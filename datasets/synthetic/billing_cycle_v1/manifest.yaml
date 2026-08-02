@@ -1,0 +1,19 @@
+# Ground-truth dependency structure for billing_cycle_v1 (Software Specification §8.1,
+# "include at least one subject with a deliberate dependency cycle so SCC escalation
+# (RQ3) is exercised"). Three smells whose resolutions structurally require one
+# another (a genuine dependency cycle: no linear order can respect every edge), so
+# the orderer must escalate the whole component rather than pick an arbitrary order.
+# This subject is a graph-level fixture (no injected Java source) used by the
+# ordering golden test and the escalation-path integration test.
+subject: billing_cycle_v1
+acyclic: false
+smells:
+  - { id: s1, category: ShotgunSurgery, loc: [billing.PaymentService.charge], severity: 0.7 }
+  - { id: s2, category: DivergentChange, loc: [billing.PaymentService.refund], severity: 0.6 }
+  - { id: s3, category: FeatureEnvy, loc: [billing.PaymentService.notify], severity: 0.5 }
+prerequisites: # cyclic by construction: s1 -> s2 -> s3 -> s1
+  - { src: s1, dst: s2 }
+  - { src: s2, dst: s3 }
+  - { src: s3, dst: s1 }
+expected_cascade_if_out_of_order:
+  - s1-before-s2-cycle-with-s3

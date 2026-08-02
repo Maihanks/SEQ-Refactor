@@ -1,0 +1,21 @@
+# Ground-truth dependency structure for notification_mixed_v1: a mixed subject
+# combining a genuine 2-cycle (s1 <-> s2), a smell that depends on a member of
+# that cycle (s3, depends on s1) and therefore can only be ordered once the
+# cycle's condensation is resolved, and a fully independent smell (s4) that is
+# ready immediately. Exercises escalation of a *partial* cycle alongside
+# continued dependency-safe ordering of the acyclic remainder (Algorithm 1,
+# lines on the residual condensation).
+subject: notification_mixed_v1
+acyclic: false
+smells:
+  - { id: s1, category: MessageChains, loc: [notify.Dispatcher.routeA], severity: 0.6 }
+  - { id: s2, category: MiddleMan, loc: [notify.Dispatcher.routeB], severity: 0.55 }
+  - { id: s3, category: FeatureEnvy, loc: [notify.Dispatcher.routeC], severity: 0.4 }
+  - { id: s4, category: DuplicatedCode, loc: [notify.Dispatcher.routeD], severity: 0.9 }
+prerequisites:
+  - { src: s1, dst: s2 } # cycle member
+  - { src: s2, dst: s1 } # cycle member
+  - { src: s1, dst: s3 } # s3 depends on a smell trapped in the cycle
+  # s4 has no prerequisites: ready immediately, ordered purely by impact
+expected_cascade_if_out_of_order:
+  - s3-before-cycle-s1-s2-resolved

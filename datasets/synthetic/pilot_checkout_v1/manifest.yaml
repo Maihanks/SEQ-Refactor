@@ -1,0 +1,32 @@
+# Ground-truth dependency structure for the pilot_checkout_v1 synthetic subject
+# (Software Specification §8.1). Mirrors the paper's illustrative pilot
+# (Section "Preliminary Pilot"): a God Class whose decomposition redistributes
+# responsibilities and thereby fixes the method boundaries the subsequent
+# Long Method extractions, Message Chain shortenings, and the Big Switch
+# replacement should follow. This is the only subject with real, compilable
+# injected-smell Java source (src/) so it can drive the end-to-end pipeline
+# test in addition to the ordering golden test.
+subject: pilot_checkout_v1
+acyclic: true
+smells:
+  - { id: s1, category: GodClass, loc: [orders.OrderService], severity: 1.0 }
+  - { id: s2, category: LongMethod, loc: [orders.OrderService.checkout], severity: 0.9 }
+  - { id: s3, category: LongMethod, loc: [orders.OrderService.applyDiscount], severity: 0.85 }
+  - { id: s4, category: LongMethod, loc: [orders.OrderService.priceOf], severity: 0.8 }
+  - { id: s5, category: MessageChains, loc: [orders.OrderService.notifyWarehouse], severity: 0.5 }
+  - { id: s6, category: MessageChains, loc: [orders.OrderService.notifyBilling], severity: 0.45 }
+  - { id: s7, category: BigSwitch, loc: [orders.OrderService.dispatchStatus], severity: 0.3 }
+prerequisites: # ground-truth edges: resolve GodClass before every method-level smell it contains
+  - { src: s1, dst: s2 }
+  - { src: s1, dst: s3 }
+  - { src: s1, dst: s4 }
+  - { src: s1, dst: s5 }
+  - { src: s1, dst: s6 }
+  - { src: s1, dst: s7 }
+expected_cascade_if_out_of_order:
+  # Resolving any method-level smell before the God Class is decomposed moves methods
+  # between classes against boundaries the later decomposition changes, reproducing
+  # the cascading violation the paper's pilot observed for an early Long Method extraction.
+  - s2-before-s1
+  - s3-before-s1
+  - s4-before-s1

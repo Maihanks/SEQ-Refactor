@@ -1,0 +1,17 @@
+# One-subject smoke run (NFR-6: "the ordering golden test and a one-subject smoke
+# run execute on every change"). Uses the deterministic baseline generator only,
+# so it needs no API key and no network access.
+subjects_glob: "datasets/synthetic/pilot_checkout_v1/"
+strategies: ["seqrefactor"]
+generators: ["baseline"]
+impact_weights:
+  alpha: 0.4
+  beta: 0.4
+  gamma: 0.2
+discount: 0.9
+# The heuristic coverage proxy (seqrefactor.ingest, no JaCoCo report attached to
+# this fixture) undercounts real coverage since it only counts @Test occurrences
+# against every production method including trivial accessors; 0.0 keeps the
+# smoke run unblocked. Supply a real jacoco.csv and raise this for a genuine run.
+coverage_min: 0.0
+seed: 20260101

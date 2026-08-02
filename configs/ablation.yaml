@@ -1,0 +1,16 @@
+# The primary ablation matrix (Software Specification §8.3): crosses ordering
+# strategy (the independent variable of interest) with generator (the control
+# that separates ordering effects from generation effects) over every subject.
+subjects_glob: "datasets/synthetic/*/"
+strategies: ["seqrefactor", "impact_only", "topo_only", "unordered"]
+generators: ["llm", "baseline"]
+impact_weights:
+  alpha: 0.4
+  beta: 0.4
+  gamma: 0.2
+discount: 0.9
+coverage_min: 0.0
+seed: 20260101
+weight_sweep: # RQ4
+  alpha: [0.2, 0.4, 0.6]
+  beta: [0.2, 0.4, 0.6]

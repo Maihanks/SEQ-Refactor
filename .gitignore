@@ -1,0 +1,46 @@
+# --- Secrets -----------------------------------------------------------
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# --- Python --------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*$py.class
+*.egg-info/
+.eggs/
+build/
+dist/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# --- Java / Gradle ---------------------------------------------------------
+.gradle/
+jvm-sidecar/build/
+jvm-sidecar/.gradle/
+!jvm-sidecar/gradle/wrapper/gradle-wrapper.jar
+*.class
+out/
+
+# --- IDE ---------------------------------------------------------------
+.vscode/
+.idea/
+*.iml
+
+# --- Runtime artefacts (reproducibility store; large/regeneratable) --------
+runs/
+artifacts/
+*.sqlite
+*.sqlite3
+.worktrees/
+
+# --- OS ------------------------------------------------------------------
+.DS_Store
+Thumbs.db

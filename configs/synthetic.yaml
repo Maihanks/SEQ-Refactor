@@ -1,0 +1,12 @@
+# Full synthetic-tier run (Software Specification §8.1) across all bundled
+# synthetic subjects, ordered strategy only, both generators.
+subjects_glob: "datasets/synthetic/*/"
+strategies: ["seqrefactor"]
+generators: ["baseline", "llm"]
+impact_weights:
+  alpha: 0.4
+  beta: 0.4
+  gamma: 0.2
+discount: 0.9
+coverage_min: 0.0
+seed: 20260101
