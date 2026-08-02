@@ -275,6 +275,11 @@ building this repository, not just written:
   byte-for-byte unchanged (NFR-1), and that `GodClass` is always ordered before every
   method-level smell it structurally contains, through the real detector + graph builder +
   orderer + LangGraph loop (not just the manifest-driven golden test).
+- **Dependency migration to uv** — `uv sync` re-resolved the dependency set from scratch and
+  picked up two major-version jumps versus what was originally tested against
+  (`langgraph` 0.2 → 1.2, `openai` 1.x → 2.x). The full test suite (including the LangGraph-driven
+  orchestrator integration tests) was re-run and a fresh live OpenAI call was made after the
+  migration to confirm neither jump broke anything.
 - **SonarQube adapter** (`seqrefactor/detect/sonar.py`) — **not** verified against a live
   server: none was reachable on `localhost:9000` in the environment this was built in, and no
   `sonar-scanner` binary was found. The client is a complete, real HTTP implementation against
