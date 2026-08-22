@@ -14,7 +14,7 @@ from dotenv import load_dotenv
 from seqrefactor.graph.builder import build as build_graph
 from seqrefactor.model import Config
 from seqrefactor.orchestrator import Orchestrator
-from seqrefactor.report import Reporter
+from seqrefactor.report import Reporter, hypothesis_tests
 
 load_dotenv()
 
@@ -73,8 +73,8 @@ def order(config_path: str, subject: str, strategy: str | None, generator: str |
     generating or applying any transformation (useful for auditing OR-1..OR-5)."""
     from seqrefactor import ingest
     from seqrefactor.detect import native as detect_native
-    from seqrefactor.order import impact as impact_scorer
     from seqrefactor.orchestrator import _select_ordering
+    from seqrefactor.order import impact as impact_scorer
 
     cfg = _load_config(Path(config_path))
     module = ingest.load(Path(subject))
@@ -112,6 +112,67 @@ def reproduce(run_report_path: str) -> None:
     click.echo(f"ordering_validity={report.ordering_validity}")
     click.echo(f"escalation_rate={report.escalation_rate}")
     click.echo("content_hash=" + _content_hash(payload))
+
+
+@main.command()
+@click.option("--config", "config_path", required=True, type=click.Path(exists=True))
+@click.option("--out", "out_dir", default="results", type=click.Path())
+@click.option(
+    "--generator",
+    default="baseline",
+    help="Generator for the main ablation matrix (default: baseline -- no LLM/API calls needed).",
+)
+@click.option(
+    "--scaling-sizes",
+    default="10,25,50,100",
+    help="Comma-separated module sizes (|V|) for the Table IV scaling study.",
+)
+def results(config_path: str, out_dir: str, generator: str, scaling_sizes: str) -> None:
+    """Regenerate Tables II-IV and results/SUMMARY.md from a fixed seed
+    (Working Brief §8): one command, every number from a real computation,
+    nothing hand-entered.
+
+    Table III (dependency mass) and Table IV (complexity scaling) run fully
+    offline -- no Java toolchain needed. Table II (the main ablation) and
+    H1-H3 need the built jvm-sidecar (see jvm-sidecar/README.md) for real
+    test/metric verification, exactly like `seqrefactor run`; if it isn't
+    built, Table II is skipped with a clear message rather than crashing the
+    whole command.
+    """
+    from seqrefactor._sidecar import SidecarUnavailable
+    from seqrefactor.datasets import graph_from_manifest, list_subjects, load_manifest
+    from seqrefactor.eval import tables as eval_tables
+    from seqrefactor.eval.complexity import run_scaling_study
+    from seqrefactor.eval.depmass import run_study as run_depmass_study
+
+    cfg = _load_config(Path(config_path))
+    out_path = Path(out_dir)
+    out_path.mkdir(parents=True, exist_ok=True)
+
+    entries = [(s, graph_from_manifest(load_manifest(s)), None) for s in list_subjects()]
+    masses, h4 = run_depmass_study(entries)
+    eval_tables.table3_depmass(masses, out_dir=out_path)
+    click.echo(f"wrote table3_depmass.* ({len(masses)} subjects)")
+
+    sizes = [int(s) for s in scaling_sizes.split(",") if s.strip()]
+    records = run_scaling_study(module_sizes=sizes, seed=cfg.seed)
+    eval_tables.table4_efficiency(records, out_dir=out_path)
+    click.echo(f"wrote table4_efficiency.* ({len(records)} rows, sizes={sizes})")
+
+    h1_h3: dict = {}
+    ablation_cfg = cfg.model_copy(update={"generators": [generator]})
+    try:
+        subjects = sorted(Path(p) for p in glob.glob(cfg.subjects_glob) if Path(p).is_dir())
+        orchestrator = Orchestrator()
+        reports = orchestrator.run_matrix(ablation_cfg, subjects)
+        eval_tables.table2_ablation(reports, out_dir=out_path)
+        h1_h3 = hypothesis_tests(reports)
+        click.echo(f"wrote table2_ablation.* ({len(reports)} run reports)")
+    except SidecarUnavailable as exc:
+        click.echo(f"skipped table2_ablation (jvm-sidecar not built): {exc}")
+
+    eval_tables.summary_md(h1_h3, h4, out_dir=out_path)
+    click.echo(f"wrote {out_path / 'SUMMARY.md'}")
 
 
 if __name__ == "__main__":

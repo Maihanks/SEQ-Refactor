@@ -30,3 +30,15 @@ expected_cascade_if_out_of_order:
   - s2-before-s1
   - s3-before-s1
   - s4-before-s1
+# Injected positive/negative dependencies (Working Brief §7): ground truth for the
+# dependency-mass study (eval/depmass.py), independent of what graph_builder.build's
+# catalogue/containment heuristics would derive from these same smells. Probabilities
+# are illustrative, matching the HONESTY NOTE in graph/rules.py -- not mined data.
+positive_dependencies:
+  # Both Message Chains sit in the same notification fan-out; shortening one chain
+  # (Hide Delegate) typically exposes and motivates shortening the other in the same pass.
+  - { src: s5, dst: s6, probability: 0.6, operation: "Hide Delegate" }
+negative_dependencies:
+  # applyDiscount and priceOf share pricing logic; extracting one Long Method in
+  # isolation can leave the other's extraction boundary awkwardly re-scoped.
+  - { src: s3, dst: s4, probability: 0.25, operation: "Extract Method" }

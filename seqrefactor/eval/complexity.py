@@ -1,0 +1,177 @@
+"""Complexity instrumentation and the incremental-vs-from-scratch scaling study
+(Working Brief §4 / C2, C6; RQ6, H5).
+
+Runs entirely on synthetic, seeded smell "forests" (classes with randomly
+categorised, optionally-contained methods) rather than real Java modules, so
+the study is fast, offline, and its ``module_size`` (|V|) axis can be swept
+far beyond what the checked-in synthetic subjects provide. This measures the
+graph-*maintenance* cost the incremental path actually saves (Working Brief
+§4 deliverable + ``graph/incremental.py``'s own design note): a from-scratch
+step rebuilds edges over every pair of remaining smells (``graph_builder.build``,
+O(|V|^2) pairs checked); an incremental step (``graph/incremental.apply_step``)
+only rebuilds edges touching the resolved vertex's disturbed region. Both
+paths are proven bit-for-bit equivalent by
+``tests/property/test_incremental_equivalence.py`` -- this module measures
+*how much cheaper* the equivalent result is, not whether it is equivalent.
+
+Every number in ``eval/tables.py``'s Table IV is read from
+:class:`~seqrefactor.model.ComplexityRecord` produced here, per the brief's
+acceptance check ("Table IV is emitted from real counters, not hand-entered").
+"""
+
+from __future__ import annotations
+
+import random
+import statistics
+import time
+
+from seqrefactor.graph.builder import build
+from seqrefactor.graph.incremental import apply_step, touched_node_ids
+from seqrefactor.model import (
+    ComplexityRecord,
+    ImpactWeights,
+    OperationCounters,
+    SmellDependencyGraph,
+    SmellInstance,
+)
+from seqrefactor.order.impact import score
+from seqrefactor.order.orderer import order
+
+_CATEGORIES = [
+    "GodClass",
+    "LongMethod",
+    "FeatureEnvy",
+    "DuplicatedCode",
+    "LargeClass",
+    "DivergentChange",
+    "ShotgunSurgery",
+    "MessageChains",
+    "MiddleMan",
+    "BigSwitch",
+]
+
+
+def synthetic_forest(module_size: int, rng: random.Random) -> list[SmellInstance]:
+    """A deterministic (given ``rng``) smell forest with approximately
+    ``module_size`` vertices: classes each containing 0-3 methods, so both
+    catalogue and structural-containment edges are exercised."""
+    nodes: list[SmellInstance] = []
+    counter = 0
+    while len(nodes) < module_size:
+        counter += 1
+        class_name = f"C{counter}"
+        nodes.append(
+            SmellInstance(id=f"n{counter}", category=rng.choice(_CATEGORIES), loc=[class_name])
+        )
+        for m in range(rng.randint(0, 3)):
+            if len(nodes) >= module_size:
+                break
+            counter += 1
+            nodes.append(
+                SmellInstance(
+                    id=f"n{counter}",
+                    category=rng.choice(_CATEGORIES),
+                    loc=[f"{class_name}.m{m}"],
+                )
+            )
+    return nodes[:module_size]
+
+
+def _from_scratch_step(
+    graph: SmellDependencyGraph, resolved_id: str, touched: set[str]
+) -> tuple[SmellDependencyGraph, OperationCounters]:
+    stale = touched_node_ids(graph.nodes, touched) | {resolved_id}
+    survivors = [n for n in graph.nodes if n.id not in stale]
+    counters = OperationCounters(
+        vertex_touches=len(graph.nodes), edge_touches=len(survivors) ** 2
+    )
+    return build(survivors), counters
+
+
+def _incremental_step(
+    graph: SmellDependencyGraph, resolved_id: str, touched: set[str]
+) -> tuple[SmellDependencyGraph, OperationCounters]:
+    counters = OperationCounters()
+    new_graph = apply_step(graph, resolved_id, rescanned_smells=[], touched_elements=touched, counters=counters)
+    return new_graph, counters
+
+
+def _median_wall_clock(fn, repeats: int) -> float:
+    samples = []
+    for _ in range(repeats):
+        start = time.perf_counter()
+        fn()
+        samples.append(time.perf_counter() - start)
+    return statistics.median(samples)
+
+
+def run_scaling_study(
+    module_sizes: list[int],
+    max_steps_per_size: int = 10,
+    repeats: int = 7,
+    seed: int = 20260101,
+) -> list[ComplexityRecord]:
+    """Sweep ``module_sizes`` (|V|) and step count (k, capped at
+    ``max_steps_per_size``); for each size and each step, measure both
+    maintenance strategies' operation counters and median wall-clock time.
+
+    Both paths are driven off the SAME from-scratch agenda choice at each
+    step (so they always resolve the same vertex), then both actually apply
+    their own update to independently-tracked graph state for the next
+    step -- this is what lets the incremental curve's cost reflect a
+    realistic session (drifting graph state) rather than repeatedly patching
+    the same fixed graph.
+    """
+    weights = ImpactWeights()
+    records: list[ComplexityRecord] = []
+
+    for module_size in module_sizes:
+        rng = random.Random(f"{seed}:{module_size}")
+        base_nodes = synthetic_forest(module_size, rng)
+        scratch_graph = build(base_nodes)
+        incremental_graph = build(base_nodes)
+
+        for step_index in range(max_steps_per_size):
+            if not scratch_graph.nodes:
+                break
+            ordering = order(scratch_graph, score(scratch_graph, weights))
+            if not ordering.agenda:
+                break  # residual is a pure cycle: nothing left to safely resolve
+            resolved_id = ordering.agenda[0]
+            resolved_node = next(n for n in scratch_graph.nodes if n.id == resolved_id)
+            touched = set(resolved_node.loc)
+
+            def _run_scratch(g=scratch_graph, r=resolved_id, t=touched):
+                return _from_scratch_step(g, r, t)
+
+            def _run_incremental(g=incremental_graph, r=resolved_id, t=touched):
+                return _incremental_step(g, r, t)
+
+            scratch_wall = _median_wall_clock(_run_scratch, repeats)
+            incremental_wall = _median_wall_clock(_run_incremental, repeats)
+
+            scratch_graph, scratch_counters = _run_scratch()
+            incremental_graph, incremental_counters = _run_incremental()
+
+            records.append(
+                ComplexityRecord(
+                    subject=f"synthetic_V{module_size}",
+                    step_index=step_index,
+                    strategy="from_scratch",
+                    module_size=module_size,
+                    counters=scratch_counters,
+                    wall_clock_seconds=scratch_wall,
+                )
+            )
+            records.append(
+                ComplexityRecord(
+                    subject=f"synthetic_V{module_size}",
+                    step_index=step_index,
+                    strategy="incremental",
+                    module_size=module_size,
+                    counters=incremental_counters,
+                    wall_clock_seconds=incremental_wall,
+                )
+            )
+
+    return records

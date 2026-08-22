@@ -32,9 +32,12 @@ def test_ordering_is_safe_and_impact_forward(subject: str) -> None:
     out = order(g, impact)
 
     pos = {s: i for i, s in enumerate(out.agenda)}
+    prerequisite_edges = [e for e in g.edges if e.polarity == "prerequisite"]
 
-    # OR-1: every prerequisite precedes its dependent.
-    for e in g.edges:
+    # OR-1: every prerequisite precedes its dependent. POSITIVE/NEGATIVE edges are
+    # deliberately excluded here: they are soft (tie-break/cascade-anticipation
+    # only, Working Brief §2 acceptance check) and never constrain feasibility.
+    for e in prerequisite_edges:
         if e.src in pos and e.dst in pos:
             assert pos[e.src] < pos[e.dst], (
                 f"[{subject}] safety violated: {e.src} must precede {e.dst}"
@@ -42,7 +45,7 @@ def test_ordering_is_safe_and_impact_forward(subject: str) -> None:
 
     # META-TEST: a higher-impact smell is NEVER placed before an unresolved
     # prerequisite, even when impact would prefer it. Safety still wins.
-    for e in g.edges:
+    for e in prerequisite_edges:
         if impact[e.dst] > impact[e.src] and e.src in pos and e.dst in pos:
             assert pos[e.src] < pos[e.dst], (
                 f"[{subject}] impact override: {e.dst} outranks {e.src} but "

@@ -36,6 +36,7 @@ out/
 
 # --- Runtime artefacts (reproducibility store; large/regeneratable) --------
 runs/
+results/
 artifacts/
 *.sqlite
 *.sqlite3

@@ -18,9 +18,18 @@ thin](#whats-real-vs-whats-thin) below.
 
 Companion documents (`draft docs/`):
 [`SEQ_REFACTOR_paper.tex`](draft%20docs/SEQ_REFACTOR_paper.tex) — the research paper this
-implements — and
+implements —,
 [`SEQ_REFACTOR_Software_Specification.docx`](draft%20docs/SEQ_REFACTOR_Software_Specification.docx)
-— the engineering specification this codebase follows section-by-section.
+— the engineering specification this codebase follows section-by-section —, and
+[`SEQ_REFACTOR_ClaudeCode_Instructions.docx`](draft%20docs/SEQ_REFACTOR_ClaudeCode_Instructions.docx)
+— a later working brief that requested the signed-dependency graph, incremental graph
+maintenance, complexity instrumentation, and dependency-mass study described below.
+**Its description of the paper (a signed positive/negative dependency section, an
+incremental-maintenance subsection, RQ5/RQ6/H4/H5, Tables II-IV) does not match
+`SEQ_REFACTOR_paper.docx` as currently saved in this repository — see
+[`REPO_MAP.md`](REPO_MAP.md) §3 for the full discrepancy.** Everything below was built
+against the brief, ahead of the paper text, on the repository owner's explicit instruction;
+the paper itself will need matching updates before submission.
 
 ## Table of contents
 
@@ -48,6 +57,8 @@ S1 DETECT      tree-sitter-backed heuristic analyser -> SmellInstance[]
                '- emits: SmellInstance[]
 
 S2 BUILD       catalogue precedence rules + structural containment
+               (+ a disjoint signed catalogue: POSITIVE/co-resolution and
+               NEGATIVE/cascading edges, soft, never gate feasibility)
                '- emits: SmellDependencyGraph (edges carry provenance, OR-5)
 
 S3 ORDER       <== THE CONTRIBUTION
@@ -103,20 +114,30 @@ unresolved prerequisite.
 ```
 seqrefactor/                 the Python package (installed into .venv by `uv sync`)
   model.py                   pydantic data model (§6 of the spec) shared by every stage
+  datasets.py                synthetic-subject manifest loading (ground truth for the
+                              golden test AND eval/depmass.py — one shared loader)
   ingest.py                  module loading + coverage precondition
-  cli.py                     `seqrefactor run|order|reproduce`
+  cli.py                     `seqrefactor run|order|reproduce|results`
   orchestrator.py            the LangGraph S1..S7 pipeline + re-detect loop
   gate.py                    accept/reject evidence fusion
-  report.py                  ablation tables, per-step trajectory
+  report.py                  ablation tables, per-step trajectory, H1-H3 hypothesis tests
   detect/
     native.py                tree-sitter heuristic SmellDetector (works with zero setup)
     sonar.py                 SonarQube Web API adapter (real client; needs a live server)
   graph/
-    builder.py                catalogue rules + structural containment -> DepEdge[]
-    rules.py                  the precedence rule table (paper Table I)
+    builder.py                catalogue + signed-catalogue rules + structural containment
+                                -> DepEdge[] (edge_for_pair is reused by graph/incremental.py)
+    rules.py                   PREREQUISITE precedence table (paper Table I) + a disjoint
+                                POSITIVE/NEGATIVE signed-dependency table (see its own
+                                HONESTY NOTE on where those probabilities come from)
+    incremental.py              scoped vertex/edge maintenance after one accepted step
+                                (Working Brief §3/C6) — proven bit-for-bit equivalent to a
+                                from-scratch rebuild, see its own design-note docstring
   order/
     impact.py                  impact scoring (Eq. 1)
-    orderer.py                  <== the ordering algorithm (THE CONTRIBUTION)
+    orderer.py                  <== the ordering algorithm (THE CONTRIBUTION); PREREQUISITE-
+                                only feasibility, POSITIVE/NEGATIVE-mass tie-break, operation
+                                counters, memoised SCC condensation
   retrieve/
     vector.py                  TF-IDF (offline) / OpenAI-embedding semantic retrieval
     cpg.py                      in-memory call-graph structural retrieval
@@ -128,6 +149,13 @@ seqrefactor/                 the Python package (installed into .venv by `uv syn
     metrics.py                   five-family metric facade (tree-sitter + CK-via-sidecar)
     tests.py                     JUnit execution via jvm-sidecar
     arch.py                      interface-surface + package-cycle check
+  eval/                         Working Brief §4/§5/§6/§8: statistics and result emission
+    stats.py                     shared Wilcoxon + rank-biserial effect size + bootstrap CI,
+                                  used by both report.py's H1-H3 and depmass.py's H4
+    complexity.py                 incremental-vs-from-scratch scaling study (synthetic, offline)
+    depmass.py                    the dependency-mass study (RQ5, H4)
+    weight_sweep.py               RQ4's alpha/beta/gamma sensitivity sweep execution loop
+    tables.py                     Table II/III/IV emission (CSV+LaTeX+Markdown) + SUMMARY.md
   _sidecar.py, _treesitter.py, _worktree.py   internal shared helpers
 
 jvm-sidecar/                 Java 17 / Gradle sidecar: JUnit execution + CK metrics
@@ -135,14 +163,18 @@ jvm-sidecar/                 Java 17 / Gradle sidecar: JUnit execution + CK metr
 
 datasets/synthetic/          ground-truth synthetic subjects (see Datasets below)
 configs/                     smoke.yaml, synthetic.yaml, ablation.yaml
+results/                     `make results` output (gitignored — regenerable, not source)
 tests/
   golden/                    the ordering golden test (§9.2) — guards OR-1..OR-3
   unit/                      one file per module above
+  property/                  Hypothesis-driven and per-subject bit-for-bit equivalence proof
+                              between incremental and from-scratch graph maintenance (the H5 gate)
   integration/               full-pipeline, real-sidecar, scratch-copy end-to-end tests
-  support.py                 manifest-loading test helpers, independent of the code under test
+  support.py                 re-exports seqrefactor.datasets for test-side imports
 
 pyproject.toml               dependencies, dev tooling (`[dependency-groups]`), pytest/ruff/mypy config
 uv.lock                      exact resolved/pinned dependency versions (committed; see Getting started)
+Makefile                     `make results` — the single regeneration command (Working Brief §8)
 ```
 
 ## Getting started
@@ -199,12 +231,25 @@ source). `seqrefactor reproduce <run_report.json>` recomputes the derived measur
 resolution, cascading violations, ordering validity, escalation rate) from a persisted report and
 confirms they match what's stored, which is the reproducibility story NFR-2/NFR-3 exist for.
 
+```bash
+# One command, regenerates Tables II-IV + results/SUMMARY.md from a fixed seed (Working
+# Brief §8). Table III (dependency mass) and Table IV (complexity scaling) run fully offline;
+# Table II (the main ablation) needs the built jvm-sidecar and is skipped with a clear message
+# if it isn't present, rather than failing the whole command.
+make results
+# equivalent to: uv run seqrefactor results --config configs/ablation.yaml --out results
+```
+
 ## Testing
 
 ```bash
-uv run pytest -q                          # everything (36 tests at last count)
+uv run pytest -q                          # everything (75 tests; 6 skip cleanly without a built
+                                           # jvm-sidecar, 75/75 pass with one built)
 uv run pytest tests/golden -q             # the ordering golden test only
 uv run pytest tests/unit -q               # unit tests (most run with zero external setup)
+uv run pytest tests/property -q           # incremental-vs-from-scratch equivalence (the H5 gate):
+                                           # Hypothesis-driven random forests + every synthetic
+                                           # subject, step by step
 uv run pytest tests/integration -q        # full pipeline, real sidecar, ~30s (needs jvm-sidecar built)
 ```
 
@@ -224,7 +269,7 @@ detector/graph-builder produce from source — see `tests/support.py`):
 
 | Subject | Structure | Purpose |
 |---|---|---|
-| `pilot_checkout_v1` | Acyclic; a God Class (`OrderService`) containing 6 method-level smells | The only subject with real, compiled, tested Java source (`src/`) — mirrors the paper's illustrative pilot and drives every end-to-end/integration test |
+| `pilot_checkout_v1` | Acyclic; a God Class (`OrderService`) containing 6 method-level smells, plus one injected POSITIVE and one injected NEGATIVE dependency (ground truth for the dependency-mass study) | The only subject with real, compiled, tested Java source (`src/`) — mirrors the paper's illustrative pilot and drives every end-to-end/integration test |
 | `billing_cycle_v1` | A genuine 3-node cycle (`s1 -> s2 -> s3 -> s1`) | Exercises full SCC escalation (§8.1: "include at least one subject with a deliberate dependency cycle") |
 | `notification_mixed_v1` | A 2-node cycle plus a dependent and an independent smell | Exercises *partial* escalation: the cycle escalates while the acyclic remainder still gets ordered |
 
@@ -285,6 +330,34 @@ building this repository, not just written:
   `sonar-scanner` binary was found. The client is a complete, real HTTP implementation against
   SonarQube's documented Issues Search API, but treat it as *implemented, not verified* until
   run against a real instance.
+- **Working-Brief additions (signed graph, incremental maintenance, complexity instrumentation,
+  dependency-mass study, H1-H4 statistics, table emission)** — the base environment had only a
+  JRE, not a full JDK (`javac` unavailable); a portable Eclipse Temurin 21 JDK was downloaded to
+  a scratch directory (no root needed) and pointed at via `JAVA_HOME` to build the jvm-sidecar
+  (`cd jvm-sidecar && ./gradlew build`) and verify everything end-to-end for real:
+  - The full test suite, including the sidecar-backed tests that otherwise skip themselves,
+    passes: **75/75, zero skips**.
+  - `seqrefactor results` run against the real sidecar produced all three tables from genuine
+    pipeline executions, no fabrication. It surfaced a real, interesting result: on
+    `pilot_checkout_v1` with the deterministic baseline generator, the `impact_only` arm (impact
+    priority with the topological constraint deliberately removed) showed
+    `ordering_validity=0.0` and `cascading_violations=50/50`, while `seqrefactor`/`topo_only`/
+    `unordered` all held `ordering_validity=1.0` with zero cascading violations — a live
+    demonstration of exactly the failure mode the paper's Section IV-E worked example describes
+    (resolving method-level smells before the God Class they're contained in). All four arms hit
+    the 50-step cap without the baseline generator's patches driving net smell resolution above
+    zero on this subject; that is a property of the existing deterministic baseline generator
+    (documented above as an ablation control, not a quality tool) and the fixed `max_steps=50`,
+    not of the new statistics/table code, and was not investigated further as out of this task's
+    scope.
+  - `eval/weight_sweep.py`'s `run_weight_sweep` was smoke-tested directly against
+    `pilot_checkout_v1` with a real sidecar-backed orchestrator run and returned a real row
+    (`{alpha: 0.3, beta: 0.3, gamma: 0.4, cascading_violations: 0, net_smell_resolution: 0,
+    ordering_validity: 1.0, ...}`), confirming the RQ4 sweep loop is not just unit-tested logic.
+  - With only 3 synthetic subjects, H1-H4 correctly report "insufficient data" (minimum 5 paired
+    observations) rather than a number — see `results/SUMMARY.md`'s own honesty framing.
+  - `results/` is gitignored (regenerable, like `runs/`), so nothing from these runs is committed;
+    re-run `make results` yourself (with a JDK on `PATH`) to reproduce it.
 
 ## What's real vs. what's thin
 
@@ -292,7 +365,28 @@ Being direct about scope, matching the spec's own "SCOPE NOTE" and "HONESTY NOTE
 
 - **Real and the actual contribution**: the smell-dependency graph, impact scoring, the
   priority-queue-Kahn + Tarjan-SCC ordering algorithm, and its golden test. This is what the
-  paper is about, and it has no shortcuts.
+  paper (as currently written) is about, and it has no shortcuts.
+- **Real, working, and built ahead of the paper text (Working Brief, see README top and
+  REPO_MAP.md §3 for the paper/brief discrepancy this rests on)**:
+  - The signed (POSITIVE/NEGATIVE) dependency catalogue and graph edges (`graph/rules.py`,
+    `graph/builder.py`) — soft, never gate ordering feasibility, only tie-break and inform the
+    dependency-mass study. Probabilities are illustrative catalogue defaults, not mined data;
+    see that module's own HONESTY NOTE.
+  - Incremental graph maintenance (`graph/incremental.py`) — proven bit-for-bit equivalent to a
+    from-scratch rebuild by construction (not just by testing), with a Hypothesis property-test
+    and whole-corpus step-by-step harness (`tests/property/`) enforcing it. Its design note
+    explains, honestly, where the real efficiency saving is (scoped detection + graph rebuild)
+    and where it deliberately is not (re-inventing an unverifiable dynamic order-maintenance
+    algorithm for an ordering step that is already cheap by the paper's own complexity analysis).
+  - Complexity instrumentation (`eval/complexity.py`) — a synthetic, seeded scaling study with
+    real operation counters and median wall-clock timing; not run against the (small) checked-in
+    subjects, since the interesting scaling signal needs larger |V| than they provide.
+  - The dependency-mass study (`eval/depmass.py`) and H1-H4 statistics (`eval/stats.py`,
+    `report.py`) — real Wilcoxon signed-rank tests, rank-biserial effect sizes, and bootstrap
+    confidence intervals, all guarded to report "insufficient data" rather than a fabricated
+    conclusion when the sample (currently 3 synthetic subjects) is too small to test.
+  - Table/summary emission (`eval/tables.py`, `seqrefactor results`, `make results`) — every
+    number in `results/` traces to one of the computations above; nothing is hand-entered.
 - **Real and fully working, but intentionally modest in scope**:
   - The native detector (`detect/native.py`) is a threshold-based heuristic over tree-sitter,
     not a claim of state-of-the-art smell detection — it's a real, swappable `SmellDetector`
@@ -311,10 +405,8 @@ Being direct about scope, matching the spec's own "SCOPE NOTE" and "HONESTY NOTE
 - **Real client code, unverified against a live server**: the SonarQube adapter (see
   Verification log above).
 - **Not implemented**: the open-source-subjects tier with `RefactoringMiner`-recovered
-  reference orders, the full 20–45-file synthetic corpus, the α/β weight-sweep runner for RQ4
-  (the config schema and CLI plumbing for it exist; the sweep-execution loop itself doesn't),
-  and non-parametric paired statistical testing over ablation results (`report.py` produces the
-  descriptive per-strategy means those tests would run over, not the tests themselves).
+  reference orders, and the full 20–45-file synthetic corpus (the checked-in three subjects are
+  small but fully exercised — see Datasets above).
 
 ## Traceability to the specification
 
