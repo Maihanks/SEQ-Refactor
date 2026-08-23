@@ -154,3 +154,31 @@ production code, and directionally exactly what the paper's ordering-safety argu
 separate effort), more open-source subjects beyond this one, and scaling the synthetic corpus to
 the spec'd 20-45 files (the three checked-in synthetic subjects are small but fully exercised,
 including the signed-edge ground truth).
+
+## 7. Tables III and IV committed (post-Section-6 follow-up)
+
+A separate paper-writing session/agent reported back (relayed by the repository owner) that it
+correctly refused to fabricate statistics for Tables V/VI (that document's own numbering for the
+dependency-mass and complexity-scaling results) rather than invent numbers not backed by this
+repository — the right call, and consistent with everything above. It described those tables as
+"not yet computed... genuinely not in the repository." That was accurate about *committed output*
+but not about the underlying capability: `eval/depmass.py` and `eval/complexity.py` were already
+real, tested, working modules (Section 5 above); the numbers simply hadn't been generated and
+preserved anywhere version-controlled, the same situation Table II was in before Section 6.
+
+Closed the same way: ran both against real inputs and committed the output under `evaluation/`
+(see `evaluation/README.md` for exact commands, full tables, and scope caveats) —
+
+- **Table III** (dependency-mass, `eval/depmass.py`, structural only, no executed run threaded
+  through): real per-subject positive/negative mass from each synthetic manifest's ground truth.
+  H4 correctly reports `n=3, supported=None` ("insufficient... minimum 5") — no p-value, no
+  effect size, none fabricated.
+- **Table IV** (complexity-scaling, `eval/complexity.py`, synthetic seeded study across
+  |V| ∈ {10, 25, 50, 100, 200}): real operation counters showing the predicted H5 scaling
+  signature — from-scratch edge touches grow roughly quadratically with |V|, incremental edge
+  touches stay roughly flat, and the ratio between them grows from ~8x at |V|=10 to **~10,600x at
+  |V|=200**.
+
+Both are one-shot, deterministic, seeded computations (not requiring the jvm-sidecar), reusing
+the exact production code path `seqrefactor results` already calls — nothing was manually
+reconstructed or estimated.

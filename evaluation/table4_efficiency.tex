@@ -1,0 +1,99 @@
+\begin{table}[t]
+\centering
+\caption{Incremental vs. from-scratch maintenance cost (RQ6, H5)}
+\label{tab:efficiency}
+\begin{tabular}{lllllllll}
+\toprule
+subject & step\_index & strategy & module\_size & vertex\_touches & edge\_touches & heap\_operations & order\_renumbering\_operations & wall\_clock\_seconds \\
+\midrule
+synthetic\_V10 & 0 & from\_scratch & 10 & 10 & 36 & 0 & 0 & 4.984e-05 \\
+synthetic\_V10 & 0 & incremental & 10 & 4 & 3 & 0 & 0 & 1.579e-05 \\
+synthetic\_V10 & 1 & from\_scratch & 10 & 6 & 9 & 0 & 0 & 1.843e-05 \\
+synthetic\_V10 & 1 & incremental & 10 & 3 & 2 & 0 & 0 & 1.74e-05 \\
+synthetic\_V10 & 2 & from\_scratch & 10 & 3 & 1 & 0 & 0 & 1.857e-05 \\
+synthetic\_V10 & 2 & incremental & 10 & 2 & 1 & 0 & 0 & 2.072e-05 \\
+synthetic\_V10 & 3 & from\_scratch & 10 & 1 & 0 & 0 & 0 & 1.386e-05 \\
+synthetic\_V10 & 3 & incremental & 10 & 1 & 0 & 0 & 0 & 9.14e-06 \\
+synthetic\_V25 & 0 & from\_scratch & 25 & 25 & 441 & 0 & 0 & 0.00039219 \\
+synthetic\_V25 & 0 & incremental & 25 & 4 & 3 & 0 & 0 & 5.387e-05 \\
+synthetic\_V25 & 1 & from\_scratch & 25 & 21 & 289 & 0 & 0 & 0.00026068 \\
+synthetic\_V25 & 1 & incremental & 25 & 4 & 3 & 0 & 0 & 4.103e-05 \\
+synthetic\_V25 & 2 & from\_scratch & 25 & 17 & 196 & 0 & 0 & 0.00018046 \\
+synthetic\_V25 & 2 & incremental & 25 & 3 & 2 & 0 & 0 & 3.142e-05 \\
+synthetic\_V25 & 3 & from\_scratch & 25 & 14 & 121 & 0 & 0 & 0.00011488 \\
+synthetic\_V25 & 3 & incremental & 25 & 3 & 2 & 0 & 0 & 2.365e-05 \\
+synthetic\_V25 & 4 & from\_scratch & 25 & 11 & 81 & 0 & 0 & 8.027e-05 \\
+synthetic\_V25 & 4 & incremental & 25 & 2 & 1 & 0 & 0 & 1.864e-05 \\
+synthetic\_V25 & 5 & from\_scratch & 25 & 9 & 49 & 0 & 0 & 5.171e-05 \\
+synthetic\_V25 & 5 & incremental & 25 & 2 & 1 & 0 & 0 & 1.457e-05 \\
+synthetic\_V25 & 6 & from\_scratch & 25 & 7 & 25 & 0 & 0 & 4.497e-05 \\
+synthetic\_V25 & 6 & incremental & 25 & 2 & 1 & 0 & 0 & 1.235e-05 \\
+synthetic\_V25 & 7 & from\_scratch & 25 & 5 & 9 & 0 & 0 & 1.324e-05 \\
+synthetic\_V25 & 7 & incremental & 25 & 2 & 1 & 0 & 0 & 1.297e-05 \\
+synthetic\_V25 & 8 & from\_scratch & 25 & 3 & 4 & 0 & 0 & 8.64e-06 \\
+synthetic\_V25 & 8 & incremental & 25 & 1 & 0 & 0 & 0 & 7.41e-06 \\
+synthetic\_V25 & 9 & from\_scratch & 25 & 2 & 1 & 0 & 0 & 5.49e-06 \\
+synthetic\_V25 & 9 & incremental & 25 & 1 & 0 & 0 & 0 & 6.06e-06 \\
+synthetic\_V50 & 0 & from\_scratch & 50 & 50 & 2116 & 0 & 0 & 0.0018749 \\
+synthetic\_V50 & 0 & incremental & 50 & 4 & 3 & 0 & 0 & 0.00019326 \\
+synthetic\_V50 & 1 & from\_scratch & 50 & 46 & 1764 & 0 & 0 & 0.00150249 \\
+synthetic\_V50 & 1 & incremental & 50 & 4 & 3 & 0 & 0 & 0.0003192 \\
+synthetic\_V50 & 2 & from\_scratch & 50 & 42 & 1444 & 0 & 0 & 0.00123274 \\
+synthetic\_V50 & 2 & incremental & 50 & 4 & 3 & 0 & 0 & 0.00015186 \\
+synthetic\_V50 & 3 & from\_scratch & 50 & 38 & 1156 & 0 & 0 & 0.00104039 \\
+synthetic\_V50 & 3 & incremental & 50 & 4 & 3 & 0 & 0 & 0.00012171 \\
+synthetic\_V50 & 4 & from\_scratch & 50 & 34 & 900 & 0 & 0 & 0.00081569 \\
+synthetic\_V50 & 4 & incremental & 50 & 4 & 3 & 0 & 0 & 0.00020439 \\
+synthetic\_V50 & 5 & from\_scratch & 50 & 30 & 676 & 0 & 0 & 0.00061959 \\
+synthetic\_V50 & 5 & incremental & 50 & 4 & 3 & 0 & 0 & 7.766e-05 \\
+synthetic\_V50 & 6 & from\_scratch & 50 & 26 & 529 & 0 & 0 & 0.00048372 \\
+synthetic\_V50 & 6 & incremental & 50 & 3 & 2 & 0 & 0 & 6.405e-05 \\
+synthetic\_V50 & 7 & from\_scratch & 50 & 23 & 400 & 0 & 0 & 0.00055189 \\
+synthetic\_V50 & 7 & incremental & 50 & 3 & 2 & 0 & 0 & 5.281e-05 \\
+synthetic\_V50 & 8 & from\_scratch & 50 & 20 & 289 & 0 & 0 & 0.00026073 \\
+synthetic\_V50 & 8 & incremental & 50 & 3 & 2 & 0 & 0 & 4.073e-05 \\
+synthetic\_V50 & 9 & from\_scratch & 50 & 17 & 196 & 0 & 0 & 0.00017955 \\
+synthetic\_V50 & 9 & incremental & 50 & 3 & 2 & 0 & 0 & 3.11e-05 \\
+synthetic\_V100 & 0 & from\_scratch & 100 & 100 & 9216 & 0 & 0 & 0.00759355 \\
+synthetic\_V100 & 0 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00069022 \\
+synthetic\_V100 & 1 & from\_scratch & 100 & 96 & 8464 & 0 & 0 & 0.00629925 \\
+synthetic\_V100 & 1 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00064762 \\
+synthetic\_V100 & 2 & from\_scratch & 100 & 92 & 7744 & 0 & 0 & 0.00604669 \\
+synthetic\_V100 & 2 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00059497 \\
+synthetic\_V100 & 3 & from\_scratch & 100 & 88 & 7056 & 0 & 0 & 0.00531704 \\
+synthetic\_V100 & 3 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00054901 \\
+synthetic\_V100 & 4 & from\_scratch & 100 & 84 & 6400 & 0 & 0 & 0.00512848 \\
+synthetic\_V100 & 4 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00053907 \\
+synthetic\_V100 & 5 & from\_scratch & 100 & 80 & 5776 & 0 & 0 & 0.00501775 \\
+synthetic\_V100 & 5 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00049606 \\
+synthetic\_V100 & 6 & from\_scratch & 100 & 76 & 5184 & 0 & 0 & 0.0044267 \\
+synthetic\_V100 & 6 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00045738 \\
+synthetic\_V100 & 7 & from\_scratch & 100 & 72 & 4624 & 0 & 0 & 0.00396496 \\
+synthetic\_V100 & 7 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00039446 \\
+synthetic\_V100 & 8 & from\_scratch & 100 & 68 & 4096 & 0 & 0 & 0.0033368 \\
+synthetic\_V100 & 8 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00038789 \\
+synthetic\_V100 & 9 & from\_scratch & 100 & 64 & 3600 & 0 & 0 & 0.00315673 \\
+synthetic\_V100 & 9 & incremental & 100 & 4 & 3 & 0 & 0 & 0.00031413 \\
+synthetic\_V200 & 0 & from\_scratch & 200 & 200 & 38416 & 0 & 0 & 0.03363704 \\
+synthetic\_V200 & 0 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00287256 \\
+synthetic\_V200 & 1 & from\_scratch & 200 & 196 & 36864 & 0 & 0 & 0.03043611 \\
+synthetic\_V200 & 1 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00282998 \\
+synthetic\_V200 & 2 & from\_scratch & 200 & 192 & 35344 & 0 & 0 & 0.02877591 \\
+synthetic\_V200 & 2 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00257998 \\
+synthetic\_V200 & 3 & from\_scratch & 200 & 188 & 33856 & 0 & 0 & 0.02829045 \\
+synthetic\_V200 & 3 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00244147 \\
+synthetic\_V200 & 4 & from\_scratch & 200 & 184 & 32400 & 0 & 0 & 0.02421496 \\
+synthetic\_V200 & 4 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00214391 \\
+synthetic\_V200 & 5 & from\_scratch & 200 & 180 & 30976 & 0 & 0 & 0.02226863 \\
+synthetic\_V200 & 5 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00212834 \\
+synthetic\_V200 & 6 & from\_scratch & 200 & 176 & 29584 & 0 & 0 & 0.02134805 \\
+synthetic\_V200 & 6 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00201274 \\
+synthetic\_V200 & 7 & from\_scratch & 200 & 172 & 28224 & 0 & 0 & 0.02043332 \\
+synthetic\_V200 & 7 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00190959 \\
+synthetic\_V200 & 8 & from\_scratch & 200 & 168 & 26896 & 0 & 0 & 0.02178156 \\
+synthetic\_V200 & 8 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00214648 \\
+synthetic\_V200 & 9 & from\_scratch & 200 & 164 & 25600 & 0 & 0 & 0.01949983 \\
+synthetic\_V200 & 9 & incremental & 200 & 4 & 3 & 0 & 0 & 0.00171906 \\
+\bottomrule
+\end{tabular}
+\end{table}
