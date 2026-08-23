@@ -169,10 +169,16 @@ correctly report "insufficient data" below 5 paired subjects, and this run doesn
 `ordering_validity=1.0` for `seqrefactor`/`topo_only`/`unordered` reflects that every *attempted*
 prerequisite was attempted before its dependents, per the existing `_prerequisites_satisfied`
 accounting in `orchestrator.py` -- a rejected-but-attempted prerequisite still counts as
-"satisfied" there (pre-existing behaviour, not changed by this work). Raw run reports:
-`json_java_v1__<strategy>__baseline__<hash>.json`, regenerable via
+"satisfied" there (pre-existing behaviour, not changed by this work). Raw run reports (the four
+content-hashed `RunReport` JSON files plus `summary.json` this table and narrative were read
+from) are preserved verbatim in [`example_run/`](example_run/) -- deliberately *not* named
+`results/`/`runs/`, which are gitignored elsewhere in this repo as regenerable output; this
+specific snapshot is committed as evidence backing the numbers above, not as something
+`make results` regenerates. A fresh run (e.g. after raising `max_steps`, or against an updated
+JDK/sidecar) is reproducible via
 `uv run seqrefactor run --config configs/opensource.yaml --out <scratch dir>` against a scratch
-copy (see warning above) -- not committed here, matching `results/`/`runs/` being gitignored.
+copy (see warning below) and would land in a scratch/gitignored location like any other run --
+copy it into `example_run/` (replacing these files) if it should supersede this snapshot.
 
 ## Running the pipeline against it
 

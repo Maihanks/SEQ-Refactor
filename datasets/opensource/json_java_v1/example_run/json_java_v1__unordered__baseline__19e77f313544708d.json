@@ -1,0 +1,178 @@
+{
+  "subject": "json_java_v1",
+  "strategy": "unordered",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:org.json.CDL",
+      "verdict": {
+        "smell": "GodClass:org.json.CDL",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "LongMethod:org.json.CDL.getValue",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValue",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.348"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:org.json.CDL.getValueExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.349"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.350"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.350"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.351"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.353"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.353"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 10,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.354"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 11,
+      "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.354"
+      },
+      "introduced": [
+        "LongMethod:org.json.CDL.getValueExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0
+}

@@ -1,0 +1,160 @@
+{
+  "subject": "json_java_v1",
+  "strategy": "topo_only",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:org.json.CDL",
+      "verdict": {
+        "smell": "GodClass:org.json.CDL",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "GodClass:org.json.Cookie",
+      "verdict": {
+        "smell": "GodClass:org.json.Cookie",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "GodClass:org.json.HTTP",
+      "verdict": {
+        "smell": "GodClass:org.json.HTTP",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "GodClass:org.json.JSONArray",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONArray",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "GodClass:org.json.JSONML",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONML",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "GodClass:org.json.JSONObject",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONObject",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "BigSwitch:org.json.JSONObject.quote",
+      "verdict": {
+        "smell": "BigSwitch:org.json.JSONObject.quote",
+        "accepted": false,
+        "rationale": "test suite failed"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "GodClass:org.json.JSONParserConfiguration",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONParserConfiguration",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "GodClass:org.json.JSONPointer",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONPointer",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "GodClass:org.json.JSONTokener",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONTokener",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 10,
+      "smell": "BigSwitch:org.json.JSONTokener.nextStringExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:org.json.JSONTokener.nextStringExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.358"
+      },
+      "introduced": [
+        "BigSwitch:org.json.JSONTokener.nextStringExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 11,
+      "smell": "BigSwitch:org.json.JSONTokener.nextStringExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:org.json.JSONTokener.nextStringExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.359"
+      },
+      "introduced": [
+        "BigSwitch:org.json.JSONTokener.nextStringExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0
+}

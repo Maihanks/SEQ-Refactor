@@ -1,0 +1,166 @@
+{
+  "subject": "json_java_v1",
+  "strategy": "impact_only",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:org.json.JSONObject",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONObject",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "GodClass:org.json.JSONArray",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONArray",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "GodClass:org.json.JSONTokener",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONTokener",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "GodClass:org.json.XML",
+      "verdict": {
+        "smell": "GodClass:org.json.XML",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "GodClass:org.json.XMLTokener",
+      "verdict": {
+        "smell": "GodClass:org.json.XMLTokener",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "GodClass:org.json.JSONWriter",
+      "verdict": {
+        "smell": "GodClass:org.json.JSONWriter",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "GodClass:org.json.CDL",
+      "verdict": {
+        "smell": "GodClass:org.json.CDL",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "LongMethod:org.json.JSONML.toString",
+      "verdict": {
+        "smell": "LongMethod:org.json.JSONML.toString",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.025"
+      },
+      "introduced": [
+        "LongMethod:org.json.JSONML.toStringExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 8,
+      "smell": "MessageChains:org.json.Cookie.toString",
+      "verdict": {
+        "smell": "MessageChains:org.json.Cookie.toString",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.299"
+      },
+      "introduced": [
+        "MessageChains:org.json.Cookie.toStringExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 9,
+      "smell": "MessageChains:org.json.Cookie.toStringExtracted",
+      "verdict": {
+        "smell": "MessageChains:org.json.Cookie.toStringExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.309"
+      },
+      "introduced": [
+        "MessageChains:org.json.Cookie.toStringExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 10,
+      "smell": "MessageChains:org.json.Cookie.toStringExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:org.json.Cookie.toStringExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.316"
+      },
+      "introduced": [
+        "MessageChains:org.json.Cookie.toStringExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 11,
+      "smell": "MessageChains:org.json.Cookie.toStringExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:org.json.Cookie.toStringExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.322"
+      },
+      "introduced": [
+        "MessageChains:org.json.Cookie.toStringExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 5,
+  "ordering_validity": 0.5833333333333334,
+  "escalation_rate": 0.0
+}
