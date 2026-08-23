@@ -50,13 +50,13 @@ def _java_binary() -> str:
     raise SidecarUnavailable("No `java` executable found on PATH and JAVA_HOME is not set.")
 
 
-def _invoke(args: list[str]) -> dict:
+def _invoke(args: list[str], cwd: Path | None = None) -> dict:
     jar = _jar_path()
     java = _java_binary()
     with tempfile.TemporaryDirectory(prefix="seqrefactor-sidecar-") as tmp:
         out_path = Path(tmp) / "result.json"
         cmd = [java, "-jar", str(jar), *args, "--out", str(out_path)]
-        proc = subprocess.run(cmd, capture_output=True, text=True, check=False)
+        proc = subprocess.run(cmd, capture_output=True, text=True, check=False, cwd=cwd)
         if proc.returncode not in (0,):
             raise SidecarUnavailable(
                 f"sidecar exited {proc.returncode} for {cmd!r}\nstdout={proc.stdout}\nstderr={proc.stderr}"
@@ -68,12 +68,27 @@ def _invoke(args: list[str]) -> dict:
         return json.loads(out_path.read_text(encoding="utf-8"))
 
 
-def run_tests(src: Path, test_src: Path, classpath: list[Path] | None = None) -> TestResult:
-    """Compile and run a module's JUnit suite via the sidecar `test` subcommand."""
-    args = ["test", "--src", str(src), "--test-src", str(test_src)]
+def run_tests(
+    src: Path, test_src: Path, classpath: list[Path] | None = None, cwd: Path | None = None
+) -> TestResult:
+    """Compile and run a module's JUnit suite via the sidecar `test` subcommand.
+
+    ``cwd``, when given, is the working directory the JVM subprocess runs in --
+    matters for subject tests that read fixtures by a path relative to the
+    module root (e.g. ``src/test/resources/...``), the same way `mvn test` /
+    `gradle test` would resolve them when run from that project's own root.
+    Without it, the subprocess inherits the calling Python process's cwd, which
+    for a subject outside the current repo has no relation to the module at all.
+
+    ``src``/``test_src``/``classpath`` are resolved to absolute paths before
+    building the command: they are typically relative to the *caller's* cwd,
+    which is no longer the JVM subprocess's cwd once ``cwd`` is set, so a
+    relative path here would otherwise resolve against the wrong root.
+    """
+    args = ["test", "--src", str(Path(src).resolve()), "--test-src", str(Path(test_src).resolve())]
     if classpath:
-        args += ["--classpath", os.pathsep.join(str(p) for p in classpath)]
-    payload = _invoke(args)
+        args += ["--classpath", os.pathsep.join(str(Path(p).resolve()) for p in classpath)]
+    payload = _invoke(args, cwd=cwd)
     return TestResult(
         success=payload["success"],
         tests_run=payload["tests_run"],

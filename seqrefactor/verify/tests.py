@@ -24,4 +24,4 @@ class SidecarTestRunner:
                 f"module {module.name!r} has no main_dir/test_dir "
                 "(load it with seqrefactor.ingest.load, which populates both)"
             )
-        return _sidecar.run_tests(module.main_dir, module.test_dir, module.classpath)
+        return _sidecar.run_tests(module.main_dir, module.test_dir, module.classpath, cwd=module.path)

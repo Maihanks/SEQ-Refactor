@@ -11,6 +11,7 @@ from __future__ import annotations
 
 from collections import defaultdict
 from collections.abc import Callable
+from dataclasses import asdict
 from statistics import mean
 
 import numpy as np
@@ -148,5 +149,9 @@ class Reporter:
         return {
             "cells": ablation_table(runs),
             "by_strategy": aggregate_by_strategy(runs),
-            "hypothesis_tests": hypothesis_tests(runs),
+            # asdict, not the raw PairedTestResult dataclasses: this dict is the reporter's
+            # public output contract (written verbatim to summary.json by the CLI's `run`
+            # command via plain json.dumps), which must stay JSON-safe on its own rather
+            # than relying on every caller to know to convert it first.
+            "hypothesis_tests": {k: asdict(v) for k, v in hypothesis_tests(runs).items()},
         }

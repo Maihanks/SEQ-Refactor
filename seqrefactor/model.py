@@ -313,4 +313,5 @@ class Config(BaseModel):
     discount: float = 0.9
     coverage_min: float = 0.80
     seed: int = 20260101
+    max_steps: int = 50  # cap on resolution attempts per (subject, strategy, generator) run
     weight_sweep: WeightSweep | None = None

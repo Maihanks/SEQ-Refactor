@@ -1,0 +1,27 @@
+# The open-source-tier ablation matrix (paper §VII-C; see
+# datasets/opensource/json_java_v1/PROVENANCE.md for what this subject is and how it
+# was derived). Baseline generator only: no API key/network needed, and it keeps the
+# run deterministic and reproducible run to run.
+#
+# WARNING (matches configs/ablation.yaml's own warning for datasets/synthetic/): the
+# orchestrator mutates its target module in place. NEVER point subjects_glob at
+# datasets/opensource/ directly -- copy the subject to a scratch location first:
+#   cp -r datasets/opensource/json_java_v1 /tmp/scratch_json_java
+# and point subjects_glob at the copy before running `seqrefactor run`.
+subjects_glob: "datasets/opensource/json_java_v1/"
+strategies: ["seqrefactor", "impact_only", "topo_only", "unordered"]
+generators: ["baseline"]
+impact_weights:
+  alpha: 0.4
+  beta: 0.4
+  gamma: 0.2
+discount: 0.9
+coverage_min: 0.0
+seed: 20260101
+# 126 smells are detected in this subject (see PROVENANCE.md); a full resolution
+# would need well over 100 steps x 4 strategies, each step recompiling + rerunning
+# the subject's 445 tests through the sidecar (~5-10s/step). 12 is a deliberately
+# small, bounded, illustrative run -- enough to see whether ordering strategies
+# diverge on cascading violations / ordering validity early on, not an exhaustive
+# resolution. Raise it for a fuller (much slower) run.
+max_steps: 12

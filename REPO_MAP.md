@@ -117,8 +117,40 @@ finding the run surfaced (the `impact_only` arm showing `ordering_validity=0.0` 
 cascading violations on every step, exactly the paper's Section IV-E failure mode, while the
 three dependency-aware/topology-respecting arms held `ordering_validity=1.0`).
 
-**Still not done** (matches this document's original Section 2 gap list, now narrower): the
-open-source subject tier with `RefactoringMiner`-recovered reference orders, and scaling the
-synthetic corpus to the spec'd 20-45 files (the three checked-in subjects are small but fully
-exercised, including the new signed-edge ground truth). Both are substantial, separate efforts
-(cloning/mining real repositories) out of scope for this increment.
+## 6. Open-source subject added (post-Section-5 follow-up)
+
+One real open-source subject, `datasets/opensource/json_java_v1` (a filtered, dependency-free
+copy of stleary/JSON-java at a pinned commit — see its own `PROVENANCE.md` for exactly what was
+kept/excluded and why), was added and run through the real ablation matrix
+(`configs/opensource.yaml`, 12-step bounded run, 126 real smells detected across 26 classes). It
+surfaced and led to fixing two genuine, pre-existing gaps unrelated to this specific subject:
+
+1. `jvm-sidecar` only bundled the JUnit 5 engine; many real-world Java projects (this one
+   included) still use JUnit 4. Fixed by adding the vintage engine + `mergeServiceFiles()` to
+   `jvm-sidecar/build.gradle` (the latter matters: Shadow doesn't merge `META-INF/services` files
+   by default, so without it, adding a second engine silently drops the first one's registration).
+2. `seqrefactor/_sidecar.py`'s `run_tests` never set the JVM subprocess's working directory, so
+   any subject test reading a fixture by a module-root-relative path failed regardless of which
+   subject invoked it. Fixed by threading `cwd=module.path` through
+   `verify/tests.py` -> `_sidecar.run_tests` -> `_invoke`, with `--src`/`--test-src`/`--classpath`
+   resolved to absolute paths first (needed once `cwd` changes what a relative path resolves
+   against).
+
+A real, incidental correctness bug in this session's own earlier work was also caught here:
+`report.Reporter.ablation()`'s `hypothesis_tests` entry held raw `PairedTestResult` dataclasses,
+which broke `seqrefactor run`'s `summary.json` write with a `TypeError` the first time that CLI
+command (as opposed to `seqrefactor results`, exercised earlier and unaffected since it goes
+through `eval/tables.py` instead) was actually run end-to-end. Fixed with `dataclasses.asdict`
+plus a regression test (`tests/unit/test_report.py::test_reporter_ablation_output_is_json_serializable`).
+
+Real result (see `datasets/opensource/json_java_v1/PROVENANCE.md` for full detail): `impact_only`
+(no topological safety) hit 5/12 cascading violations and 58% ordering validity on this subject;
+`seqrefactor`/`topo_only`/`unordered` all held 0 violations and 100% validity. One subject, one
+generator, 12 steps — illustrative, not a powered statistical claim, but real, on unmodified
+production code, and directionally exactly what the paper's ordering-safety argument predicts.
+
+**Still not done**: the open-source subject tier's own missing piece,
+`RefactoringMiner`-recovered reference orders (needs real commit-history mining, a substantial,
+separate effort), more open-source subjects beyond this one, and scaling the synthetic corpus to
+the spec'd 20-45 files (the three checked-in synthetic subjects are small but fully exercised,
+including the signed-edge ground truth).

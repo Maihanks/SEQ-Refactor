@@ -277,9 +277,35 @@ The spec's full experimental design (§8) calls for 20–45-file injected-smell 
 a controlled synthetic tier and an open-source tier with mined reference orders. What's shipped
 here is a smaller, real, fully-exercised subset — every code path (ordering, escalation, partial
 escalation, detection, verification, generation) has at least one genuine test against it — rather
-than a larger but shallow corpus. Scaling the synthetic tier to the full spec'd size, and adding
-the open-source tier with `RefactoringMiner`-recovered reference orders, is the natural next step
-(§8.2) and is not done here.
+than a larger but shallow corpus. Scaling the synthetic tier to the full spec'd size is the natural
+next step and is not done here.
+
+### Open-source tier
+
+One real subject under `datasets/opensource/`:
+[`json_java_v1`](datasets/opensource/json_java_v1/PROVENANCE.md) — a filtered, dependency-free
+copy of [stleary/JSON-java](https://github.com/stleary/JSON-java) at a pinned commit (public
+domain license), 26 real classes / 126 detected smells, chosen specifically because it compiles
+with no dependencies beyond JUnit, which is what the jvm-sidecar's `javac`-direct compile model
+supports without extra classpath wiring. Its `PROVENANCE.md` documents exactly what was kept, what
+was excluded and why (all mechanical: missing test-only dependencies or a classpath-resource
+lookup the sidecar doesn't yet support), how to re-fetch and re-filter it from scratch, two real
+sidecar/client bugs it surfaced and fixed (JUnit 4/vintage-engine support,
+`_sidecar.py` not setting the JVM subprocess's working directory), and a real 12-step ablation
+result: `impact_only` (no topological safety) hit 5/12 cascading violations and 58% ordering
+validity, while `seqrefactor`/`topo_only`/`unordered` held 0 violations and 100% validity — the
+paper's Section IV-E failure mode, reproduced on real production code, not a synthetic fixture.
+
+Unlike the synthetic subjects, it has no hand-declared ground-truth dependency structure or mined
+reference order (that needs `RefactoringMiner` against real commit history — a substantial,
+separate effort, still not done; see REPO_MAP.md), so it drives the ablation matrix only, not the
+golden test or the dependency-mass study, both of which need declared ground truth.
+
+**Never point `subjects_glob` at `datasets/opensource/` (or `datasets/synthetic/`) directly** —
+copy the subject to a scratch location first; the orchestrator mutates its target in place. This
+bit once already during this project's development (a `configs/ablation.yaml`-style run against
+the checked-in path corrupted the pilot fixture's `.java` source before being caught and reverted
+via git) — treat the warning as load-bearing, not decorative.
 
 ## Configuration and secrets
 
@@ -404,9 +430,15 @@ Being direct about scope, matching the spec's own "SCOPE NOTE" and "HONESTY NOTE
     module.
 - **Real client code, unverified against a live server**: the SonarQube adapter (see
   Verification log above).
-- **Not implemented**: the open-source-subjects tier with `RefactoringMiner`-recovered
-  reference orders, and the full 20–45-file synthetic corpus (the checked-in three subjects are
-  small but fully exercised — see Datasets above).
+- **Real, on real production code, but a single illustrative run, not a powered study**: the
+  open-source subject (`datasets/opensource/json_java_v1`) drives the ablation matrix with a real
+  result (see Datasets above and its own `PROVENANCE.md`), but it is one subject with a bounded
+  12-step budget — the formal H1-H3 paired statistics correctly report "insufficient data" until
+  there are at least 5 comparable subjects.
+- **Not implemented**: `RefactoringMiner`-recovered reference orders for the open-source tier
+  (needs real commit-history mining, a substantial separate effort), more open-source subjects,
+  and the full 20–45-file synthetic corpus (the checked-in three subjects are small but fully
+  exercised — see Datasets above).
 
 ## Traceability to the specification
 

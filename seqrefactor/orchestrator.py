@@ -39,8 +39,8 @@ from seqrefactor.model import (
     SmellDependencyGraph,
     SmellId,
     SmellInstance,
-    Strategy,
     StepRecord,
+    Strategy,
     Verdict,
 )
 from seqrefactor.order import impact as impact_scorer
@@ -235,10 +235,11 @@ class Orchestrator:
         cfg: Config,
         strategy: Strategy | None = None,
         generator: GeneratorName | None = None,
-        max_steps: int = 50,
+        max_steps: int | None = None,
     ) -> RunReport:
         strategy = strategy or cfg.strategies[0]
         generator_name: GeneratorName = generator or cfg.generators[0]
+        max_steps = max_steps if max_steps is not None else cfg.max_steps
 
         module = ingest.load(Path(path))
         precondition = ingest.check_preconditions(module, coverage_min=cfg.coverage_min)

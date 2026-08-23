@@ -2,8 +2,10 @@
 
 from __future__ import annotations
 
+import json
+
 from seqrefactor.model import RunReport, StepRecord, Verdict
-from seqrefactor.report import auc_quality_trajectory, hypothesis_tests
+from seqrefactor.report import Reporter, auc_quality_trajectory, hypothesis_tests
 
 
 def _run(subject: str, strategy: str, generator: str, n_accepted: int, n_cascades: int) -> RunReport:
@@ -61,6 +63,18 @@ def test_h2_uses_net_smell_resolution_against_unordered_and_topo_only() -> None:
 
     assert results["H2_higher_nsr_vs_unordered"].supported is True
     assert results["H2_higher_nsr_vs_topo_only"].supported is True
+
+
+def test_reporter_ablation_output_is_json_serializable() -> None:
+    """Regression test: Reporter.ablation()'s dict is written verbatim to summary.json
+    by the CLI's `run` command via plain json.dumps -- it must be JSON-safe on its own,
+    not leak PairedTestResult dataclass instances (caught for real running the pipeline
+    against datasets/opensource/json_java_v1, see PROVENANCE.md)."""
+    runs = [_run("subj", "seqrefactor", "baseline", n_accepted=3, n_cascades=0)]
+
+    summary = Reporter().ablation(runs)
+
+    json.dumps(summary)  # must not raise TypeError
 
 
 def test_auc_quality_trajectory_is_nonnegative_and_monotone_with_more_accepts() -> None:
