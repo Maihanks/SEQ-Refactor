@@ -1,0 +1,11 @@
+{
+  "subject": "billing_cycle_v1",
+  "strategy": "topo_only",
+  "generator": "baseline",
+  "steps": [],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0
+}

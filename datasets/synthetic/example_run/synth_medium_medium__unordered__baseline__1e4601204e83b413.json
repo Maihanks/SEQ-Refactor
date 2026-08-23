@@ -1,0 +1,132 @@
+{
+  "subject": "synth_medium_medium",
+  "strategy": "unordered",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:synth.GodClass0",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass0",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "MessageChains:synth.GodClass0.m0_messagechains",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass0.m0_messagechains",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.284 below threshold -0.05"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:synth.GodClass0.m1_longmethod",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m1_longmethod",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.122 below threshold -0.05"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "GodClass:synth.GodClass1",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass1",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:synth.GodClass1.m0_messagechains",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass1.m0_messagechains",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.284 below threshold -0.05"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "MessageChains:synth.GodClass1.m1_messagechains",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass1.m1_messagechains",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.284 below threshold -0.05"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "GodClass:synth.GodClass2",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass2",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "BigSwitch:synth.GodClass2.m0_bigswitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.GodClass2.m0_bigswitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.121 below threshold -0.05"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "LongMethod:synth.GodClass2.m1_longmethod",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass2.m1_longmethod",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.282 below threshold -0.05"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "GodClass:synth.GodClass3",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass3",
+        "accepted": false,
+        "rationale": "generator produced no patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0
+}

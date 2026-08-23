@@ -25,6 +25,7 @@ import random
 import statistics
 import time
 
+from seqrefactor.datasets import graph_from_manifest, list_subjects, load_manifest
 from seqrefactor.graph.builder import build
 from seqrefactor.graph.incremental import apply_step, touched_node_ids
 from seqrefactor.model import (
@@ -166,6 +167,74 @@ def run_scaling_study(
             records.append(
                 ComplexityRecord(
                     subject=f"synthetic_V{module_size}",
+                    step_index=step_index,
+                    strategy="incremental",
+                    module_size=module_size,
+                    counters=incremental_counters,
+                    wall_clock_seconds=incremental_wall,
+                )
+            )
+
+    return records
+
+
+def run_corpus_study(
+    subjects: list[str] | None = None,
+    max_steps_per_subject: int = 10,
+    repeats: int = 7,
+) -> list[ComplexityRecord]:
+    """The same incremental-vs-from-scratch measurement as ``run_scaling_study``,
+    but starting from the real corpus's own manifest-declared graphs (Working
+    Brief, Phase 2, §5.1: "run eval/complexity.py across the synthetic corpus")
+    rather than a synthetic |V| sweep. Complements, not replaces, the sweep:
+    this shows real subjects' actual cost; the sweep shows the asymptotic trend
+    at sizes larger than any single subject provides.
+    """
+    weights = ImpactWeights()
+    subjects = subjects if subjects is not None else list_subjects()
+    records: list[ComplexityRecord] = []
+
+    for subject in subjects:
+        graph = graph_from_manifest(load_manifest(subject))
+        module_size = len(graph.nodes)
+        scratch_graph = graph
+        incremental_graph = graph
+
+        for step_index in range(max_steps_per_subject):
+            if not scratch_graph.nodes:
+                break
+            ordering = order(scratch_graph, score(scratch_graph, weights))
+            if not ordering.agenda:
+                break
+            resolved_id = ordering.agenda[0]
+            resolved_node = next(n for n in scratch_graph.nodes if n.id == resolved_id)
+            touched = set(resolved_node.loc)
+
+            def _run_scratch(g=scratch_graph, r=resolved_id, t=touched):
+                return _from_scratch_step(g, r, t)
+
+            def _run_incremental(g=incremental_graph, r=resolved_id, t=touched):
+                return _incremental_step(g, r, t)
+
+            scratch_wall = _median_wall_clock(_run_scratch, repeats)
+            incremental_wall = _median_wall_clock(_run_incremental, repeats)
+
+            scratch_graph, scratch_counters = _run_scratch()
+            incremental_graph, incremental_counters = _run_incremental()
+
+            records.append(
+                ComplexityRecord(
+                    subject=subject,
+                    step_index=step_index,
+                    strategy="from_scratch",
+                    module_size=module_size,
+                    counters=scratch_counters,
+                    wall_clock_seconds=scratch_wall,
+                )
+            )
+            records.append(
+                ComplexityRecord(
+                    subject=subject,
                     step_index=step_index,
                     strategy="incremental",
                     module_size=module_size,

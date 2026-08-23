@@ -296,7 +296,7 @@ class DependencyMass(BaseModel):
 # Configuration (drives Orchestrator.run_one / run_matrix, §8.3)
 # --------------------------------------------------------------------------
 
-Strategy = Literal["seqrefactor", "impact_only", "topo_only", "unordered"]
+Strategy = Literal["seqrefactor", "impact_only", "topo_only", "unordered", "search_based"]
 GeneratorName = Literal["llm", "baseline"]
 
 

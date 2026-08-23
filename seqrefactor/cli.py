@@ -81,7 +81,9 @@ def order(config_path: str, subject: str, strategy: str | None, generator: str |
     smells = detect_native.detect(module)
     g = build_graph(smells, module)
     impact_scores = impact_scorer.score(g, cfg.impact_weights)
-    ordering = _select_ordering(strategy or cfg.strategies[0], g, impact_scores)
+    ordering = _select_ordering(
+        strategy or cfg.strategies[0], g, impact_scores, discount=cfg.discount, seed=cfg.seed
+    )
 
     click.echo(f"subject: {module.name}")
     click.echo(f"smells detected: {len(smells)}")

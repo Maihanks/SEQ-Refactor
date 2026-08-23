@@ -1,0 +1,987 @@
+{
+  "cells": [
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    }
+  ],
+  "by_strategy": {
+    "seqrefactor": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 18
+    },
+    "impact_only": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0.5555555555555556,
+      "ordering_validity": 0.9444444444444444,
+      "escalation_rate": 0.0,
+      "n_subjects": 18
+    },
+    "topo_only": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 18
+    },
+    "unordered": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 18
+    },
+    "search_based": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 18
+    }
+  },
+  "hypothesis_tests": {
+    "H1_fewer_cascading_violations_vs_unordered": {
+      "n": 18,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "mean_difference": 0.0,
+      "supported": null,
+      "note": "every paired difference is exactly zero; the test is degenerate."
+    },
+    "H2_higher_nsr_vs_unordered": {
+      "n": 18,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "mean_difference": 0.0,
+      "supported": null,
+      "note": "every paired difference is exactly zero; the test is degenerate."
+    },
+    "H2_higher_nsr_vs_topo_only": {
+      "n": 18,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": 0.0,
+      "ci_high": 0.0,
+      "mean_difference": 0.0,
+      "supported": null,
+      "note": "every paired difference is exactly zero; the test is degenerate."
+    },
+    "H3_higher_auc_vs_topo_only": {
+      "n": 18,
+      "statistic": 13.5,
+      "p_value": 0.26411638843399154,
+      "effect_size_r": 0.2857142857142857,
+      "ci_low": -1.0555555555555556,
+      "ci_high": 2.167361111111107,
+      "mean_difference": 0.4722222222222222,
+      "supported": false,
+      "note": "not supported at p<0.05 (H_alt: greater)"
+    }
+  }
+}

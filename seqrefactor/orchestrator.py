@@ -44,7 +44,7 @@ from seqrefactor.model import (
     Verdict,
 )
 from seqrefactor.order import impact as impact_scorer
-from seqrefactor.order import orderer
+from seqrefactor.order import orderer, search_based
 from seqrefactor.retrieve.retriever import Retriever
 from seqrefactor.verify.arch import ArchCheck
 from seqrefactor.verify.metrics import MetricFacade
@@ -52,11 +52,16 @@ from seqrefactor.verify.tests import SidecarTestRunner
 
 
 def _select_ordering(
-    strategy: Strategy, g: SmellDependencyGraph, impact_scores: dict[SmellId, float]
+    strategy: Strategy,
+    g: SmellDependencyGraph,
+    impact_scores: dict[SmellId, float],
+    discount: float = 0.9,
+    seed: int = 20260101,
 ) -> Ordering:
-    """The four ablation arms (§8.3 Variables): only the ordering strategy varies;
-    everything else in the loop is identical across arms so the comparison isolates
-    ordering effects from generation effects."""
+    """The five ablation arms (§8.3 Variables, + search_based added Phase 2 §4):
+    only the ordering strategy varies; everything else in the loop is identical
+    across arms so the comparison isolates ordering effects from generation
+    effects."""
     if strategy == "unordered":
         return Ordering(agenda=[n.id for n in g.nodes], escalations=[])
     if strategy == "impact_only":
@@ -69,6 +74,10 @@ def _select_ordering(
         # id-tie-broken topological sort while keeping OR-1 safety intact.
         flat = dict.fromkeys(impact_scores, 0.0)
         return orderer.order(g, flat)
+    if strategy == "search_based":
+        # Genetic-algorithm search for the objective (paper Eq. 2) Algorithm 1 only
+        # greedily approximates (order/search_based.py's own HONESTY NOTE on scope).
+        return search_based.search_based_order(g, impact_scores, discount=discount, seed=seed)
     return orderer.order(g, impact_scores)  # "seqrefactor"
 
 
@@ -134,7 +143,9 @@ class Orchestrator:
 
         # S3 Order (THE CONTRIBUTION for strategy == "seqrefactor")
         impact_scores = impact_scorer.score(g, cfg.impact_weights)
-        ordering = _select_ordering(strategy, g, impact_scores)
+        ordering = _select_ordering(
+            strategy, g, impact_scores, discount=cfg.discount, seed=cfg.seed + step_index
+        )
 
         escalated_ids = {sid for comp in ordering.escalations for sid in comp}
         actionable = [sid for sid in ordering.agenda if sid not in escalated_ids]

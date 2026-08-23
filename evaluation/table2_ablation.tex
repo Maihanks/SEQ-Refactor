@@ -1,0 +1,101 @@
+\begin{table}[t]
+\centering
+\caption{SEQ-REFACTOR ablation (RQ1-RQ4)}
+\label{tab:ablation}
+\begin{tabular}{llllllll}
+\toprule
+subject & strategy & generator & net\_smell\_resolution & cascading\_violations & ordering\_validity & escalation\_rate & steps \\
+\midrule
+billing\_cycle\_v1 & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+billing\_cycle\_v1 & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+billing\_cycle\_v1 & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+billing\_cycle\_v1 & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+billing\_cycle\_v1 & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+notification\_mixed\_v1 & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+notification\_mixed\_v1 & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+notification\_mixed\_v1 & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+notification\_mixed\_v1 & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+notification\_mixed\_v1 & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 0 \\
+pilot\_checkout\_v1 & impact\_only & baseline & 0 & 10 & 0.0 & 0.0 & 10 \\
+pilot\_checkout\_v1 & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+pilot\_checkout\_v1 & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+pilot\_checkout\_v1 & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+pilot\_checkout\_v1 & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_cycle & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_cycle & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_cycle & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_cycle & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_cycle & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_high & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_high & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_high & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_high & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_high & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_low & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_low & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_low & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_low & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_low & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_medium & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_medium & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_medium & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_medium & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_large\_medium & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_cycle & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_cycle & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_cycle & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_cycle & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_cycle & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high\_signed & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high\_signed & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high\_signed & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high\_signed & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_high\_signed & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low\_signed & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low\_signed & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low\_signed & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low\_signed & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_low\_signed & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_medium & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_medium & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_medium & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_medium & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_medium\_medium & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_cycle & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_cycle & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_cycle & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_cycle & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_cycle & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_high & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_high & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_high & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_high & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_high & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_low & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 8 \\
+synth\_small\_low & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 8 \\
+synth\_small\_low & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 8 \\
+synth\_small\_low & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 8 \\
+synth\_small\_low & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 8 \\
+synth\_small\_medium & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_medium & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_medium & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_medium & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_small\_medium & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_xlarge\_medium & impact\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_xlarge\_medium & search\_based & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_xlarge\_medium & seqrefactor & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_xlarge\_medium & topo\_only & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+synth\_xlarge\_medium & unordered & baseline & 0 & 0 & 1.0 & 0.0 & 10 \\
+\bottomrule
+\end{tabular}
+\end{table}

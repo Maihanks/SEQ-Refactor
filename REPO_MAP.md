@@ -182,3 +182,46 @@ Closed the same way: ran both against real inputs and committed the output under
 Both are one-shot, deterministic, seeded computations (not requiring the jvm-sidecar), reusing
 the exact production code path `seqrefactor results` already calls — nothing was manually
 reconstructed or estimated.
+
+## 8. Phase 2: the synthetic-subject generator and the powered study
+
+See `PHASE2_PLAN.md` for the pre-implementation gap list (Section 0's required deliverable) and
+`REPRODUCE.md` for exact reproduction steps. Summary of what changed:
+
+- **`seqrefactor/synth/generator.py`**: a deterministic, seeded generator planting each smell as a
+  real, compilable Java structural pattern the native detector and graph builder independently
+  rediscover from source (never from the manifest) — the anti-circularity property the brief
+  named directly. Plants only the four categories the native detector actually supports (GodClass,
+  LongMethod, MessageChains, BigSwitch); Feature Envy and other catalogue-only categories are
+  explicitly out of scope, stated in the generator's own SCOPE NOTE rather than silently narrowed.
+  Cycle subjects carry a manifest-declared cycle (the containment-based builder cannot discover a
+  real one, by construction — see the generator's CYCLE NOTE). All acceptance checks (§1.6:
+  determinism, compile/test-green, independence with overlap, cycle control) hold and are covered
+  by `tests/unit/test_synth_generator.py`.
+- **`seqrefactor/synth/build_corpus.py`**: generates 15 subjects from one master seed across a
+  documented size x density grid plus cycle/signed-rate variants; `datasets/synthetic/CORPUS.md`
+  documents every one. Combined with the 3 pre-existing hand-written subjects, the corpus is 18
+  subjects (Definition of Done: "at least 15").
+- **`order/search_based.py`**: a fifth strategy arm, a real genetic algorithm searching for the
+  paper's own optimisation objective (Eq. 2) via a priority-vector encoding decoded through the
+  existing, already-safe `orderer.order` (so search can never produce an unsafe ordering, by
+  construction). Explicitly documented as *not* a verified reproduction of Ouni et al. [29] or Liu
+  et al. [30]'s exact published algorithms (this environment cannot fetch either paper to check
+  fidelity) — see its own HONESTY NOTE.
+- **The powered ablation ran for real**: 18 subjects x 5 strategies, `configs/synthetic.yaml`,
+  raw run reports committed under `datasets/synthetic/example_run/`. H3 and H4 now compute real
+  statistics at n=18 (previously "insufficient data" at n=3). H1/H2 are honestly **degenerate**
+  (every paired difference is exactly zero, not merely non-significant) — traced to a real,
+  reported mechanism: the baseline generator cannot patch class-level smells, so most of the
+  bounded step budget on multi-GodClass subjects goes to rejected attempts before any real
+  progress is possible. See `evaluation/README.md`'s Phase 2 section for the full, honest
+  narrative, including why `impact_only`'s designed failure mode barely triggers on the *generated*
+  corpus specifically (a real generator-severity-design limitation, stated plainly, not hidden).
+- **Tables III (dependency-mass) and IV (complexity) re-run against the full corpus**, the latter
+  now also measured against real corpus subject graphs (`eval/complexity.run_corpus_study`), not
+  only the synthetic |V| sweep — both corroborate the same asymptotic trend independently.
+- **Not done, stated plainly**: the LLM-generator run (Section 3, step 3) needs
+  `OPENAI_API_KEY`, absent in this environment — everything above uses the baseline generator
+  only, so `net_smell_resolution` being flat at 0 reflects that generator's real limitations, not
+  necessarily SEQ-REFACTOR's ordering algorithm. `REPRODUCE.md` states exactly how to close this
+  gap once a key is available.
