@@ -26,6 +26,25 @@ Every subject's own seed is `master_seed + index` in grid-definition order (`bui
 | `synth_medium_low_signed` | 20260115 | 8 | 15 | 0.55 | no | 0.1 | 0.1 |
 | `synth_xlarge_medium` | 20260116 | 16 | 31 | 0.55 | no | 0.5 | 0.5 |
 
-**Total: 15 subjects** (Working Brief's Definition of Done: "at least 15 committed subjects").
-
 Each subject plants only the four smell categories the native detector (`detect/native.py`) actually supports (GodClass, LongMethod, MessageChains, BigSwitch) -- see `synth/generator.py`'s module docstring SCOPE NOTE for why Feature Envy and other catalogue-only categories are not planted. Cycle subjects (`cycle=yes`) carry a manifest-declared cycle in addition to the containment-derived prerequisites, exercising SCC escalation (RQ3); see the generator's CYCLE NOTE for why this cannot instead be made independently builder-discoverable with the current containment-based edge derivation.
+
+## Priority-Dependency Conflict family (Working Brief Phase 2c §2.2)
+
+A low-severity God Class prerequisite whose dependent(s) are deliberately higher severity, planted through real code (padding decouples detection from severity, see `synth/generator.py`'s PHASE 2C docstring section), so `impact_only` and the dependency-safe strategies are forced to diverge by construction, not by chance.
+
+| subject | seed | kind | width/depth | prerequisite severity | min dependent severity |
+|---|---|---|---|---|---|
+| `conflict_pair_a` | 20261102 | pair | 1 | 0.58 | 0.70 |
+| `conflict_pair_b` | 20261103 | pair | 1 | 0.50 | 0.80 |
+| `conflict_pair_c` | 20261104 | pair | 1 | 0.33 | 0.80 |
+| `conflict_width_2` | 20261105 | width | 2 | 0.58 | 0.70 |
+| `conflict_width_4` | 20261106 | width | 4 | 0.50 | 0.60 |
+| `conflict_width_6` | 20261107 | width | 6 | 0.33 | 0.60 |
+| `conflict_chain_depth2` | 20261108 | chain | 2 | 0.25 | 0.90 |
+| `conflict_chain_depth3` | 20261109 | chain | 3 | 0.33 | 0.90 |
+| `conflict_chain_depth4` | 20261110 | chain | 4 | 0.33 | 1.00 |
+| `conflict_chain_depth5` | 20261111 | chain | 5 | 0.50 | 0.90 |
+
+**Total: 15 grid subjects + 10 conflict subjects = 25 subjects** (Working Brief's Definition of Done: "at least 15 committed subjects").
+
+"Diamond" shapes (A -> B, A -> C, B -> D, C -> D) are not included: Java's qualified-name namespace is a tree, so no real element can be structurally contained by two different elements at once -- the same reason genuine cycles are architecturally impossible for the builder to discover. A diamond could only be faked as manifest-only ground truth, which would defeat this family's own purpose (a conflict the detector must independently rediscover), so it is left out rather than faked; see `synth/generator.py`'s module docstring.

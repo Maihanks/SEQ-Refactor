@@ -1,0 +1,16 @@
+{
+  "subject": "notification_mixed_v1",
+  "strategy": "topo_only",
+  "generator": "baseline",
+  "steps": [],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 0,
+  "successful_generations": 0,
+  "generation_success_rate": 0.0,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {}
+}

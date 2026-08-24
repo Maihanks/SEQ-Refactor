@@ -7,7 +7,8 @@
 # mutates its target module in place. NEVER point subjects_glob at datasets/synthetic/
 # directly for a real run -- copy the corpus to a scratch location first.
 subjects_glob: "datasets/synthetic/*/"
-strategies: ["seqrefactor", "impact_only", "topo_only", "unordered", "search_based"]
+# 7 arms (Working Brief Phase 2c §3 adds random/random_topological to Phase 2's five):
+strategies: ["seqrefactor", "impact_only", "topo_only", "unordered", "search_based", "random", "random_topological"]
 generators: ["baseline"]
 impact_weights:
   alpha: 0.4
@@ -16,9 +17,9 @@ impact_weights:
 discount: 0.9
 coverage_min: 0.0
 seed: 20260101
-# Corpus subjects carry 8-31 planted smells each (see CORPUS.md); 10 steps covers the
-# small/medium tiers fully and a meaningful portion of the large/xlarge tiers, while
-# keeping total run cost bounded (~16 real-source subjects x 5 strategies x 10 steps x
-# ~2.5s/step, measured against a generated small subject, is on the order of 30
-# minutes -- see PHASE2_PLAN.md's cost/scope note).
+# Corpus subjects carry 2-31 planted smells each (see CORPUS.md); 10 steps covers the
+# small/medium tiers and every conflict subject fully (conflict subjects have 2-7
+# smells and terminate long before the cap regardless), and a meaningful portion of
+# the large/xlarge tiers, while keeping total run cost bounded -- see
+# PHASE2_PLAN.md's cost/scope note.
 max_steps: 10

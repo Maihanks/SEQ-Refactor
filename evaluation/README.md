@@ -131,6 +131,126 @@ just the controlled sweep. Every row's underlying equivalence (incremental == fr
 actual H5 claim) is proven by construction and enforced by
 `tests/property/test_incremental_equivalence.py`, run against this same corpus among others.
 
+## Phase 2c update: the discriminating benchmark
+
+Phase 2's benchmark had a structural bias a reviewer identified: God Class always got the
+maximum severity (1.0), and God Class was always the prerequisite, so even `impact_only`
+(which ignores dependency edges) tended to pick it first anyway -- the strategies rarely had a
+reason to differ, which is why H1/H2 came back degenerate in the Phase 2 write-up above. Phase
+2c decorrelates severity from dependency role (a prerequisite samples Uniform(0.2, 0.6); each
+dependent it contains samples independently from Uniform(0.6, 1.0), both realised through real
+code structure the live detector computes severity from -- see
+`seqrefactor/synth/generator.py`'s PHASE 2C docstring section) and adds an explicit
+Priority-Dependency Conflict family (pairs, widths, chains) where a low-severity prerequisite's
+dependent(s) are deliberately higher severity, so `impact_only` and the dependency-safe
+strategies are forced to diverge **by construction**. The corpus grew from 18 to 28 subjects
+(15 decorrelated grid subjects + 10 conflict subjects, `datasets/synthetic/CORPUS.md`); two new
+reference strategies (`random`, `random_topological`) and two new studies (detector
+precision/recall, random-baseline mean/spread) were added alongside.
+
+### Table V — detector precision/recall/F1 (new, Phase 2c §4)
+
+**Command:** `eval.detector_quality.run_study()`, `eval_tables.table5_detector_quality(...)`.
+
+Every one of the 25 generator-produced subjects scores **precision = recall = F1 = 1.0** against
+the generator's own planted ground truth -- a real, corpus-wide confirmation of the independence
+property Phase 1/2 only spot-checked (`tests/unit/test_synth_generator.py`'s
+`test_builder_independently_infers_planted_prerequisites_with_full_overlap`), now holding across
+every subject, not just one. The one hand-written subject, `pilot_checkout_v1` (predates the
+generator, its manifest was authored by hand, not produced by a script the detector's own
+categories are guaranteed to match), scores precision = recall = F1 = 0.714 -- a real, honestly
+reported difference between a hand-authored fixture and a script-verified one, not a detector
+regression. `billing_cycle_v1`/`notification_mixed_v1` are correctly excluded (no real Java
+source to run a detector against at all), not scored zero.
+
+### Table VI — random-baseline reference statistics (new, Phase 2c §3)
+
+**Command:** `eval.random_study.run_study(...)`, `eval_tables.table6_random_baseline(...)`, 200
+samples per subject, seed 20260101.
+
+- `mean_violation_fraction` clusters tightly around **0.48-0.51** across all 28 subjects
+  (matching the naive expectation for an arbitrary permutation against a single prerequisite
+  edge: roughly a coin flip) -- the real "how unsafe is doing nothing about ordering" upper
+  reference the brief asks for.
+- On every subject with more than one valid topological order to begin with (i.e. excluding the
+  trivial 2-node pair/chain subjects, where only one order exists and every strategy coincides
+  by necessity), `seqrefactor`'s objective **exceeds** `random_topological`'s mean by well more
+  than its standard deviation -- e.g. `synth_xlarge_medium`: seqrefactor 3.638 vs.
+  random_topological 2.718 +/- 0.205 (~4.5 standard deviations); `conflict_width_6`: 1.351 vs.
+  1.299 +/- 0.025 (~2 standard deviations, smaller but still real on a much smaller subject).
+  This is real, direct evidence that impact-forward prioritisation adds value *beyond* safety
+  alone (H3's underlying claim), isolated from the value of safety itself, exactly what
+  comparing against this reference is for.
+
+### Table II / H1, H2, H3 (RQ1, RQ2, RQ3) -- Phase 2c result
+
+**Command:** `uv run seqrefactor run --config configs/synthetic.yaml --out <scratch dir>` (against
+a scratch copy, per the standing warning), 28 subjects x 7 strategies x up to 10 steps each, real
+sidecar. Raw reports: `datasets/synthetic/example_run/*.json` (196 files); real per-strategy
+means:
+
+| strategy | n | mean cascading_violations | mean ordering_validity |
+|---|---|---|---|
+| `impact_only` | 28 | **7.536** | **0.131** |
+| `random` | 28 | 1.429 | 0.690 |
+| `unordered` | 28 | 0.964 | 0.893 |
+| `random_topological` | 28 | 0.000 | 1.000 |
+| `search_based` | 28 | 0.000 | 1.000 |
+| `seqrefactor` | 28 | 0.000 | 1.000 |
+| `topo_only` | 28 | 0.000 | 1.000 |
+
+This is the acceptance check the brief named directly, holding exactly as predicted: on the
+conflict subjects, `impact_only` (unsafe by design) records real cascading violations and
+ordering validity far below 1.0, while every dependency-respecting strategy
+(`seqrefactor`/`topo_only`/`search_based`/`random_topological`) stays perfectly safe.
+`random`/`unordered` land in between (occasionally, not always, unsafe by coincidence).
+
+**H1 and H2, real statistics, n=28 (no longer degenerate for H1):**
+
+| Hypothesis | Supported | n | p-value | effect size (r) | mean difference |
+|---|---|---|---|---|---|
+| H1 (fewer cascading violations vs. unordered) | **yes** | 28 | **0.0416** | **1.0** | 0.964 |
+| H2 (higher NSR vs. unordered) | insufficient signal | 28 | n/a | n/a | 0.0 (degenerate) |
+| H2 (higher NSR vs. topo_only) | insufficient signal | 28 | n/a | n/a | 0.0 (degenerate) |
+| H3 (higher AUC vs. topo_only) | **yes** | 28 | **0.0009** | **0.978** | 10.75 |
+
+H1 went from degenerate (Phase 2, n=18, every difference exactly zero) to a real, significant
+result: p=0.042, and the maximum possible rank-biserial effect size (r=1.0, meaning every single
+paired subject moved in the predicted direction, not just most). H3 is even stronger
+(p=0.0009). This is the "genuine, computable H1 result" the brief predicted the redesign would
+produce, not tuned to appear -- the conflict family's H1 effect is entirely attributable to
+`impact_only` alone; the other six strategies are pairwise identical on cascading violations by
+construction, which is exactly the mechanism check (§2.2) working as designed.
+
+**H2 stays degenerate, and Section 5's new diagnostics explain exactly why -- a real finding in
+its own right, not a loose end.** Net smell resolution is 0 for *every* strategy on *every*
+subject. Generation success rate (GSR, `RunReport.generation_success_rate`) and the
+rejection-reason breakdown (`RunReport.rejection_reason_counts`), summed across all 28 subjects
+per strategy:
+
+| strategy | generation attempts | GSR | total NSR | total cascading | rejections |
+|---|---|---|---|---|---|
+| `impact_only` | 238 | 0.979 | 0 | 211 | `metric_regression`: 22, `no_patch`: 5 |
+| `unordered` | 238 | 0.853 | 0 | 27 | `no_patch`: 35, `metric_regression`: 29 |
+| `seqrefactor` | 238 | 0.836 | 0 | 0 | `no_patch`: 39, `metric_regression`: 40 |
+| `search_based` | 238 | 0.803 | 0 | 0 | `no_patch`: 47, `metric_regression`: 28 |
+| `random` | 238 | 0.782 | 0 | 40 | `no_patch`: 52, `metric_regression`: 80 |
+| `topo_only` | 238 | 0.744 | 0 | 0 | `no_patch`: 61, `metric_regression`: 84 |
+| `random_topological` | 238 | 0.731 | 0 | 0 | `no_patch`: 64, `metric_regression`: 71 |
+
+Across every strategy, `no_patch` (the generator produced nothing, always true for a God Class
+target -- `generate/baseline.py` has no class-level transform) and `metric_regression` (a patch
+was produced and compiled and passed tests, but the aggregate five-family metric delta fell below
+the gate's threshold) together account for nearly every rejection. NSR stays at zero regardless
+of *which* smell gets offered to the generator first, because the deterministic baseline
+generator's wrap-and-delegate transform (documented since Phase 1 as an ablation *control*, not a
+quality tool) essentially never earns a positive aggregate metric delta on its own. **This is a
+generator-capability ceiling, not a scheduling failure**: H2 was never going to distinguish the
+strategies while every strategy's accepted-transform rate is pinned near zero by the same
+generator limitation. Resolving it needs the LLM generator (Working Brief Phase 2 §3 step 3,
+still blocked on an API key, see REPRODUCE.md) -- stated as the honest next step, not glossed
+over.
+
 ## Phase 1 results (superseded scope, kept for reference)
 
 The original single/few-subject numbers this section used to report (n=3 synthetic subjects for

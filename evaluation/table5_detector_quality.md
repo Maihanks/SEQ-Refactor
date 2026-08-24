@@ -1,0 +1,30 @@
+# Detector precision/recall/F1 against planted ground truth
+
+| subject | ground_truth_count | detected_count | true_positives | precision | recall | f1 |
+| --- | --- | --- | --- | --- | --- | --- |
+| conflict_chain_depth2 | 2 | 2 | 2 | 1.0 | 1.0 | 1.0 |
+| conflict_chain_depth3 | 3 | 3 | 3 | 1.0 | 1.0 | 1.0 |
+| conflict_chain_depth4 | 4 | 4 | 4 | 1.0 | 1.0 | 1.0 |
+| conflict_chain_depth5 | 5 | 5 | 5 | 1.0 | 1.0 | 1.0 |
+| conflict_pair_a | 2 | 2 | 2 | 1.0 | 1.0 | 1.0 |
+| conflict_pair_b | 2 | 2 | 2 | 1.0 | 1.0 | 1.0 |
+| conflict_pair_c | 2 | 2 | 2 | 1.0 | 1.0 | 1.0 |
+| conflict_width_2 | 3 | 3 | 3 | 1.0 | 1.0 | 1.0 |
+| conflict_width_4 | 5 | 5 | 5 | 1.0 | 1.0 | 1.0 |
+| conflict_width_6 | 7 | 7 | 7 | 1.0 | 1.0 | 1.0 |
+| pilot_checkout_v1 | 7 | 7 | 5 | 0.7143 | 0.7143 | 0.7143 |
+| synth_large_cycle | 23 | 23 | 23 | 1.0 | 1.0 | 1.0 |
+| synth_large_high | 26 | 26 | 26 | 1.0 | 1.0 | 1.0 |
+| synth_large_low | 20 | 20 | 20 | 1.0 | 1.0 | 1.0 |
+| synth_large_medium | 23 | 23 | 23 | 1.0 | 1.0 | 1.0 |
+| synth_medium_cycle | 16 | 16 | 16 | 1.0 | 1.0 | 1.0 |
+| synth_medium_high | 17 | 17 | 17 | 1.0 | 1.0 | 1.0 |
+| synth_medium_high_signed | 15 | 15 | 15 | 1.0 | 1.0 | 1.0 |
+| synth_medium_low | 13 | 13 | 13 | 1.0 | 1.0 | 1.0 |
+| synth_medium_low_signed | 15 | 15 | 15 | 1.0 | 1.0 | 1.0 |
+| synth_medium_medium | 15 | 15 | 15 | 1.0 | 1.0 | 1.0 |
+| synth_small_cycle | 9 | 9 | 9 | 1.0 | 1.0 | 1.0 |
+| synth_small_high | 10 | 10 | 10 | 1.0 | 1.0 | 1.0 |
+| synth_small_low | 8 | 8 | 8 | 1.0 | 1.0 | 1.0 |
+| synth_small_medium | 9 | 9 | 9 | 1.0 | 1.0 | 1.0 |
+| synth_xlarge_medium | 31 | 31 | 31 | 1.0 | 1.0 | 1.0 |

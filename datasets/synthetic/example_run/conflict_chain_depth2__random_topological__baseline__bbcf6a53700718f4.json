@@ -1,0 +1,167 @@
+{
+  "subject": "conflict_chain_depth2",
+  "strategy": "random_topological",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:synth.Level0",
+      "verdict": {
+        "smell": "GodClass:synth.Level0",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.318",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.318",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.318",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.318",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.318",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.318",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.319",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.319",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.319",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.Level0.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 9,
+  "generation_success_rate": 0.9,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "no_patch": 1
+  }
+}

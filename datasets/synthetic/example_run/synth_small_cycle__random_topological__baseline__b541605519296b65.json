@@ -1,0 +1,160 @@
+{
+  "subject": "synth_small_cycle",
+  "strategy": "random_topological",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:synth.GodClass1",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass1",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "BigSwitch:synth.GodClass1.m0_bigswitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.GodClass1.m0_bigswitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.150 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "BigSwitch:synth.LeafClass1.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass1.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "GodClass:synth.GodClass0",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass0",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "MessageChains:synth.GodClass0.m1_messagechains",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass0.m1_messagechains",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.288",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass0.m1_messagechainsExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "BigSwitch:synth.GodClass0.m0_bigswitchExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:synth.GodClass0.m0_bigswitchExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.309",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:synth.GodClass0.m0_bigswitchExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "BigSwitch:synth.GodClass0.m0_bigswitchExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:synth.GodClass0.m0_bigswitchExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.309",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:synth.GodClass0.m0_bigswitchExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "MessageChains:synth.GodClass0.m1_messagechainsExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass0.m1_messagechainsExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.289",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass0.m1_messagechainsExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "MessageChains:synth.GodClass0.m1_messagechainsExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass0.m1_messagechainsExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.289",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass0.m1_messagechainsExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 8,
+  "generation_success_rate": 0.8,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "no_patch": 2,
+    "metric_regression": 3
+  }
+}

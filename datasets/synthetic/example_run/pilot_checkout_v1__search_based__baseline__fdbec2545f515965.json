@@ -1,0 +1,167 @@
+{
+  "subject": "pilot_checkout_v1",
+  "strategy": "search_based",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:orders.OrderService",
+      "verdict": {
+        "smell": "GodClass:orders.OrderService",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.341",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.341",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.341",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.341",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.342",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.342",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.342",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.342",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.342",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "BigSwitch:orders.OrderService.dispatchStatusExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 9,
+  "generation_success_rate": 0.9,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "no_patch": 1
+  }
+}

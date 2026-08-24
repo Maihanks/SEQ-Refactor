@@ -7,82 +7,82 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.5
 - id: s2
   category: BigSwitch
   loc:
   - synth.GodClass0.m0_bigswitch
-  severity: 0.29
+  severity: 0.8
 - id: s3
   category: LongMethod
   loc:
   - synth.GodClass0.m1_longmethod
-  severity: 0.77
+  severity: 0.7
 - id: s4
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.417
 - id: s5
   category: LongMethod
   loc:
   - synth.GodClass1.m0_longmethod
-  severity: 0.84
+  severity: 1.0
 - id: s6
   category: LongMethod
   loc:
   - synth.GodClass1.m1_longmethod
-  severity: 0.79
+  severity: 0.8
 - id: s7
   category: GodClass
   loc:
   - synth.GodClass2
-  severity: 1.0
+  severity: 0.25
 - id: s8
   category: MessageChains
   loc:
   - synth.GodClass2.m0_messagechains
-  severity: 0.52
+  severity: 0.9
 - id: s9
   category: BigSwitch
   loc:
   - synth.GodClass2.m1_bigswitch
-  severity: 0.32
+  severity: 0.9
 - id: s10
   category: GodClass
   loc:
   - synth.GodClass3
-  severity: 1.0
+  severity: 0.25
 - id: s11
   category: BigSwitch
   loc:
   - synth.GodClass3.m0_bigswitch
-  severity: 0.32
+  severity: 0.9
 - id: s12
   category: GodClass
   loc:
   - synth.GodClass4
-  severity: 1.0
+  severity: 0.25
 - id: s13
   category: BigSwitch
   loc:
   - synth.GodClass4.m0_bigswitch
-  severity: 0.32
+  severity: 0.9
 - id: s14
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.9
 - id: s15
   category: BigSwitch
   loc:
   - synth.LeafClass1.leafSwitch
-  severity: 0.3
+  severity: 0.4
 - id: s16
   category: BigSwitch
   loc:
   - synth.LeafClass2.leafSwitch
-  severity: 0.3
+  severity: 0.4
 prerequisites:
 - src: s1
   dst: s2
@@ -100,10 +100,10 @@ prerequisites:
   dst: s11
 - src: s12
   dst: s13
-- src: s15
-  dst: s11
 - src: s11
-  dst: s15
+  dst: s3
+- src: s3
+  dst: s11
 expected_cascade_if_out_of_order:
 - s2-before-s1
 - s3-before-s1
@@ -113,8 +113,13 @@ expected_cascade_if_out_of_order:
 - s9-before-s7
 - s11-before-s10
 - s13-before-s12
+positive_dependencies:
+- src: s9
+  dst: s8
+  probability: 0.33
+  operation: Rename Method
 negative_dependencies:
 - src: s2
   dst: s3
-  probability: 0.4
-  operation: Extract Method
+  probability: 0.47
+  operation: Inline Method

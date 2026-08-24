@@ -9,7 +9,7 @@ class GodClass1Test {
     @Test
     void m0_bigswitchBehaves() {
         GodClass1 subject = new GodClass1();
-        assertEquals("two", subject.m0_bigswitch(2));
+        assertEquals("v2", subject.m0_bigswitch(2));
     }
 
 }

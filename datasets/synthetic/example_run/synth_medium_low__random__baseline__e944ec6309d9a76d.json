@@ -1,0 +1,152 @@
+{
+  "subject": "synth_medium_low",
+  "strategy": "random",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "MessageChains:synth.GodClass1.m1_messagechains",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass1.m1_messagechains",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.275",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass1.m1_messagechainsExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 1,
+      "smell": "BigSwitch:synth.GodClass0.m1_bigswitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.GodClass0.m1_bigswitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.166 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 2,
+      "smell": "GodClass:synth.GodClass1",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass1",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "GodClass:synth.GodClass0",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass0",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "BigSwitch:synth.LeafClass5.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass5.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethod",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethod",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.145 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "BigSwitch:synth.LeafClass2.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass2.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "BigSwitch:synth.LeafClass1.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass1.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "BigSwitch:synth.LeafClass4.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass4.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.300 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 1,
+  "ordering_validity": 0.8,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 8,
+  "generation_success_rate": 0.8,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "metric_regression": 7,
+    "no_patch": 2
+  }
+}

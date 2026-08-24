@@ -1,0 +1,167 @@
+{
+  "subject": "conflict_width_6",
+  "strategy": "impact_only",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.317",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 1,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.319",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.321",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 3,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.323",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 4,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.324",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 5,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.326",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 6,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.327",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 7,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.329",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 8,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.330",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    },
+    {
+      "index": 9,
+      "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.331",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass0.m2_longmethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 10,
+  "ordering_validity": 0.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 10,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {}
+}

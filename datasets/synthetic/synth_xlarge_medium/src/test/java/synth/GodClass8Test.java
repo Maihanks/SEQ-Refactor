@@ -9,7 +9,7 @@ class GodClass8Test {
     @Test
     void m0_messagechainsBehaves() {
         GodClass8 subject = new GodClass8();
-        assertEquals("bbc", subject.m0_messagechains(" ABCDEF "));
+        assertEquals("bbcxxxxxxx", subject.m0_messagechains(" ABCDEF "));
     }
 
 }

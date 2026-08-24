@@ -9,7 +9,7 @@ class GodClass7Test {
     @Test
     void m0_longmethodBehaves() {
         GodClass7 subject = new GodClass7();
-        assertEquals(113, subject.m0_longmethod(3));
+        assertEquals(731, subject.m0_longmethod(50));
     }
 
 }

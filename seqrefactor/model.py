@@ -183,12 +183,25 @@ class Evidence(BaseModel):
     metric: MetricDelta
     tests_pass: bool
     arch_ok: bool
+    compile_errors: list[str] = Field(default_factory=list)  # distinguishes compile from test failure
+
+
+RejectionReason = Literal[
+    "accepted",
+    "no_patch",  # generator produced an empty patch
+    "generation_failure",  # generator produced a patch, but it could not be applied (e.g. file not found)
+    "compile_failure",
+    "test_failure",
+    "metric_regression",
+    "architecture_failure",
+]
 
 
 class Verdict(BaseModel):
     smell: SmellId
     accepted: bool
     rationale: str
+    reason: RejectionReason = "accepted"  # Working Brief Phase 2c §5: rejection-reason classification
 
 
 # --------------------------------------------------------------------------
@@ -240,6 +253,59 @@ class RunReport(BaseModel):
         escalated = sum(len(c) for c in self.escalations)
         total = escalated + len(self.steps)
         return escalated / total if total else 0.0
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def generation_attempts(self) -> int:
+        """Working Brief Phase 2c §5: every step is one generation attempt."""
+        return len(self.steps)
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def successful_generations(self) -> int:
+        """Steps where the generator produced a patch at all (whether or not
+        the gate went on to accept it) -- distinct from ``accepted``."""
+        return sum(1 for s in self.steps if s.verdict.reason != "no_patch")
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def generation_success_rate(self) -> float:
+        """GSR = successful patches / generation attempts (Working Brief
+        Phase 2c §5), separating generator capability from scheduler quality."""
+        if not self.steps:
+            return 0.0
+        return self.successful_generations / self.generation_attempts
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def net_smell_resolution_rate_given_generation_success(self) -> float:
+        """NSR normalised by how many steps actually had a patch to work
+        with, so a low overall NSR caused by the generator producing few
+        patches (a generator-capability limit) reads differently from a low
+        rate here (a scheduler-quality limit) -- Working Brief Phase 2c §5:
+        "so scheduler failure is distinguishable from generator failure"."""
+        if self.successful_generations == 0:
+            return 0.0
+        return self.net_smell_resolution / self.successful_generations
+
+    @computed_field  # type: ignore[prop-decorator]
+    @property
+    def rejection_reason_counts(self) -> dict[str, int]:
+        """Working Brief Phase 2c §5: "classify every rejected candidate by
+        reason ... and report the counts per strategy". Deliberately does not
+        include a "dependency_violation" bucket: this gate architecture never
+        rejects *because of* a dependency violation (prerequisite safety is
+        enforced by which smell gets offered to the gate at all, via the
+        ordering strategy, not by the gate itself) -- that signal is already
+        tracked precisely by ``cascading_violation``/``ordering_validity``
+        above, cross-reference those instead of conflating the two here."""
+        counts: dict[str, int] = {}
+        for step in self.steps:
+            if step.verdict.accepted:
+                continue
+            reason = step.verdict.reason
+            counts[reason] = counts.get(reason, 0) + 1
+        return counts
 
 
 # --------------------------------------------------------------------------
@@ -296,7 +362,10 @@ class DependencyMass(BaseModel):
 # Configuration (drives Orchestrator.run_one / run_matrix, §8.3)
 # --------------------------------------------------------------------------
 
-Strategy = Literal["seqrefactor", "impact_only", "topo_only", "unordered", "search_based"]
+Strategy = Literal[
+    "seqrefactor", "impact_only", "topo_only", "unordered", "search_based",
+    "random", "random_topological",
+]
 GeneratorName = Literal["llm", "baseline"]
 
 

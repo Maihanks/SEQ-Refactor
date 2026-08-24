@@ -144,22 +144,34 @@ def results(config_path: str, out_dir: str, generator: str, scaling_sizes: str) 
     from seqrefactor._sidecar import SidecarUnavailable
     from seqrefactor.datasets import graph_from_manifest, list_subjects, load_manifest
     from seqrefactor.eval import tables as eval_tables
-    from seqrefactor.eval.complexity import run_scaling_study
+    from seqrefactor.eval.complexity import run_corpus_study, run_scaling_study
     from seqrefactor.eval.depmass import run_study as run_depmass_study
+    from seqrefactor.eval.detector_quality import run_study as run_detector_quality_study
+    from seqrefactor.eval.random_study import run_study as run_random_study
 
     cfg = _load_config(Path(config_path))
     out_path = Path(out_dir)
     out_path.mkdir(parents=True, exist_ok=True)
 
-    entries = [(s, graph_from_manifest(load_manifest(s)), None) for s in list_subjects()]
-    masses, h4 = run_depmass_study(entries)
+    subjects = list_subjects()
+    graphs = [(s, graph_from_manifest(load_manifest(s))) for s in subjects]
+
+    masses, h4 = run_depmass_study([(s, g, None) for s, g in graphs])
     eval_tables.table3_depmass(masses, out_dir=out_path)
     click.echo(f"wrote table3_depmass.* ({len(masses)} subjects)")
 
     sizes = [int(s) for s in scaling_sizes.split(",") if s.strip()]
-    records = run_scaling_study(module_sizes=sizes, seed=cfg.seed)
+    records = run_scaling_study(module_sizes=sizes, seed=cfg.seed) + run_corpus_study()
     eval_tables.table4_efficiency(records, out_dir=out_path)
-    click.echo(f"wrote table4_efficiency.* ({len(records)} rows, sizes={sizes})")
+    click.echo(f"wrote table4_efficiency.* ({len(records)} rows, sizes={sizes} + real corpus)")
+
+    detector_results = run_detector_quality_study(subjects)
+    eval_tables.table5_detector_quality(detector_results, out_dir=out_path)
+    click.echo(f"wrote table5_detector_quality.* ({len(detector_results)} subjects)")
+
+    random_results = run_random_study(graphs, n_samples=200, seed=cfg.seed)
+    eval_tables.table6_random_baseline(random_results, out_dir=out_path)
+    click.echo(f"wrote table6_random_baseline.* ({len(random_results)} subjects)")
 
     h1_h3: dict = {}
     ablation_cfg = cfg.model_copy(update={"generators": [generator]})

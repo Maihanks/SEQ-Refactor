@@ -9,13 +9,13 @@ class GodClass2Test {
     @Test
     void m0_longmethodBehaves() {
         GodClass2 subject = new GodClass2();
-        assertEquals(113, subject.m0_longmethod(3));
+        assertEquals(626, subject.m0_longmethod(50));
     }
 
     @Test
     void m1_messagechainsBehaves() {
         GodClass2 subject = new GodClass2();
-        assertEquals("bbc", subject.m1_messagechains(" ABCDEF "));
+        assertEquals("bbcxxxxxxxxx", subject.m1_messagechains(" ABCDEF "));
     }
 
 }

@@ -7,52 +7,52 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.583
 - id: s2
   category: LongMethod
   loc:
   - synth.GodClass0.m0_longmethod
-  severity: 0.84
+  severity: 1.0
 - id: s3
   category: BigSwitch
   loc:
   - synth.GodClass0.m1_bigswitch
-  severity: 0.35
+  severity: 1.0
 - id: s4
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.417
 - id: s5
   category: BigSwitch
   loc:
   - synth.GodClass1.m0_bigswitch
-  severity: 0.28
+  severity: 0.7
 - id: s6
   category: GodClass
   loc:
   - synth.GodClass2
-  severity: 1.0
+  severity: 0.5
 - id: s7
   category: MessageChains
   loc:
   - synth.GodClass2.m0_messagechains
-  severity: 0.48
+  severity: 0.7
 - id: s8
   category: GodClass
   loc:
   - synth.GodClass3
-  severity: 1.0
+  severity: 0.5
 - id: s9
   category: BigSwitch
   loc:
   - synth.GodClass3.m0_bigswitch
-  severity: 0.31
+  severity: 0.8
 - id: s10
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.7
 prerequisites:
 - src: s1
   dst: s2

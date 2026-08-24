@@ -2,7 +2,7 @@
   "cells": [
     {
       "subject": "billing_cycle_v1",
-      "strategy": "seqrefactor",
+      "strategy": "impact_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -12,7 +12,37 @@
     },
     {
       "subject": "billing_cycle_v1",
-      "strategy": "impact_only",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "billing_cycle_v1",
+      "strategy": "seqrefactor",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -41,67 +71,47 @@
       "steps": 0
     },
     {
-      "subject": "billing_cycle_v1",
-      "strategy": "search_based",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 0
-    },
-    {
-      "subject": "notification_mixed_v1",
-      "strategy": "seqrefactor",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 0
-    },
-    {
-      "subject": "notification_mixed_v1",
+      "subject": "conflict_chain_depth2",
       "strategy": "impact_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
       "escalation_rate": 0.0,
-      "steps": 0
+      "steps": 10
     },
     {
-      "subject": "notification_mixed_v1",
-      "strategy": "topo_only",
+      "subject": "conflict_chain_depth2",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth2",
+      "strategy": "random_topological",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
       "ordering_validity": 1.0,
       "escalation_rate": 0.0,
-      "steps": 0
+      "steps": 10
     },
     {
-      "subject": "notification_mixed_v1",
-      "strategy": "unordered",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 0
-    },
-    {
-      "subject": "notification_mixed_v1",
+      "subject": "conflict_chain_depth2",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
       "ordering_validity": 1.0,
       "escalation_rate": 0.0,
-      "steps": 0
+      "steps": 10
     },
     {
-      "subject": "pilot_checkout_v1",
+      "subject": "conflict_chain_depth2",
       "strategy": "seqrefactor",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -109,6 +119,726 @@
       "ordering_validity": 1.0,
       "escalation_rate": 0.0,
       "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth2",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth2",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.7,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth3",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 9,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.7,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth4",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 9,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.7,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_chain_depth5",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 9,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_b",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.5,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.5,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_c",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.3333333333333333,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.3333333333333333,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_2",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 3
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.2,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.6,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_4",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "conflict_width_6",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "topo_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
+    },
+    {
+      "subject": "notification_mixed_v1",
+      "strategy": "unordered",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 0
     },
     {
       "subject": "pilot_checkout_v1",
@@ -122,6 +852,46 @@
     },
     {
       "subject": "pilot_checkout_v1",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "seqrefactor",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "pilot_checkout_v1",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -141,7 +911,37 @@
       "steps": 10
     },
     {
-      "subject": "pilot_checkout_v1",
+      "subject": "synth_large_cycle",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 4,
+      "ordering_validity": 0.3,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_cycle",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -162,16 +962,6 @@
     },
     {
       "subject": "synth_large_cycle",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_large_cycle",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -191,7 +981,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_large_cycle",
+      "subject": "synth_large_high",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.4,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_high",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -212,16 +1032,6 @@
     },
     {
       "subject": "synth_large_high",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_large_high",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -241,7 +1051,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_large_high",
+      "subject": "synth_large_low",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 3,
+      "ordering_validity": 0.5,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_low",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -262,16 +1102,6 @@
     },
     {
       "subject": "synth_large_low",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_large_low",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -291,7 +1121,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_large_low",
+      "subject": "synth_large_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 5,
+      "ordering_validity": 0.3,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_large_medium",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -312,16 +1172,6 @@
     },
     {
       "subject": "synth_large_medium",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_large_medium",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -341,7 +1191,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_large_medium",
+      "subject": "synth_medium_cycle",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 9,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.7,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -362,16 +1242,6 @@
     },
     {
       "subject": "synth_medium_cycle",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_medium_cycle",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -391,7 +1261,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_medium_cycle",
+      "subject": "synth_medium_high",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 8,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.4,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -412,16 +1312,6 @@
     },
     {
       "subject": "synth_medium_high",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_medium_high",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -441,7 +1331,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_medium_high",
+      "subject": "synth_medium_high_signed",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -462,16 +1382,6 @@
     },
     {
       "subject": "synth_medium_high_signed",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_medium_high_signed",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -491,7 +1401,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_medium_high_signed",
+      "subject": "synth_medium_low",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 8,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -512,16 +1452,6 @@
     },
     {
       "subject": "synth_medium_low",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_medium_low",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -541,7 +1471,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_medium_low",
+      "subject": "synth_medium_low_signed",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_low_signed",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -562,16 +1522,6 @@
     },
     {
       "subject": "synth_medium_low_signed",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_medium_low_signed",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -591,7 +1541,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_medium_low_signed",
+      "subject": "synth_medium_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.8,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_medium",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -612,16 +1592,6 @@
     },
     {
       "subject": "synth_medium_medium",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_medium_medium",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -641,7 +1611,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_medium_medium",
+      "subject": "synth_small_cycle",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 3,
+      "ordering_validity": 0.7,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_cycle",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -653,16 +1653,6 @@
     {
       "subject": "synth_small_cycle",
       "strategy": "seqrefactor",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_small_cycle",
-      "strategy": "impact_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -691,7 +1681,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_small_cycle",
+      "subject": "synth_small_high",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 6,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 2,
+      "ordering_validity": 0.6,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_high",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -703,16 +1723,6 @@
     {
       "subject": "synth_small_high",
       "strategy": "seqrefactor",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_small_high",
-      "strategy": "impact_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -741,18 +1751,28 @@
       "steps": 10
     },
     {
-      "subject": "synth_small_high",
-      "strategy": "search_based",
+      "subject": "synth_small_low",
+      "strategy": "impact_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
-      "ordering_validity": 1.0,
+      "ordering_validity": 0.625,
       "escalation_rate": 0.0,
-      "steps": 10
+      "steps": 8
     },
     {
       "subject": "synth_small_low",
-      "strategy": "seqrefactor",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.875,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "random_topological",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -762,7 +1782,17 @@
     },
     {
       "subject": "synth_small_low",
-      "strategy": "impact_only",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 8
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "seqrefactor",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -791,18 +1821,28 @@
       "steps": 8
     },
     {
-      "subject": "synth_small_low",
-      "strategy": "search_based",
+      "subject": "synth_small_medium",
+      "strategy": "impact_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
       "escalation_rate": 0.0,
-      "steps": 8
+      "steps": 10
     },
     {
       "subject": "synth_small_medium",
-      "strategy": "seqrefactor",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.9,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "random_topological",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -812,7 +1852,17 @@
     },
     {
       "subject": "synth_small_medium",
-      "strategy": "impact_only",
+      "strategy": "search_based",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "seqrefactor",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -841,7 +1891,37 @@
       "steps": 10
     },
     {
-      "subject": "synth_small_medium",
+      "subject": "synth_xlarge_medium",
+      "strategy": "impact_only",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 10,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "random",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 1,
+      "ordering_validity": 0.9,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
+      "strategy": "random_topological",
+      "generator": "baseline",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_xlarge_medium",
       "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -862,16 +1942,6 @@
     },
     {
       "subject": "synth_xlarge_medium",
-      "strategy": "impact_only",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_xlarge_medium",
       "strategy": "topo_only",
       "generator": "baseline",
       "net_smell_resolution": 0,
@@ -883,16 +1953,6 @@
     {
       "subject": "synth_xlarge_medium",
       "strategy": "unordered",
-      "generator": "baseline",
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "steps": 10
-    },
-    {
-      "subject": "synth_xlarge_medium",
-      "strategy": "search_based",
       "generator": "baseline",
       "net_smell_resolution": 0,
       "cascading_violations": 0,
@@ -902,56 +1962,70 @@
     }
   ],
   "by_strategy": {
-    "seqrefactor": {
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "n_subjects": 18
-    },
     "impact_only": {
       "net_smell_resolution": 0,
-      "cascading_violations": 0.5555555555555556,
-      "ordering_validity": 0.9444444444444444,
+      "cascading_violations": 7.535714285714286,
+      "ordering_validity": 0.1306547619047619,
       "escalation_rate": 0.0,
-      "n_subjects": 18
+      "n_subjects": 28
     },
-    "topo_only": {
+    "random": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 1.4285714285714286,
+      "ordering_validity": 0.6895833333333333,
+      "escalation_rate": 0.0,
+      "n_subjects": 28
+    },
+    "random_topological": {
       "net_smell_resolution": 0,
       "cascading_violations": 0,
       "ordering_validity": 1.0,
       "escalation_rate": 0.0,
-      "n_subjects": 18
-    },
-    "unordered": {
-      "net_smell_resolution": 0,
-      "cascading_violations": 0,
-      "ordering_validity": 1.0,
-      "escalation_rate": 0.0,
-      "n_subjects": 18
+      "n_subjects": 28
     },
     "search_based": {
       "net_smell_resolution": 0,
       "cascading_violations": 0,
       "ordering_validity": 1.0,
       "escalation_rate": 0.0,
-      "n_subjects": 18
+      "n_subjects": 28
+    },
+    "seqrefactor": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 28
+    },
+    "topo_only": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 28
+    },
+    "unordered": {
+      "net_smell_resolution": 0,
+      "cascading_violations": 0.9642857142857143,
+      "ordering_validity": 0.8928571428571429,
+      "escalation_rate": 0.0,
+      "n_subjects": 28
     }
   },
   "hypothesis_tests": {
     "H1_fewer_cascading_violations_vs_unordered": {
-      "n": 18,
-      "statistic": null,
-      "p_value": null,
-      "effect_size_r": null,
+      "n": 28,
+      "statistic": 6.0,
+      "p_value": 0.0416322583317752,
+      "effect_size_r": 1.0,
       "ci_low": 0.0,
-      "ci_high": 0.0,
-      "mean_difference": 0.0,
-      "supported": null,
-      "note": "every paired difference is exactly zero; the test is degenerate."
+      "ci_high": 2.25,
+      "mean_difference": 0.9642857142857143,
+      "supported": true,
+      "note": "supported at p<0.05 (H_alt: greater)"
     },
     "H2_higher_nsr_vs_unordered": {
-      "n": 18,
+      "n": 28,
       "statistic": null,
       "p_value": null,
       "effect_size_r": null,
@@ -962,7 +2036,7 @@
       "note": "every paired difference is exactly zero; the test is degenerate."
     },
     "H2_higher_nsr_vs_topo_only": {
-      "n": 18,
+      "n": 28,
       "statistic": null,
       "p_value": null,
       "effect_size_r": null,
@@ -973,15 +2047,15 @@
       "note": "every paired difference is exactly zero; the test is degenerate."
     },
     "H3_higher_auc_vs_topo_only": {
-      "n": 18,
-      "statistic": 13.5,
-      "p_value": 0.26411638843399154,
-      "effect_size_r": 0.2857142857142857,
-      "ci_low": -1.0555555555555556,
-      "ci_high": 2.167361111111107,
-      "mean_difference": 0.4722222222222222,
-      "supported": false,
-      "note": "not supported at p<0.05 (H_alt: greater)"
+      "n": 28,
+      "statistic": 90.0,
+      "p_value": 0.0009207568902879692,
+      "effect_size_r": 0.978021978021978,
+      "ci_low": 5.498660714285717,
+      "ci_high": 16.536607142857136,
+      "mean_difference": 10.75,
+      "supported": true,
+      "note": "supported at p<0.05 (H_alt: greater)"
     }
   }
 }

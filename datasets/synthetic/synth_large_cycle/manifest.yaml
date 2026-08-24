@@ -7,27 +7,27 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.583
 - id: s2
   category: MessageChains
   loc:
   - synth.GodClass0.m0_messagechains
-  severity: 0.54
+  severity: 1.0
 - id: s3
   category: LongMethod
   loc:
   - synth.GodClass0.m1_longmethod
-  severity: 0.83
+  severity: 0.9
 - id: s4
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.5
 - id: s5
   category: LongMethod
   loc:
   - synth.GodClass1.m0_longmethod
-  severity: 0.85
+  severity: 1.0
 - id: s6
   category: LongMethod
   loc:
@@ -37,87 +37,87 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass2
-  severity: 1.0
+  severity: 0.333
 - id: s8
   category: LongMethod
   loc:
   - synth.GodClass2.m0_longmethod
-  severity: 0.83
+  severity: 0.9
 - id: s9
   category: MessageChains
   loc:
   - synth.GodClass2.m1_messagechains
-  severity: 0.49
+  severity: 0.8
 - id: s10
   category: GodClass
   loc:
   - synth.GodClass3
-  severity: 1.0
+  severity: 0.583
 - id: s11
   category: BigSwitch
   loc:
   - synth.GodClass3.m0_bigswitch
-  severity: 0.27
+  severity: 0.7
 - id: s12
   category: BigSwitch
   loc:
   - synth.GodClass3.m1_bigswitch
-  severity: 0.26
+  severity: 0.7
 - id: s13
   category: GodClass
   loc:
   - synth.GodClass4
-  severity: 1.0
+  severity: 0.5
 - id: s14
   category: LongMethod
   loc:
   - synth.GodClass4.m0_longmethod
-  severity: 0.83
+  severity: 0.9
 - id: s15
   category: GodClass
   loc:
   - synth.GodClass5
-  severity: 1.0
+  severity: 0.333
 - id: s16
   category: BigSwitch
   loc:
   - synth.GodClass5.m0_bigswitch
-  severity: 0.28
+  severity: 0.7
 - id: s17
   category: GodClass
   loc:
   - synth.GodClass6
-  severity: 1.0
+  severity: 0.583
 - id: s18
   category: LongMethod
   loc:
   - synth.GodClass6.m0_longmethod
-  severity: 0.79
+  severity: 0.7
 - id: s19
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.5
 - id: s20
   category: BigSwitch
   loc:
   - synth.LeafClass1.leafSwitch
-  severity: 0.3
+  severity: 0.7
 - id: s21
   category: BigSwitch
   loc:
   - synth.LeafClass2.leafSwitch
-  severity: 0.3
+  severity: 0.7
 - id: s22
   category: BigSwitch
   loc:
   - synth.LeafClass3.leafSwitch
-  severity: 0.3
+  severity: 0.5
 - id: s23
   category: BigSwitch
   loc:
   - synth.LeafClass4.leafSwitch
-  severity: 0.3
+  severity: 0.6
 prerequisites:
 - src: s1
   dst: s2
@@ -141,10 +141,10 @@ prerequisites:
   dst: s16
 - src: s17
   dst: s18
-- src: s14
-  dst: s2
-- src: s2
-  dst: s14
+- src: s20
+  dst: s8
+- src: s8
+  dst: s20
 expected_cascade_if_out_of_order:
 - s2-before-s1
 - s3-before-s1
@@ -157,9 +157,18 @@ expected_cascade_if_out_of_order:
 - s14-before-s13
 - s16-before-s15
 - s18-before-s17
-- s2-before-s14
+- s8-before-s20
+positive_dependencies:
+- src: s12
+  dst: s11
+  probability: 0.48
+  operation: Hide Delegate
 negative_dependencies:
-- src: s6
-  dst: s5
-  probability: 0.22
-  operation: Extract Method
+- src: s2
+  dst: s3
+  probability: 0.46
+  operation: Rename Method
+- src: s8
+  dst: s9
+  probability: 0.32
+  operation: Rename Method

@@ -7,32 +7,32 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.25
 - id: s2
   category: MessageChains
   loc:
   - synth.GodClass0.m0_messagechains
-  severity: 0.53
+  severity: 0.9
 - id: s3
   category: BigSwitch
   loc:
   - synth.GodClass0.m1_bigswitch
-  severity: 0.28
+  severity: 0.7
 - id: s4
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.5
 - id: s5
   category: MessageChains
   loc:
   - synth.GodClass1.m0_messagechains
-  severity: 0.53
+  severity: 0.9
 - id: s6
   category: GodClass
   loc:
   - synth.GodClass2
-  severity: 1.0
+  severity: 0.25
 - id: s7
   category: LongMethod
   loc:
@@ -42,12 +42,12 @@ smells:
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.9
 - id: s9
   category: BigSwitch
   loc:
   - synth.LeafClass1.leafSwitch
-  severity: 0.3
+  severity: 0.4
 prerequisites:
 - src: s1
   dst: s2
@@ -65,5 +65,5 @@ expected_cascade_if_out_of_order:
 negative_dependencies:
 - src: s2
   dst: s3
-  probability: 0.33
-  operation: Hide Delegate
+  probability: 0.24
+  operation: Rename Method

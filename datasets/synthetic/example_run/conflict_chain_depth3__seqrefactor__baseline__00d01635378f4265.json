@@ -1,0 +1,165 @@
+{
+  "subject": "conflict_chain_depth3",
+  "strategy": "seqrefactor",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:synth.Level0",
+      "verdict": {
+        "smell": "GodClass:synth.Level0",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "GodClass:synth.Level0.Level1",
+      "verdict": {
+        "smell": "GodClass:synth.Level0.Level1",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethod",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethod",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.352",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.Level0.Level1.leafMethodExtractedExtractedExtractedExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 8,
+  "generation_success_rate": 0.8,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "no_patch": 2
+  }
+}

@@ -1,0 +1,160 @@
+{
+  "subject": "synth_small_high",
+  "strategy": "seqrefactor",
+  "generator": "baseline",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:synth.GodClass0",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass0",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "BigSwitch:synth.GodClass0.m1_bigswitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.GodClass0.m1_bigswitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.116 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:synth.GodClass0.m0_longmethod",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass0.m0_longmethod",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.095 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.289 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "GodClass:synth.GodClass2",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass2",
+        "accepted": false,
+        "rationale": "generator produced no patch",
+        "reason": "no_patch"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "MessageChains:synth.GodClass2.m0_messagechains",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass2.m0_messagechains",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.021",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass2.m0_messagechainsExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.233",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.242",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.249",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtractedExtracted",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtractedExtracted",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.255",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass2.m0_messagechainsExtractedExtractedExtractedExtractedExtracted"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 8,
+  "generation_success_rate": 0.8,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "no_patch": 2,
+    "metric_regression": 3
+  }
+}

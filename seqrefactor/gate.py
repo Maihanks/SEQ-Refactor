@@ -22,11 +22,23 @@ class Gate:
         self.min_metric_improvement = min_metric_improvement
 
     def decide(self, smell: SmellId, evidence: Evidence) -> Verdict:
+        # compile_errors checked ahead of tests_pass (Working Brief Phase 2c §5): a
+        # candidate that never compiled never really ran the test suite, so lumping
+        # it in with "test suite failed" would hide a distinct rejection reason.
+        if evidence.compile_errors:
+            return Verdict(
+                smell=smell, accepted=False, rationale="compilation failed", reason="compile_failure"
+            )
         if not evidence.tests_pass:
-            return Verdict(smell=smell, accepted=False, rationale="test suite failed")
+            return Verdict(
+                smell=smell, accepted=False, rationale="test suite failed", reason="test_failure"
+            )
         if not evidence.arch_ok:
             return Verdict(
-                smell=smell, accepted=False, rationale="architectural constraint violated"
+                smell=smell,
+                accepted=False,
+                rationale="architectural constraint violated",
+                reason="architecture_failure",
             )
 
         m = evidence.metric
@@ -36,6 +48,7 @@ class Gate:
                 smell=smell,
                 accepted=False,
                 rationale=f"aggregate metric delta {aggregate:.3f} below threshold {self.min_metric_improvement}",
+                reason="metric_regression",
             )
 
         return Verdict(

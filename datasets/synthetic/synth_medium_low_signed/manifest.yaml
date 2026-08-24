@@ -7,37 +7,37 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.333
 - id: s2
   category: MessageChains
   loc:
   - synth.GodClass0.m0_messagechains
-  severity: 0.48
+  severity: 0.7
 - id: s3
   category: LongMethod
   loc:
   - synth.GodClass0.m1_longmethod
-  severity: 0.85
+  severity: 1.0
 - id: s4
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.333
 - id: s5
   category: LongMethod
   loc:
   - synth.GodClass1.m0_longmethod
-  severity: 0.85
+  severity: 1.0
 - id: s6
   category: MessageChains
   loc:
   - synth.GodClass1.m1_messagechains
-  severity: 0.53
+  severity: 0.9
 - id: s7
   category: GodClass
   loc:
   - synth.GodClass2
-  severity: 1.0
+  severity: 0.5
 - id: s8
   category: LongMethod
   loc:
@@ -47,37 +47,37 @@ smells:
   category: MessageChains
   loc:
   - synth.GodClass2.m1_messagechains
-  severity: 0.47
+  severity: 0.7
 - id: s10
   category: GodClass
   loc:
   - synth.GodClass3
-  severity: 1.0
+  severity: 0.25
 - id: s11
   category: LongMethod
   loc:
   - synth.GodClass3.m0_longmethod
-  severity: 0.79
+  severity: 0.8
 - id: s12
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.5
 - id: s13
   category: BigSwitch
   loc:
   - synth.LeafClass1.leafSwitch
-  severity: 0.3
+  severity: 0.6
 - id: s14
   category: BigSwitch
   loc:
   - synth.LeafClass2.leafSwitch
-  severity: 0.3
+  severity: 0.9
 - id: s15
   category: BigSwitch
   loc:
   - synth.LeafClass3.leafSwitch
-  severity: 0.3
+  severity: 0.4
 prerequisites:
 - src: s1
   dst: s2

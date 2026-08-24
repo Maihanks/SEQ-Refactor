@@ -9,13 +9,13 @@ class GodClass1Test {
     @Test
     void m0_longmethodBehaves() {
         GodClass1 subject = new GodClass1();
-        assertEquals(113, subject.m0_longmethod(3));
+        assertEquals(731, subject.m0_longmethod(50));
     }
 
     @Test
     void m1_bigswitchBehaves() {
         GodClass1 subject = new GodClass1();
-        assertEquals("two", subject.m1_bigswitch(2));
+        assertEquals("v2", subject.m1_bigswitch(2));
     }
 
 }

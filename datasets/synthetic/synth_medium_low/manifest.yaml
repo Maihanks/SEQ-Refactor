@@ -7,67 +7,67 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.167
 - id: s2
   category: BigSwitch
   loc:
   - synth.GodClass0.m0_bigswitch
-  severity: 0.26
+  severity: 0.6
 - id: s3
   category: BigSwitch
   loc:
   - synth.GodClass0.m1_bigswitch
-  severity: 0.35
+  severity: 1.0
 - id: s4
   category: LongMethod
   loc:
   - synth.GodClass0.m2_longmethod
-  severity: 0.84
+  severity: 1.0
 - id: s5
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.25
 - id: s6
   category: MessageChains
   loc:
   - synth.GodClass1.m0_messagechains
-  severity: 0.53
+  severity: 0.9
 - id: s7
   category: MessageChains
   loc:
   - synth.GodClass1.m1_messagechains
-  severity: 0.46
+  severity: 0.6
 - id: s8
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.5
 - id: s9
   category: BigSwitch
   loc:
   - synth.LeafClass1.leafSwitch
-  severity: 0.3
+  severity: 0.4
 - id: s10
   category: BigSwitch
   loc:
   - synth.LeafClass2.leafSwitch
-  severity: 0.3
+  severity: 0.5
 - id: s11
   category: BigSwitch
   loc:
   - synth.LeafClass3.leafSwitch
-  severity: 0.3
+  severity: 0.6
 - id: s12
   category: BigSwitch
   loc:
   - synth.LeafClass4.leafSwitch
-  severity: 0.3
+  severity: 0.5
 - id: s13
   category: BigSwitch
   loc:
   - synth.LeafClass5.leafSwitch
-  severity: 0.3
+  severity: 0.5
 prerequisites:
 - src: s1
   dst: s2
@@ -85,12 +85,12 @@ expected_cascade_if_out_of_order:
 - s4-before-s1
 - s6-before-s5
 - s7-before-s5
-positive_dependencies:
-- src: s2
-  dst: s3
-  probability: 0.55
-  operation: Rename Method
-- src: s7
-  dst: s6
-  probability: 0.58
+negative_dependencies:
+- src: s3
+  dst: s2
+  probability: 0.47
+  operation: Inline Method
+- src: s6
+  dst: s7
+  probability: 0.4
   operation: Extract Method

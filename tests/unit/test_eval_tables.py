@@ -2,7 +2,16 @@
 
 from __future__ import annotations
 
-from seqrefactor.eval.tables import summary_md, table2_ablation, table3_depmass, table4_efficiency
+from seqrefactor.eval.detector_quality import DetectorQualityResult
+from seqrefactor.eval.random_study import RandomBaselineResult
+from seqrefactor.eval.tables import (
+    summary_md,
+    table2_ablation,
+    table3_depmass,
+    table4_efficiency,
+    table5_detector_quality,
+    table6_random_baseline,
+)
 from seqrefactor.model import (
     ComplexityRecord,
     DependencyMass,
@@ -72,3 +81,29 @@ def test_summary_md_lists_every_hypothesis(tmp_path) -> None:
     assert "H1_fewer_cascading_violations_vs_unordered" in text
     assert "H4_dependency_mass" in text
     assert "H5" in text  # noted as proved by construction, not a statistical row
+
+
+def test_table5_detector_quality_writes_three_formats(tmp_path) -> None:
+    results = [
+        DetectorQualityResult(
+            subject="synth_small_low", ground_truth_count=8, detected_count=8,
+            true_positives=8, precision=1.0, recall=1.0, f1=1.0,
+        )
+    ]
+    rows = table5_detector_quality(results, out_dir=tmp_path)
+    assert rows[0]["f1"] == 1.0
+    assert (tmp_path / "table5_detector_quality.csv").is_file()
+    assert (tmp_path / "table5_detector_quality.tex").is_file()
+
+
+def test_table6_random_baseline_writes_three_formats(tmp_path) -> None:
+    results = [
+        RandomBaselineResult(
+            subject="pilot_checkout_v1", n_samples=100, mean_violation_fraction=0.5,
+            stdev_violation_fraction=0.1, mean_random_topological_objective=1.5,
+            stdev_random_topological_objective=0.05, seqrefactor_objective=1.6,
+        )
+    ]
+    rows = table6_random_baseline(results, out_dir=tmp_path)
+    assert rows[0]["n_samples"] == 100
+    assert (tmp_path / "table6_random_baseline.md").is_file()

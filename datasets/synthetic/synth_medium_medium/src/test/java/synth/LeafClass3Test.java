@@ -9,7 +9,7 @@ class LeafClass3Test {
     @Test
     void leafSwitchBehaves() {
         LeafClass3 subject = new LeafClass3();
-        assertEquals("two", subject.leafSwitch(2));
+        assertEquals("v2", subject.leafSwitch(2));
     }
 
 }

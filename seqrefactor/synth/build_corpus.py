@@ -1,13 +1,27 @@
-"""Generate the full synthetic corpus from one master seed (Working Brief, Phase 2,
-Section 2). Every subject's own seed is derived deterministically from the master
+"""Generate the full synthetic corpus from one master seed (Working Brief, Phase 2
+Section 2, extended by Phase 2c Section 2.2's Priority-Dependency Conflict
+family). Every subject's own seed is derived deterministically from the master
 seed and its index, so the whole corpus is reproducible from a single number.
 
-Grid, documented here (and mirrored into CORPUS.md by ``write_corpus_md``): three
-size tiers (small/medium/large, varying n_classes and n_smells together) crossed
-with three dependency-density levels (low/medium/high), plus explicit cycle
-subjects (RQ3) and a couple of extra high-variety subjects at the top of the size
-range. Subjects are kept deliberately small relative to the brief's suggested
-8..25 class range (PHASE2_PLAN.md's cost/scope note): every ablation step costs a
+Two families:
+
+1. The grid (``build_spec_grid``): three size tiers (small/medium/large,
+   varying n_classes and n_smells together) crossed with three
+   dependency-density levels (low/medium/high), plus explicit cycle subjects
+   (RQ3) and a couple of extra high-variety subjects at the top of the size
+   range. Since Phase 2c, every grid subject's severity is decorrelated from
+   dependency role by ``synth/generator.build_plan`` itself (no change needed
+   here to get that property) -- see that module's docstring.
+2. The Priority-Dependency Conflict family (``build_conflict_spec_grid``):
+   pairs, widths, and chains where a low-severity prerequisite's dependent(s)
+   are deliberately higher severity, so impact_only and the dependency-safe
+   strategies are forced to diverge by construction (Phase 2c §2.2). These
+   are small by nature (2-6 smells) and finish in a handful of orchestrator
+   steps regardless of ``max_steps``, so they add little to total run cost
+   despite growing subject count.
+
+Subjects are kept deliberately small relative to the brief's suggested 8..25
+class range (PHASE2_PLAN.md's cost/scope note): every ablation step costs a
 real sidecar compile+test cycle, and this corpus is meant to actually be run
 within one session, not just generated.
 """
@@ -17,7 +31,14 @@ from __future__ import annotations
 from dataclasses import dataclass
 from pathlib import Path
 
-from seqrefactor.synth.generator import build_plan, generate_subject
+from seqrefactor.synth.generator import (
+    build_chain_plan,
+    build_conflict_plan,
+    build_plan,
+    generate_chain_subject,
+    generate_conflict_subject,
+    generate_subject,
+)
 
 MASTER_SEED = 20260101  # matches seqrefactor.model.Config's own default seed
 
@@ -126,10 +147,44 @@ def build_spec_grid(master_seed: int = MASTER_SEED) -> list[CorpusSpec]:
     return specs
 
 
+@dataclass(frozen=True)
+class ConflictSpec:
+    subject_id: str
+    seed: int
+    kind: str  # "pair" | "width" | "chain"
+    width_or_depth: int
+
+
+def build_conflict_spec_grid(master_seed: int = MASTER_SEED) -> list[ConflictSpec]:
+    """Priority-Dependency Conflict family (Working Brief Phase 2c §2.2):
+    pairs, widths (1 prerequisite, several dependents), and chains (nested
+    prerequisites of increasing depth). A dedicated seed offset
+    (``master_seed + 1000 + index``) keeps this family's seeds from ever
+    colliding with the grid's, even if either grid grows."""
+    specs: list[ConflictSpec] = []
+    index = 0
+
+    def next_seed() -> int:
+        nonlocal index
+        index += 1
+        return master_seed + 1000 + index
+
+    for label in ("a", "b", "c"):
+        specs.append(ConflictSpec(f"conflict_pair_{label}", next_seed(), "pair", 1))
+
+    for width in (2, 4, 6):
+        specs.append(ConflictSpec(f"conflict_width_{width}", next_seed(), "width", width))
+
+    for depth in (2, 3, 4, 5):
+        specs.append(ConflictSpec(f"conflict_chain_depth{depth}", next_seed(), "chain", depth))
+
+    return specs
+
+
 def build_corpus(out_root: str = "datasets/synthetic", master_seed: int = MASTER_SEED) -> list[str]:
-    """Generate every subject in the grid, returning the list of subject
-    directory paths written. Regenerating with the same ``master_seed`` and
-    grid reproduces the corpus byte-for-byte (each subject's own generation is
+    """Generate every subject in both families, returning the list of subject
+    directory paths written. Regenerating with the same ``master_seed``
+    reproduces the corpus byte-for-byte (each subject's own generation is
     deterministic, see synth/generator.py's own determinism guarantee)."""
     paths = []
     for spec in build_spec_grid(master_seed):
@@ -145,6 +200,19 @@ def build_corpus(out_root: str = "datasets/synthetic", master_seed: int = MASTER
             out_root=out_root,
         )
         paths.append(path)
+
+    for cspec in build_conflict_spec_grid(master_seed):
+        if cspec.kind == "chain":
+            path = generate_chain_subject(
+                cspec.subject_id, cspec.seed, depth=cspec.width_or_depth, out_root=out_root
+            )
+        else:
+            path = generate_conflict_subject(
+                cspec.subject_id, cspec.seed, shape=cspec.kind, width=cspec.width_or_depth,
+                out_root=out_root,
+            )
+        paths.append(path)
+
     return paths
 
 
@@ -191,10 +259,6 @@ def write_corpus_md(path: str = "datasets/synthetic/CORPUS.md", master_seed: int
             f"{len(plan.all_smells)} | {spec.dependency_density} | "
             f"{'yes' if plan.cyclic else 'no'} | {spec.positive_rate} | {spec.negative_rate} |"
         )
-    total_note = (
-        f"**Total: {len(specs)} subjects** (Working Brief's Definition of Done: "
-        '"at least 15 committed subjects").'
-    )
     scope_note = (
         "Each subject plants only the four smell categories the native detector "
         "(`detect/native.py`) actually supports (GodClass, LongMethod, MessageChains, "
@@ -205,5 +269,56 @@ def write_corpus_md(path: str = "datasets/synthetic/CORPUS.md", master_seed: int
         "generator's CYCLE NOTE for why this cannot instead be made independently "
         "builder-discoverable with the current containment-based edge derivation."
     )
-    lines += ["", total_note, "", scope_note]
+    lines += ["", scope_note]
+
+    conflict_specs = build_conflict_spec_grid(master_seed)
+    conflict_intro = (
+        "A low-severity God Class prerequisite whose dependent(s) are deliberately "
+        "higher severity, planted through real code (padding decouples detection "
+        "from severity, see `synth/generator.py`'s PHASE 2C docstring section), so "
+        "`impact_only` and the dependency-safe strategies are forced to diverge by "
+        "construction, not by chance."
+    )
+    conflict_header_row = (
+        "| subject | seed | kind | width/depth | prerequisite severity | "
+        "min dependent severity |"
+    )
+    lines += [
+        "",
+        "## Priority-Dependency Conflict family (Working Brief Phase 2c §2.2)",
+        "",
+        conflict_intro,
+        "",
+        conflict_header_row,
+        "|---|---|---|---|---|---|",
+    ]
+    for cspec in conflict_specs:
+        if cspec.kind == "chain":
+            cplan = build_chain_plan(cspec.subject_id, cspec.seed, depth=cspec.width_or_depth)
+            god_severities = [s.severity for s in cplan.all_smells if s.category == "GodClass"]
+            dep_severities = [s.severity for s in cplan.all_smells if s.category != "GodClass"]
+        else:
+            cplan = build_conflict_plan(cspec.subject_id, cspec.seed, cspec.kind, cspec.width_or_depth)
+            god_severities = [cplan.classes[0].god_smell.severity]
+            dep_severities = [c.severity for c in cplan.classes[0].children]
+        lines.append(
+            f"| `{cspec.subject_id}` | {cspec.seed} | {cspec.kind} | {cspec.width_or_depth} | "
+            f"{max(god_severities):.2f} | {min(dep_severities):.2f} |"
+        )
+
+    total_note = (
+        f"**Total: {len(specs)} grid subjects + {len(conflict_specs)} conflict subjects "
+        f"= {len(specs) + len(conflict_specs)} subjects** (Working Brief's Definition of "
+        'Done: "at least 15 committed subjects").'
+    )
+    diamond_note = (
+        '"Diamond" shapes (A -> B, A -> C, B -> D, C -> D) are not included: Java\'s '
+        "qualified-name namespace is a tree, so no real element can be structurally "
+        "contained by two different elements at once -- the same reason genuine cycles "
+        "are architecturally impossible for the builder to discover. A diamond could "
+        "only be faked as manifest-only ground truth, which would defeat this family's "
+        "own purpose (a conflict the detector must independently rediscover), so it is "
+        "left out rather than faked; see `synth/generator.py`'s module docstring."
+    )
+    lines += ["", total_note, "", diamond_note]
     Path(path).write_text("\n".join(lines) + "\n", encoding="utf-8")

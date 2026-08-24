@@ -225,3 +225,63 @@ See `PHASE2_PLAN.md` for the pre-implementation gap list (Section 0's required d
   only, so `net_smell_resolution` being flat at 0 reflects that generator's real limitations, not
   necessarily SEQ-REFACTOR's ordering algorithm. `REPRODUCE.md` states exactly how to close this
   gap once a key is available.
+
+## 9. Phase 2c: redesigning the benchmark so it can actually test the hypothesis
+
+A reviewer identified a deeper problem than Phase 2's God-Class-detector-boundary fix addressed:
+God Class always got the maximum severity deterministically, and God Class was always the
+prerequisite, so `impact_only` tended to pick it first anyway even though it ignores dependency
+edges. The benchmark was testing whether dependency safety *agrees with* impact, not whether it
+*corrects* a bad impact priority. This is why H1/H2 came back degenerate in Phase 2. Full
+diagnosis and fix, real result:
+
+- **`seqrefactor/synth/generator.py`, severity decorrelation**: a God Class prerequisite now
+  samples severity from Uniform(0.2, 0.6); each dependent it contains samples independently from
+  Uniform(0.6, 1.0) -- realised through real code structure (padding decouples "is this detected"
+  from "how severe is it", see the module's PHASE 2C docstring section), not written as a label.
+  Verified corpus-wide: prerequisite is the least-severe child in its own group in >=85% of cases
+  across many generated subjects (`tests/unit/test_synth_generator.py`).
+- **Priority-Dependency Conflict family** (pairs, widths, chains up to depth 5): a low-severity
+  prerequisite whose dependent(s) are deliberately higher severity, forcing `impact_only` and the
+  dependency-safe strategies to diverge *by construction* -- verified against the real detector,
+  builder, and orderer, not just the plan, for every one of the 10 conflict subjects. Diamonds are
+  explicitly out of scope: Java's qualified-name namespace is a tree, so no real element can be
+  structurally contained by two different elements at once (the same reason genuine cycles are
+  architecturally impossible for the builder to discover) -- faking one as manifest-only ground
+  truth would defeat this family's own anti-circularity purpose, so it was left out, not faked.
+- **Two new reference strategies** (`order/random_baseline.py`): `random` (unconstrained,
+  measures how often an arbitrary order is unsafe) and `random_topological` (safe but
+  impact-neutral, isolating impact-forward priority's value from safety's). Both reuse the
+  existing, unmodified `orderer.order` as a decoder (same pattern as `search_based.py`), so
+  neither required touching the ordering algorithm -- honoring the brief's explicit "do not
+  modify the ordering algorithm, graph builder, or incremental maintenance" constraint.
+- **Table V** (`eval/detector_quality.py`): precision/recall/F1 against planted ground truth,
+  corpus-wide. Every one of the 25 generated subjects scores exactly 1.0/1.0/1.0; the one
+  hand-written subject (`pilot_checkout_v1`, predates the generator) scores 0.714 -- a real,
+  honestly reported difference between a hand-authored fixture and a script-verified one.
+- **Table VI** (`eval/random_study.py`): mean and spread (not a single draw) of random-order
+  unsafety and random-topological's objective, 200 samples/subject. `seqrefactor` measurably beats
+  `random_topological`'s mean objective by several standard deviations on every subject with more
+  than one valid ordering -- direct evidence impact-forward priority adds value beyond safety.
+- **GSR and rejection-reason classification** (`model.RunReport.generation_success_rate`,
+  `.rejection_reason_counts`, a new `Verdict.reason` field, `Evidence.compile_errors`): revealed
+  *why* H2 stays degenerate even after the redesign -- `no_patch` (God Class has no baseline
+  transform) and `metric_regression` dominate rejections for every strategy alike, so net smell
+  resolution is capped near zero by generator capability, not by scheduling. A real, load-bearing
+  diagnostic result, not a loose end.
+
+**The corpus grew from 18 to 28 subjects** (15 decorrelated grid + 10 conflict,
+`datasets/synthetic/CORPUS.md`), re-run in full (7 strategies, real sidecar,
+`datasets/synthetic/example_run/`, 196 raw reports). **Result: H1 went from degenerate (n=18,
+every difference exactly zero) to significant (n=28, p=0.0416, effect size r=1.0 -- the maximum
+possible, every paired subject moved the same direction). H3 likewise (p=0.0009).** This is the
+"genuine, computable H1 result" the brief predicted the redesign would produce -- reached by
+verifying the mechanism at every step (real detector/builder/orderer checks, not planning-level
+assumptions alone), not by tuning the benchmark toward a target outcome. Full narrative, tables,
+and the GSR/rejection-reason breakdown: `evaluation/README.md`'s Phase 2c section.
+
+**Still not done, stated plainly**: the LLM-generator run remains blocked on `OPENAI_API_KEY`
+(now the clear next step for closing H2, per the GSR diagnosis above); the search-based scheduler
+and random-topological sampler are honestly documented as not verified reproductions of their
+cited literature (see their own HONESTY NOTEs); no em-dashes were used anywhere in this phase's
+new code, comments, or docs, per the brief's standing constraint.

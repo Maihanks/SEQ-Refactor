@@ -7,87 +7,87 @@ smells:
   category: GodClass
   loc:
   - synth.GodClass0
-  severity: 1.0
+  severity: 0.5
 - id: s2
   category: LongMethod
   loc:
   - synth.GodClass0.m0_longmethod
-  severity: 0.77
+  severity: 0.7
 - id: s3
   category: BigSwitch
   loc:
   - synth.GodClass0.m1_bigswitch
-  severity: 0.3
+  severity: 0.8
 - id: s4
   category: GodClass
   loc:
   - synth.GodClass1
-  severity: 1.0
+  severity: 0.5
 - id: s5
   category: BigSwitch
   loc:
   - synth.GodClass1.m0_bigswitch
-  severity: 0.33
+  severity: 0.9
 - id: s6
   category: MessageChains
   loc:
   - synth.GodClass1.m1_messagechains
-  severity: 0.52
+  severity: 0.9
 - id: s7
   category: GodClass
   loc:
   - synth.GodClass2
-  severity: 1.0
+  severity: 0.5
 - id: s8
   category: MessageChains
   loc:
   - synth.GodClass2.m0_messagechains
-  severity: 0.49
+  severity: 0.8
 - id: s9
   category: BigSwitch
   loc:
   - synth.GodClass2.m1_bigswitch
-  severity: 0.29
+  severity: 0.8
 - id: s10
   category: GodClass
   loc:
   - synth.GodClass3
-  severity: 1.0
+  severity: 0.5
 - id: s11
   category: LongMethod
   loc:
   - synth.GodClass3.m0_longmethod
-  severity: 0.84
+  severity: 1.0
 - id: s12
   category: GodClass
   loc:
   - synth.GodClass4
-  severity: 1.0
+  severity: 0.25
 - id: s13
   category: BigSwitch
   loc:
   - synth.GodClass4.m0_bigswitch
-  severity: 0.28
+  severity: 0.7
 - id: s14
   category: GodClass
   loc:
   - synth.GodClass5
-  severity: 1.0
+  severity: 0.333
 - id: s15
   category: LongMethod
   loc:
   - synth.GodClass5.m0_longmethod
-  severity: 0.85
+  severity: 1.0
 - id: s16
   category: BigSwitch
   loc:
   - synth.LeafClass0.leafSwitch
-  severity: 0.3
+  severity: 0.4
 - id: s17
   category: BigSwitch
   loc:
   - synth.LeafClass1.leafSwitch
-  severity: 0.3
+  severity: 0.4
 prerequisites:
 - src: s1
   dst: s2
@@ -119,18 +119,26 @@ expected_cascade_if_out_of_order:
 positive_dependencies:
 - src: s2
   dst: s3
-  probability: 0.31
+  probability: 0.53
   operation: Hide Delegate
-- src: s9
-  dst: s8
-  probability: 0.5
-  operation: Rename Method
+- src: s6
+  dst: s5
+  probability: 0.31
+  operation: Inline Method
+- src: s8
+  dst: s9
+  probability: 0.39
+  operation: Hide Delegate
 negative_dependencies:
 - src: s2
   dst: s3
-  probability: 0.43
+  probability: 0.39
   operation: Rename Method
-- src: s5
-  dst: s6
-  probability: 0.46
+- src: s6
+  dst: s5
+  probability: 0.21
+  operation: Extract Method
+- src: s9
+  dst: s8
+  probability: 0.33
   operation: Extract Method

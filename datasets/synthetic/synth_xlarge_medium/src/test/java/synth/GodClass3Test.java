@@ -9,13 +9,13 @@ class GodClass3Test {
     @Test
     void m0_bigswitchBehaves() {
         GodClass3 subject = new GodClass3();
-        assertEquals("two", subject.m0_bigswitch(2));
+        assertEquals("v2", subject.m0_bigswitch(2));
     }
 
     @Test
     void m1_messagechainsBehaves() {
         GodClass3 subject = new GodClass3();
-        assertEquals("bbc", subject.m1_messagechains(" ABCDEF "));
+        assertEquals("bbcxxxxxxx", subject.m1_messagechains(" ABCDEF "));
     }
 
 }

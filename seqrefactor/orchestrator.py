@@ -44,7 +44,7 @@ from seqrefactor.model import (
     Verdict,
 )
 from seqrefactor.order import impact as impact_scorer
-from seqrefactor.order import orderer, search_based
+from seqrefactor.order import orderer, random_baseline, search_based
 from seqrefactor.retrieve.retriever import Retriever
 from seqrefactor.verify.arch import ArchCheck
 from seqrefactor.verify.metrics import MetricFacade
@@ -58,10 +58,10 @@ def _select_ordering(
     discount: float = 0.9,
     seed: int = 20260101,
 ) -> Ordering:
-    """The five ablation arms (§8.3 Variables, + search_based added Phase 2 §4):
-    only the ordering strategy varies; everything else in the loop is identical
-    across arms so the comparison isolates ordering effects from generation
-    effects."""
+    """The seven ablation arms (§8.3 Variables; search_based added Phase 2 §4;
+    random/random_topological added Phase 2c §3): only the ordering strategy
+    varies; everything else in the loop is identical across arms so the
+    comparison isolates ordering effects from generation effects."""
     if strategy == "unordered":
         return Ordering(agenda=[n.id for n in g.nodes], escalations=[])
     if strategy == "impact_only":
@@ -78,6 +78,14 @@ def _select_ordering(
         # Genetic-algorithm search for the objective (paper Eq. 2) Algorithm 1 only
         # greedily approximates (order/search_based.py's own HONESTY NOTE on scope).
         return search_based.search_based_order(g, impact_scores, discount=discount, seed=seed)
+    if strategy == "random":
+        # Unconstrained random permutation (order/random_baseline.py): the
+        # cascading-violation-rate upper reference.
+        return random_baseline.random_order(g, seed=seed)
+    if strategy == "random_topological":
+        # Safe, impact-neutral (order/random_baseline.py): isolates the value
+        # of impact-forward priority from the value of safety alone.
+        return random_baseline.random_topological_order(g, seed=seed)
     return orderer.order(g, impact_scores)  # "seqrefactor"
 
 
@@ -205,14 +213,18 @@ class Orchestrator:
         from seqrefactor import _treesitter as ts
 
         if not candidate.patch:
-            verdict = Verdict(smell=target.id, accepted=False, rationale="generator produced no patch")
+            verdict = Verdict(
+                smell=target.id, accepted=False, rationale="generator produced no patch",
+                reason="no_patch",
+            )
             return verdict, module
 
         element = target.loc[0] if target.loc else target.category
         real_file = ts.locate_file(element, module.source_files)
         if real_file is None:
             verdict = Verdict(
-                smell=target.id, accepted=False, rationale=f"could not locate source file for {element}"
+                smell=target.id, accepted=False, rationale=f"could not locate source file for {element}",
+                reason="generation_failure",
             )
             return verdict, module
 
@@ -228,7 +240,10 @@ class Orchestrator:
             arch_result = self.arch_check.check(module, candidate_module)
 
             evidence = Evidence(
-                metric=metric_delta, tests_pass=test_result.success, arch_ok=arch_result.ok
+                metric=metric_delta,
+                tests_pass=test_result.success,
+                arch_ok=arch_result.ok,
+                compile_errors=test_result.compile_errors,
             )
             verdict = self.gate.decide(target.id, evidence)
 

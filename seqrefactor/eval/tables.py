@@ -18,6 +18,8 @@ from pathlib import Path
 from typing import Any
 
 from seqrefactor.eval.depmass import H4Result
+from seqrefactor.eval.detector_quality import DetectorQualityResult
+from seqrefactor.eval.random_study import RandomBaselineResult
 from seqrefactor.eval.stats import PairedTestResult
 from seqrefactor.model import ComplexityRecord, DependencyMass, RunReport
 from seqrefactor.report import ablation_table
@@ -130,6 +132,54 @@ def table4_efficiency(
         "table4_efficiency",
         "Incremental vs. from-scratch maintenance cost (RQ6, H5)",
         "tab:efficiency",
+        out_dir,
+    )
+
+
+def table5_detector_quality(
+    results: list[DetectorQualityResult], out_dir: Path = RESULTS_DIR
+) -> list[dict[str, Any]]:
+    rows = [
+        {
+            "subject": r.subject,
+            "ground_truth_count": r.ground_truth_count,
+            "detected_count": r.detected_count,
+            "true_positives": r.true_positives,
+            "precision": r.precision,
+            "recall": r.recall,
+            "f1": r.f1,
+        }
+        for r in results
+    ]
+    return emit_table(
+        rows,
+        "table5_detector_quality",
+        "Detector precision/recall/F1 against planted ground truth",
+        "tab:detector-quality",
+        out_dir,
+    )
+
+
+def table6_random_baseline(
+    results: list[RandomBaselineResult], out_dir: Path = RESULTS_DIR
+) -> list[dict[str, Any]]:
+    rows = [
+        {
+            "subject": r.subject,
+            "n_samples": r.n_samples,
+            "mean_violation_fraction": r.mean_violation_fraction,
+            "stdev_violation_fraction": r.stdev_violation_fraction,
+            "mean_random_topological_objective": r.mean_random_topological_objective,
+            "stdev_random_topological_objective": r.stdev_random_topological_objective,
+            "seqrefactor_objective": r.seqrefactor_objective,
+        }
+        for r in results
+    ]
+    return emit_table(
+        rows,
+        "table6_random_baseline",
+        "Random / random-topological reference statistics (mean and spread across samples)",
+        "tab:random-baseline",
         out_dir,
     )
 
