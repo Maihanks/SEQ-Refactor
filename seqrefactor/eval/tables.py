@@ -9,6 +9,14 @@ Every table is emitted three ways to ``results/``: CSV (data of record), LaTeX
 Every row comes from a real computation upstream (``report.py``,
 ``eval/depmass.py``, ``eval/complexity.py``) -- nothing here computes a
 reported number itself, it only formats one.
+
+TABLE NUMBERING (Phase 3c G4): the ``tableN_*`` names below are this repo's
+own internal sequence, assigned in the order each table was added, and do
+NOT track the paper's table numbers one-to-one -- e.g. this module's Table
+III (``table3_depmass``) is the paper's Table VI, and this module's Table IV
+(``table4_efficiency``) is the paper's Table VII. See REPRODUCE.md's mapping
+note for the full repo-to-paper table cross-reference; that note is the
+source of truth, not this comment.
 """
 
 from __future__ import annotations
@@ -106,7 +114,11 @@ def table3_depmass(masses: list[DependencyMass], out_dir: Path = RESULTS_DIR) ->
         for m in masses
     ]
     return emit_table(
-        rows, "table3_depmass", "Dependency-mass study (RQ5, H4)", "tab:depmass", out_dir
+        rows,
+        "table3_depmass",
+        "Dependency-mass study (RQ5, H4) -- paper Table VI",
+        "tab:depmass",
+        out_dir,
     )
 
 
@@ -130,7 +142,7 @@ def table4_efficiency(
     return emit_table(
         rows,
         "table4_efficiency",
-        "Incremental vs. from-scratch maintenance cost (RQ6, H5)",
+        "Incremental vs. from-scratch maintenance cost (RQ6, H5) -- paper Table VII",
         "tab:efficiency",
         out_dir,
     )

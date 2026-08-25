@@ -1,4 +1,4 @@
-# Dependency-mass study (RQ5, H4)
+# Dependency-mass study (RQ5, H4) -- paper Table VI
 
 | subject | positive_mass | negative_mass | mass_ratio | co_resolution_events | cascading_violation_events |
 | --- | --- | --- | --- | --- | --- |

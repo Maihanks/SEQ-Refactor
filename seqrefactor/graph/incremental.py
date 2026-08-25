@@ -1,21 +1,38 @@
 """Incremental smell-dependency graph maintenance (Working Brief §3 / C6, billed
-there as "the headline" contribution).
+there as "the headline" contribution; Phase 3c G5 for the construction-cost
+framing below).
 
-DESIGN NOTE ON WHERE THE SAVING ACTUALLY IS. Algorithm 1 (``order/orderer.py``)
-is already a pure function of ``(graph, impact)`` in ``O((|V|+|E|) log|V|)``
-time -- cheap by the paper's own complexity analysis (§V-B: "negligible
-relative to smell detection, transformation generation, and verification").
-Re-running it on an unchanged graph is therefore not where an "incremental"
-strategy has room to win, and pretending otherwise by inventing a bespoke
-reordering-list algorithm this repository cannot verify against a reference
-implementation would risk exactly the silent-divergence failure mode this
-module exists to rule out. The real, measurable cost this module removes is
-upstream of ordering: (1) re-*detecting* smells over the whole module after
-every accepted step, when only the file(s) a transformation touched can have
-changed, and (2) re-deriving edges for every O(|V|^2) pair in the module, when
-only pairs touching a changed vertex can differ. ``apply_step`` below scopes
-both to the disturbed region. Tarjan/condensation memoisation for cycles that
-persist across steps lives in ``order/orderer.py`` (``condensation_cache``
+THE RESULT THIS MODULE ESTABLISHES: an asymptotic improvement in graph
+CONSTRUCTION cost, not in sorting. Over a k-step session, rebuilding the
+smell-dependency graph from scratch after every accepted step costs
+O(k|V|^2) edge derivations (all-pairs, every step); ``apply_step`` below
+instead costs O(kd), where d is the size of the disturbed region a single
+accepted transformation actually touches -- independent of |V| for a local
+refactoring, and recovering the O(k|V|^2) worst case only when a
+transformation disturbs the whole module. This is the paper's Section VI-A
+"bounded-locality" argument stated in the notation ``eval/complexity.py``
+measures it in; see that module's docstring for the full statement and
+``evaluation/scaling_summary.md`` for the real numbers it produces.
+
+DESIGN NOTE ON WHERE THE SAVING IS, AND ISN'T. Algorithm 1
+(``order/orderer.py``) is already a pure function of ``(graph, impact)`` in
+``O((|V|+|E|) log|V|)`` time -- cheap by the paper's own complexity analysis
+(§V-B: "negligible relative to smell detection, transformation generation,
+and verification"), and measured at zero heap and zero reordering operations
+in this repo's own scaling study (``evaluation/table4_efficiency.csv``'s
+``heap_operations``/``order_renumbering_operations`` columns). Re-running it
+on an unchanged graph is therefore not where an "incremental" strategy has
+room to win, and pretending otherwise by inventing a bespoke reordering-list
+algorithm this repository cannot verify against a reference implementation
+would risk exactly the silent-divergence failure mode this module exists to
+rule out. The construction cost above -- not the sort -- is the quantity
+worth reducing, and it is what this module actually reduces: (1) re-
+*detecting* smells over the whole module after every accepted step, when
+only the file(s) a transformation touched can have changed, and (2) re-
+deriving edges for every O(|V|^2) pair in the module, when only pairs
+touching a changed vertex can differ. ``apply_step`` below scopes both to the
+disturbed region. Tarjan/condensation memoisation for cycles that persist
+across steps lives in ``order/orderer.py`` (``condensation_cache``
 parameter), since that is where the condensation is computed.
 
 Because ``apply_step`` is required (and tested, see

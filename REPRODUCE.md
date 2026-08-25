@@ -5,6 +5,35 @@ from a clean checkout, in order. Written per Working Brief, Phase 2, Section 8's
 Done ("A REPRODUCE.md explains how to run everything from a clean checkout, including tool
 versions").
 
+## Table and figure numbering: repo vs. paper (Phase 3c G4)
+
+The `tableN_*` filenames under `evaluation/` are this repo's own internal sequence -- assigned in
+the order each table was added during development -- and do **not** track the paper's table
+numbers one-to-one. Cross-reference, established directly from the paper text
+(`draft docs/SEQ_REFACTOR_paper.docx`):
+
+| Repo artefact | Repo label | Paper reference | Confidence |
+| --- | --- | --- | --- |
+| `evaluation/table2_ablation.*` | "Table II" | **Table IV** ("the four-arm ablation on the open-source subject json_java_v1") | explicit in paper text |
+| `evaluation/table3_depmass.*` | "Table III" | **Table VI** ("dependency-mass comparison of RQ5/H4") | explicit in paper text |
+| `evaluation/table4_efficiency.*` | "Table IV" | **Table VII** ("the efficiency study of RQ6/H5") | explicit in paper text |
+| `evaluation/table6_random_baseline.*` | "Table VI" | **Table V** (aggregates the mean of each measure across the 28 subjects; describes sampling uniformly among valid linear extensions) | inferred from context, not an explicit "(Table V)" citation next to this data -- verify before citing |
+| `seqrefactor/graph/rules.py` `PRECEDENCE_RULES` | (no repo table number; a Python literal, not an emitted table) | **Table III** ("illustrative subset" of precedence rules) | explicit in paper text |
+| paper's symbol glossary | no repo equivalent | **Table I** | explicit in paper text; paper-only content |
+| paper's comparison against prior approaches | no repo equivalent | **Table II** | explicit in paper text; qualitative, paper-only content |
+| `evaluation/table5_detector_quality.*` | "Table V" | not currently cited by paper table number found in this pass | internal detector QA, not yet matched to a paper table |
+| `evaluation/fig_scaling.png`/`.pdf` (`seqrefactor/eval/plot_scaling.py`) | -- | referred to as **Fig. 5** by the Phase 3c working brief | **not found in the committed paper**: the paper currently has only Fig. 1-4, and no figure captioned as a scaling plot. Either a newer paper draft than what's committed here already has it, or it is still to be added -- verify against the author's current working copy before citing "Fig. 5" in a submission. |
+| the O(k\|V\|^2) -> O(kd) session bound (see `seqrefactor/eval/complexity.py`, `seqrefactor/graph/incremental.py`) | -- | referred to as **Proposition 1** by the Phase 3c working brief | **not found as a formally labelled proposition in the committed paper**: Section VI-A states the same argument in prose ("under the bounded-locality assumptions of Section VI-A the per-step re-analysis is proportional to the disturbed subgraph..."), not as a numbered "Proposition 1". Same caveat as Fig. 5 above. |
+
+The last two rows are a **documentation-currency finding**, not a data mismatch: every measured
+number this task touches (the CSV data, the 38,416/31,816 step-0/session-mean pair, the 3.05x
+median / 4.10x mean wall-clock ratio, the ~2402-to-~1.65 mean edge-touches drop) was independently
+recomputed from the committed `evaluation/table4_efficiency.csv` during this synchronisation pass
+and matches the working brief's cited values exactly. What doesn't yet exist in the committed
+`.docx` is the "Fig. 5" and "Proposition 1" *labels* themselves -- the repository-side artefacts
+those labels would point to (the figure, the explicit bound statement) are now built and
+verified; wiring the paper's own text to them is a paper edit, not a repo one.
+
 ## Tool versions this was built and verified against
 
 - Python 3.12.3, managed via [uv](https://docs.astral.sh/uv/) 0.11.20
@@ -77,6 +106,16 @@ matrix and additionally regenerates Tables II-IV and `SUMMARY.md` in one command
 
 ## 5. Tables III/IV (dependency-mass, complexity-scaling) against the corpus
 
+**The session-level bound Table IV / Fig. 5 measure (Phase 3c G2, "Proposition 1" in the working
+brief's terms -- see the numbering note above):** naive rebuilding of the smell-dependency graph
+costs O(k\|V\|^2) edge derivations over a k-step session (every step re-derives all pairs of the
+surviving smells); incremental maintenance (`graph/incremental.apply_step`) costs O(kd), where d
+is the size of the disturbed region one accepted transformation actually touches, independent of
+\|V\| for a local refactoring. The worst case (a transformation disturbing the whole module)
+recovers the O(k\|V\|^2) cost. This is a bound on operation counts (vertex/edge touches), stated
+and measured separately from wall-clock time, which is hardware-dependent -- see
+`seqrefactor/eval/complexity.py`'s module docstring for the full statement.
+
 ```bash
 uv run python -c "
 from pathlib import Path
@@ -110,6 +149,19 @@ eval_tables.table4_efficiency(records, out_dir=Path('evaluation'))
 number in this table depends on (H5) -- run it (`uv run pytest tests/property -q`) alongside any
 regeneration, not as a one-time check.
 
+Then regenerate Fig. 5 and its labelled step-0/session-mean summary from the table you just wrote
+(Phase 3c G1/G3):
+
+```bash
+make scaling   # = uv run python -m seqrefactor.eval.plot_scaling
+```
+
+This reads `evaluation/table4_efficiency.csv` alone -- it does not re-run the scaling study itself
+(that's the `run_scaling_study` command above) -- and writes `evaluation/fig_scaling.png`/`.pdf`
+and `evaluation/scaling_summary.md` deterministically from whatever is currently in that CSV.
+Re-run the `run_scaling_study` command first if you want the figure to reflect a fresh
+regeneration rather than the currently-committed table.
+
 ## 6. Everything in one command
 
 ```bash
@@ -121,6 +173,8 @@ because they operate on the synthetic corpus, not `configs/ablation.yaml`'s subj
 is gitignored (regenerable); committed snapshots of specific runs live under
 `datasets/opensource/json_java_v1/example_run/` and `evaluation/` instead, each with its own
 `README.md`/`PROVENANCE.md` explaining exactly what was run and when.
+
+`make scaling` (Phase 3c G6) is the equivalent one-command step for Fig. 5 -- see step 5 above.
 
 ## What needs an API key (not available in this environment)
 

@@ -1,4 +1,4 @@
-# Incremental vs. from-scratch maintenance cost (RQ6, H5)
+# Incremental vs. from-scratch maintenance cost (RQ6, H5) -- paper Table VII
 
 | subject | step_index | strategy | module_size | vertex_touches | edge_touches | heap_operations | order_renumbering_operations | wall_clock_seconds |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
