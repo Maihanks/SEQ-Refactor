@@ -1,0 +1,18 @@
+# Modest LLM-generator evaluation (Phase 2, PHASE2_PLAN.md cost/scope note): now
+# that OPENAI_API_KEY is supplied, run the "seqrefactor" ordering strategy with the
+# real LLM generator over a small, deliberately chosen subset of the corpus that
+# carries positive_dependencies / negative_dependencies edges (the exact structure
+# RQ5/H4 needs realised co-resolution / cascading-violation events to be non-zero).
+# Subjects were copied to a scratch directory first per the corpus warning that the
+# orchestrator mutates its target module in place.
+subjects_glob: "/home/user/workspace/llm_eval_scratch/*/"
+strategies: ["seqrefactor"]
+generators: ["llm"]
+impact_weights:
+  alpha: 0.4
+  beta: 0.4
+  gamma: 0.2
+discount: 0.9
+coverage_min: 0.0
+seed: 20260101
+max_steps: 10

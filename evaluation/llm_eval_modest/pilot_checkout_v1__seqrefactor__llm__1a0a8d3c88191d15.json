@@ -1,0 +1,158 @@
+{
+  "subject": "pilot_checkout_v1",
+  "strategy": "seqrefactor",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:orders.OrderService",
+      "verdict": {
+        "smell": "GodClass:orders.OrderService",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:orders.OrderService.checkout",
+        "MessageChains:orders.OrderService.calculateShipping"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 1,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatus",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatus",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.291",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:orders.OrderService.applyDiscount",
+      "verdict": {
+        "smell": "LongMethod:orders.OrderService.applyDiscount",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.174",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 3,
+      "smell": "MessageChains:orders.OrderService.priceOf",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.priceOf",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.221",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.calculateRegionalSurcharge"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:orders.OrderService.calculateShipping",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.calculateShipping",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.024",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.getShippingZoneCode"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 5,
+      "smell": "LongMethod:orders.OrderService.checkout",
+      "verdict": {
+        "smell": "LongMethod:orders.OrderService.checkout",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.017",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 6,
+      "smell": "MessageChains:orders.OrderService.calculateRegionalSurcharge",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.calculateRegionalSurcharge",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.021",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 7,
+      "smell": "MessageChains:orders.OrderService.getShippingZoneCode",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.getShippingZoneCode",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.016",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.getShippingZoneCodeFromCustomer"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 8,
+      "smell": "MessageChains:orders.OrderService.getShippingZoneCodeFromCustomer",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.getShippingZoneCodeFromCustomer",
+        "accepted": false,
+        "rationale": "compilation failed",
+        "reason": "compile_failure"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    },
+    {
+      "index": 9,
+      "smell": "MessageChains:orders.OrderService.notifyBilling",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.notifyBilling",
+        "accepted": false,
+        "rationale": "compilation failed",
+        "reason": "compile_failure"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true
+    }
+  ],
+  "escalations": [],
+  "net_smell_resolution": 3,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 10,
+  "successful_generations": 10,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.3,
+  "rejection_reason_counts": {
+    "compile_failure": 2
+  }
+}

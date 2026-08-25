@@ -1,0 +1,99 @@
+{
+  "cells": [
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 3,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_cycle",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 6,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_medium_high_signed",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 6,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 10
+    },
+    {
+      "subject": "synth_small_low",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 5,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 7
+    }
+  ],
+  "by_strategy": {
+    "seqrefactor": {
+      "net_smell_resolution": 5,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 4
+    }
+  },
+  "hypothesis_tests": {
+    "H1_fewer_cascading_violations_vs_unordered": {
+      "n": 0,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": null,
+      "ci_high": null,
+      "mean_difference": null,
+      "supported": null,
+      "note": "only 0 paired observation(s) (minimum 5 required); insufficient for a paired test -- a data-coverage gap, not a negative result."
+    },
+    "H2_higher_nsr_vs_unordered": {
+      "n": 0,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": null,
+      "ci_high": null,
+      "mean_difference": null,
+      "supported": null,
+      "note": "only 0 paired observation(s) (minimum 5 required); insufficient for a paired test -- a data-coverage gap, not a negative result."
+    },
+    "H2_higher_nsr_vs_topo_only": {
+      "n": 0,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": null,
+      "ci_high": null,
+      "mean_difference": null,
+      "supported": null,
+      "note": "only 0 paired observation(s) (minimum 5 required); insufficient for a paired test -- a data-coverage gap, not a negative result."
+    },
+    "H3_higher_auc_vs_topo_only": {
+      "n": 0,
+      "statistic": null,
+      "p_value": null,
+      "effect_size_r": null,
+      "ci_low": null,
+      "ci_high": null,
+      "mean_difference": null,
+      "supported": null,
+      "note": "only 0 paired observation(s) (minimum 5 required); insufficient for a paired test -- a data-coverage gap, not a negative result."
+    }
+  }
+}
