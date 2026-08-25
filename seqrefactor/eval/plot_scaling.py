@@ -98,7 +98,10 @@ def plot(rows: list[dict[str, str]], out_stem: Path = DEFAULT_OUT_STEM) -> Path:
     png_path = out_stem.with_suffix(".png")
     pdf_path = out_stem.with_suffix(".pdf")
     fig.savefig(png_path, dpi=200)
-    fig.savefig(pdf_path)
+    # Suppress the PDF backend's embedded creation timestamp: without this, re-running
+    # this script on unchanged data produces a byte-different .pdf (though visually
+    # identical), which contradicts "regenerates ... deterministically" above.
+    fig.savefig(pdf_path, metadata={"CreationDate": None})
     plt.close(fig)
     return png_path
 

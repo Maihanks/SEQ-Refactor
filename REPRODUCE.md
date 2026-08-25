@@ -134,6 +134,15 @@ To thread *realised* co-resolution/cascading events (rather than structural mass
 table, pass the actual `RunReport`s from step 4 instead of `None` for each entry -- see
 `eval/depmass.dependency_mass_for_subject`'s docstring.
 
+`evaluation/table4_efficiency.csv` (334 rows) is two measurements concatenated, distinguished by
+the `subject` column (`evaluation/README.md`'s "Table IV" section documents both in full):
+
+**1. The synthetic |V| sweep (88 rows, `subject` = `synthetic_V<n>`)** -- exactly reproducible from
+current code, byte-for-byte on every deterministic counter column (verified during Phase 3c: a
+fresh run of the command below reproduces all 88 rows' `vertex_touches`/`edge_touches` exactly).
+**This is the half the paper's cited numbers come from** -- the step-0 (38,416) and session-mean
+(31,816) values at V=200, and Fig. 5 itself:
+
 ```bash
 uv run python -c "
 from pathlib import Path
@@ -145,12 +154,43 @@ eval_tables.table4_efficiency(records, out_dir=Path('evaluation'))
 "
 ```
 
+**2. The real corpus cross-validation (246 rows, real subject names, `eval.complexity.run_corpus_study`)**
+-- **a Phase 2 snapshot, not exactly reproducible by a fresh call today**, verified during Phase 3c:
+
+```bash
+uv run python -c "
+from seqrefactor.eval.complexity import run_corpus_study
+records = run_corpus_study(max_steps_per_subject=10, repeats=7)
+print(len(records))   # 266 today, not 246 -- see below
+"
+```
+
+Running this today produces 266 rows, not 246, and the deterministic counters that do overlap by
+key differ on 267 of them. This is not a bug in either the code or the committed CSV -- the
+corpus and the synthetic generator that builds it changed *after* this table's corpus rows were
+generated: Phase 2c (see `evaluation/README.md`'s "Phase 2c update" section) grew the corpus from
+18 to 28 subjects (adding the `conflict_*` family, some of which now contribute the extra rows)
+and decorrelated severity from dependency role in `seqrefactor/synth/generator.py`, which changes
+which vertex gets resolved at each step and therefore which edges get re-derived. The committed
+246 rows are a legitimate, real measurement -- just one taken against an earlier state of the
+corpus, kept as a committed snapshot (per `evaluation/README.md`'s own framing of this directory)
+rather than silently replaced by a newer run whose numbers would differ for reasons that have
+nothing to do with the incremental-vs-from-scratch question this table exists to answer. **Do not
+overwrite `evaluation/table4_efficiency.csv`'s corpus rows with a fresh `run_corpus_study()` call**
+without first deciding, deliberately, whether you want this table to mean "Phase 2 corpus,
+comparable across the project's history" or "current corpus, current numbers" -- and updating
+`evaluation/README.md`'s narrative to match, since it currently describes and tabulates the Phase
+2 values specifically.
+
 `tests/property/test_incremental_equivalence.py` is the bit-for-bit equivalence proof every
 number in this table depends on (H5) -- run it (`uv run pytest tests/property -q`) alongside any
-regeneration, not as a one-time check.
+regeneration, not as a one-time check. It passes against both the Phase 2 snapshot's construction
+and today's corpus, since the equivalence is proven by construction (see
+`graph/incremental.py`'s docstring), not tied to a specific corpus state.
 
 Then regenerate Fig. 5 and its labelled step-0/session-mean summary from the table you just wrote
-(Phase 3c G1/G3):
+(Phase 3c G1/G3) -- this reads only the synthetic-sweep-derived columns' aggregate behaviour by
+module size, so it is unaffected by the corpus-snapshot question above:
 
 ```bash
 make scaling   # = uv run python -m seqrefactor.eval.plot_scaling
@@ -175,6 +215,61 @@ is gitignored (regenerable); committed snapshots of specific runs live under
 `README.md`/`PROVENANCE.md` explaining exactly what was run and when.
 
 `make scaling` (Phase 3c G6) is the equivalent one-command step for Fig. 5 -- see step 5 above.
+
+## 7. Verification: headline numbers re-derived from committed data (Phase 3c)
+
+Before adding anything in this Phase 3c pass, every headline number the working brief cited was
+independently recomputed from the already-committed CSVs (never from the brief's own text) and
+compared. All matched; no drift found. Re-run these to re-verify at any time -- they only read
+committed files, nothing here re-runs an experiment:
+
+```bash
+# H1, H3, H4: read directly, no computation needed
+cat evaluation/SUMMARY.md
+# H1_fewer_cascading_violations_vs_unordered: p=0.04163 (n=28)  -> brief cites p=0.042
+# H3_higher_auc_vs_topo_only:                 p=0.0009208 (n=28) -> brief cites p=0.0009
+# H4_dependency_mass:                          p=0.4861, not supported -> brief cites p=0.486
+
+# H4's realised co-resolution/cascading events are 0 for every subject:
+uv run python -c "
+import csv
+rows = list(csv.DictReader(open('evaluation/table3_depmass.csv')))
+events = [(r['co_resolution_events'], r['cascading_violation_events']) for r in rows]
+print('all zero:', all(a == '0' and b == '0' for a, b in events), '/ n =', len(rows))
+"
+
+# H5 wall-clock ratio (median/mean, across every paired from-scratch/incremental
+# step-level observation) and the mean edge-touches drop:
+uv run python -c "
+import csv, statistics
+rows = list(csv.DictReader(open('evaluation/table4_efficiency.csv')))
+by = {}
+for r in rows:
+    by.setdefault((r['subject'], int(r['step_index'])), {})[r['strategy']] = r
+wall = [float(d['from_scratch']['wall_clock_seconds']) / float(d['incremental']['wall_clock_seconds'])
+        for d in by.values() if 'from_scratch' in d and 'incremental' in d
+        and float(d['incremental']['wall_clock_seconds']) > 0]
+fs_edges = [float(r['edge_touches']) for r in rows if r['strategy'] == 'from_scratch']
+inc_edges = [float(r['edge_touches']) for r in rows if r['strategy'] == 'incremental']
+print('n paired observations:', len(wall))
+print('wall-clock median:', round(statistics.median(wall), 2), '-> brief cites 3.05x')
+print('wall-clock mean:', round(statistics.mean(wall), 2), '-> brief cites 4.10x')
+print('mean edge_touches from_scratch:', round(statistics.mean(fs_edges), 2), '-> brief cites ~2402')
+print('mean edge_touches incremental:', round(statistics.mean(inc_edges), 2), '-> brief cites ~1.6')
+"
+
+# Table VII / Fig. 5 headline pair, from the synthetic-sweep half only (Section 5 above):
+uv run python -m seqrefactor.eval.plot_scaling
+# edge_derivations_step0_V200 = 38,416.00      -> brief cites 38,416
+# edge_derivations_session_mean_V200 = 31,816.00 -> brief cites 31,816
+```
+
+**Result: zero drift on every one of these.** The one caveat, stated in full in section 5 above:
+the wall-clock/edge-touches aggregates here are computed across all 334 rows, including the 246
+Phase-2-snapshot corpus rows -- if that corpus half is ever regenerated against the current (Phase
+2c) corpus, these two aggregate figures (not the step-0/session-mean pair, which is
+synthetic-sweep-only and already re-verified exactly) would need re-checking against whatever the
+paper cites at that time.
 
 ## What needs an API key (not available in this environment)
 
