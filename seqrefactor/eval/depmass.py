@@ -22,12 +22,34 @@ probabilities behind this mass are seeded catalogue defaults
 (``graph/rules.py``), not mined from version histories -- this measures a
 modelled distribution, not an observed one. See that module's docstring for
 the full note. State this alongside any H4 result reported from here.
+
+IDENTIFIER-SPACE NOTE: manifest-declared subjects (``datasets/synthetic``)
+carry two independent identifier schemes for the same smells. ``graph_from_manifest``
+builds ``SmellDependencyGraph.nodes``/``.edges`` directly from the manifest's
+own hand-assigned ids (``s1``, ``s2``, ...). A live run's ``RunReport.steps``,
+by contrast, records whatever id the detector (``detect/native.py``'s
+``_stable_id``) independently derived for what it actually found in the
+source at that step -- ``f"{category}:{loc[0]}"``. These two id spaces do not
+share a namespace, so a naive membership check of manifest edge endpoints
+against a run's accepted-smell set can never match, regardless of what the
+run actually did (confirmed empirically: a real LLM-generator run on
+pilot_checkout_v1 always realised co_resolution_events == 0 even though
+qualifying message-chain smells were, in fact, accepted -- just under
+detector-derived ids the manifest's ``s5``/``s6`` never referenced). Below,
+``_expected_detector_id`` reconstructs the detector's id from each graph
+node's own ``category``/``loc`` (using the exact same convention as
+``_stable_id``, imported directly so the two can never drift apart again),
+so manifest-declared edges are translated into the live id space before the
+realised-event check runs. Nodes without a ``loc`` (or subjects whose graph
+was built by the live detector rather than a manifest, so ids are already in
+detector form) fall back to the identity mapping.
 """
 
 from __future__ import annotations
 
 from dataclasses import dataclass
 
+from seqrefactor.detect.native import _stable_id
 from seqrefactor.eval.stats import MIN_N_FOR_TEST, paired_test
 from seqrefactor.model import DependencyMass, RunReport, SmellDependencyGraph
 
@@ -44,6 +66,17 @@ class H4Result:
     note: str
 
 
+def _expected_detector_id_map(graph: SmellDependencyGraph) -> dict[str, str]:
+    """Map each node's own id (whatever namespace it was declared in -- manifest
+    ``s1``/``s2``/... for synthetic subjects, or already-detector-form for subjects
+    whose graph was built by the live detector) to the id the live detector
+    (``detect/native.py``'s ``_stable_id``) would independently assign for that same
+    smell, so realised-event checks against a :class:`RunReport` -- whose steps are
+    always recorded in detector-id form -- compare like with like. See the module
+    docstring's IDENTIFIER-SPACE NOTE."""
+    return {node.id: _stable_id(node.category, node.loc) for node in graph.nodes}
+
+
 def dependency_mass_for_subject(
     subject: str, graph: SmellDependencyGraph, run: RunReport | None = None
 ) -> DependencyMass:
@@ -56,7 +89,12 @@ def dependency_mass_for_subject(
     cascading_violation_events = 0
     if run is not None:
         accepted = {s.smell for s in run.steps if s.verdict.accepted}
-        co_resolution_events = sum(1 for e in positive_edges if e.src in accepted and e.dst in accepted)
+        id_map = _expected_detector_id_map(graph)
+        co_resolution_events = sum(
+            1
+            for e in positive_edges
+            if id_map.get(e.src, e.src) in accepted and id_map.get(e.dst, e.dst) in accepted
+        )
         cascading_violation_events = run.cascading_violations
 
     return DependencyMass(
