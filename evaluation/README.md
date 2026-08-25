@@ -83,18 +83,40 @@ action in that ordering fails regardless of which safe ordering was chosen.
 
 ### Table III — dependency-mass study (RQ5, H4)
 
-**Command:** see REPRODUCE.md step 5 (now threading the real `seqrefactor` `RunReport` for each
-subject through `run_study`, not `None`).
+**Command:** `uv run seqrefactor results --config <config> --out <dir>` now does this by default
+(the `results` command threads each subject's real `seqrefactor` `RunReport` from the ablation
+matrix it runs for Table II straight into `run_study`, instead of passing `None` for every
+subject unconditionally as it did before the wiring fix below) -- see REPRODUCE.md step 5.
 
-**H4, real statistic, n=18:** `statistic=32.0, p=0.827, effect_size_r=-0.297, supported=False`
+**Identifier-mismatch bug (found and fixed):** the manifest's ground-truth dependency edges are
+declared over hand-picked smell ids (`s1`, `s2`, ...; `datasets.graph_from_manifest`), while a
+real run's `RunReport.steps` record whatever id the live detector (`detect/native.py`'s
+`_stable_id`) independently derived for what it actually found in the source at that step. These
+two id spaces never shared a namespace, so the realised co-resolution check could never match
+regardless of what a run accepted; demonstrated with a constructed fixture (both ends accepted
+under detector ids) in the regression tests below, since the real LLM-generator run on this
+subject (evaluation/llm_eval_modest/) did not itself happen to accept both ends of this specific
+edge (notifyBilling failed to compile; notifyWarehouse was never attempted within budget) and so
+cannot demonstrate the bug on its own. Fixed in `eval/depmass.py`
+(translates manifest edge endpoints into detector-id form before the check, reusing `_stable_id`
+directly so the two conventions can't drift apart again) with two regression tests in
+`tests/unit/test_depmass.py`.
+
+**H4, real statistic, n=28 (current corpus; supersedes the n=18 figure from an earlier,
+smaller corpus revision):** `statistic=46.0, p=0.486, effect_size_r=0.011, supported=False`
 ("not supported at p<0.05"). `co_resolution_events` and `cascading_violation_events` are 0 for
-every subject in this run, for the same reason Table II's NSR is 0 everywhere: nothing got net
-resolved within the 10-step, baseline-generator-limited budget, so no injected
-positive/negative-dependency pair was ever actually realised. The *structural* mass itself (from
-each subject's manifest ground truth, independent of any run) is real and non-degenerate — see
-`table3_depmass.csv` for all 18 rows; positive/negative mass varies subject to subject (e.g.
-`synth_xlarge_medium`: 1.71 positive / 1.18 negative; several small subjects: 0.0 / 0.0, since not
-every generated subject's random draw happened to inject a signed dependency at all).
+every one of the 28 subjects -- now a directly verified result (real per-subject `seqrefactor`
+RunReports, correctly id-mapped), not an artifact of the identifier-mismatch bug above or of the
+prior `None`-only wiring. The reason is not that nothing got accepted: several subjects show real
+accepted resolutions within the 10-step budget (e.g. `pilot_checkout_v1` accepts a chain of
+BigSwitch extractions), and Table II's cascading-violation/ordering-validity rows depend on those
+real acceptances. It is that, per subject, the smells actually accepted never happened to include
+*both* ends of the same manifest-declared dependency edge -- the deterministic generator's
+impact-ranked exploration order did not reach those specific pairs within budget. The *structural*
+mass itself (from each subject's manifest ground truth, independent of any run) is real and
+non-degenerate -- see `table3_depmass.csv` for all 28 rows; positive/negative mass varies subject
+to subject (e.g. `synth_xlarge_medium`: 1.73 positive / 1.61 negative; several small subjects:
+0.0 / 0.0, since not every subject's random draw happened to inject a signed dependency at all).
 
 **HONESTY NOTE carried forward unchanged from Phase 1**: the probabilities behind this mass are
 illustrative catalogue/generator defaults, not mined data — see `graph/rules.py` and

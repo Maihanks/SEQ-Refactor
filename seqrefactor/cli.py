@@ -12,7 +12,7 @@ import yaml
 from dotenv import load_dotenv
 
 from seqrefactor.graph.builder import build as build_graph
-from seqrefactor.model import Config
+from seqrefactor.model import Config, RunReport
 from seqrefactor.orchestrator import Orchestrator
 from seqrefactor.report import Reporter, hypothesis_tests
 
@@ -134,12 +134,19 @@ def results(config_path: str, out_dir: str, generator: str, scaling_sizes: str) 
     (Working Brief §8): one command, every number from a real computation,
     nothing hand-entered.
 
-    Table III (dependency mass) and Table IV (complexity scaling) run fully
-    offline -- no Java toolchain needed. Table II (the main ablation) and
-    H1-H3 need the built jvm-sidecar (see jvm-sidecar/README.md) for real
-    test/metric verification, exactly like `seqrefactor run`; if it isn't
-    built, Table II is skipped with a clear message rather than crashing the
-    whole command.
+    Table III (dependency mass) needs the real ablation matrix's own
+    ``seqrefactor``-strategy RunReports to measure *realised* co-resolution
+    and cascading-violation counts, not just structural mass -- so it now
+    runs after the ablation matrix below and threads each subject's actual
+    RunReport through ``run_depmass_study`` (previously this passed ``None``
+    for every subject unconditionally, which silently produced structural-
+    mass-only numbers even when a real ablation matrix was available in the
+    very same command -- see REPRODUCE.md step 5's now-default "advanced"
+    path). If the jvm-sidecar isn't built, Table II/H1-H3 AND this real-run
+    threading are both skipped with a clear message, falling back to
+    structural-mass-only Table III rather than crashing the whole command.
+    Table IV (complexity scaling) runs fully offline either way -- no Java
+    toolchain needed.
     """
     from seqrefactor._sidecar import SidecarUnavailable
     from seqrefactor.datasets import graph_from_manifest, list_subjects, load_manifest
@@ -156,9 +163,33 @@ def results(config_path: str, out_dir: str, generator: str, scaling_sizes: str) 
     subjects = list_subjects()
     graphs = [(s, graph_from_manifest(load_manifest(s))) for s in subjects]
 
-    masses, h4 = run_depmass_study([(s, g, None) for s, g in graphs])
+    h1_h3: dict = {}
+    seqrefactor_runs_by_subject: dict[str, RunReport] = {}
+    try:
+        ablation_cfg = cfg.model_copy(update={"generators": [generator]})
+        ablation_subjects = sorted(Path(p) for p in glob.glob(cfg.subjects_glob) if Path(p).is_dir())
+        orchestrator = Orchestrator()
+        reports = orchestrator.run_matrix(ablation_cfg, ablation_subjects)
+        eval_tables.table2_ablation(reports, out_dir=out_path)
+        h1_h3 = hypothesis_tests(reports)
+        click.echo(f"wrote table2_ablation.* ({len(reports)} run reports)")
+        seqrefactor_runs_by_subject = {
+            r.subject: r for r in reports if r.strategy == "seqrefactor"
+        }
+    except SidecarUnavailable as exc:
+        click.echo(f"skipped table2_ablation (jvm-sidecar not built): {exc}")
+        click.echo("table3_depmass will fall back to structural-mass-only (no real run to thread)")
+
+    depmass_entries = [
+        (s, g, seqrefactor_runs_by_subject.get(s)) for s, g in graphs
+    ]
+    masses, h4 = run_depmass_study(depmass_entries)
     eval_tables.table3_depmass(masses, out_dir=out_path)
-    click.echo(f"wrote table3_depmass.* ({len(masses)} subjects)")
+    n_real = sum(1 for _, _, r in depmass_entries if r is not None)
+    click.echo(
+        f"wrote table3_depmass.* ({len(masses)} subjects, "
+        f"{n_real} with realised co-resolution/cascading counts from a real run)"
+    )
 
     sizes = [int(s) for s in scaling_sizes.split(",") if s.strip()]
     records = run_scaling_study(module_sizes=sizes, seed=cfg.seed) + run_corpus_study()
@@ -172,18 +203,6 @@ def results(config_path: str, out_dir: str, generator: str, scaling_sizes: str) 
     random_results = run_random_study(graphs, n_samples=200, seed=cfg.seed)
     eval_tables.table6_random_baseline(random_results, out_dir=out_path)
     click.echo(f"wrote table6_random_baseline.* ({len(random_results)} subjects)")
-
-    h1_h3: dict = {}
-    ablation_cfg = cfg.model_copy(update={"generators": [generator]})
-    try:
-        subjects = sorted(Path(p) for p in glob.glob(cfg.subjects_glob) if Path(p).is_dir())
-        orchestrator = Orchestrator()
-        reports = orchestrator.run_matrix(ablation_cfg, subjects)
-        eval_tables.table2_ablation(reports, out_dir=out_path)
-        h1_h3 = hypothesis_tests(reports)
-        click.echo(f"wrote table2_ablation.* ({len(reports)} run reports)")
-    except SidecarUnavailable as exc:
-        click.echo(f"skipped table2_ablation (jvm-sidecar not built): {exc}")
 
     eval_tables.summary_md(h1_h3, h4, out_dir=out_path)
     click.echo(f"wrote {out_path / 'SUMMARY.md'}")

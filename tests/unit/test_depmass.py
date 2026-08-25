@@ -73,8 +73,12 @@ def test_co_resolution_is_realised_when_both_ends_are_accepted_under_detector_id
     must translate the manifest's positive-dependency edge (pilot_checkout_v1's
     ``s5 -> s6``, i.e. MessageChains at notifyWarehouse/notifyBilling) into detector-id
     form before checking realised co-resolution. Before the fix this always read 0,
-    regardless of what a run actually accepted -- confirmed empirically by a real
-    LLM-generator run that accepted both smells and still measured 0."""
+    regardless of what a run actually accepted. This fixture constructs the scenario
+    directly (both ends accepted, under detector ids) to prove the fix works; in the real
+    LLM-generator run recorded at evaluation/llm_eval_modest/, neither end of this specific
+    edge was actually accepted (notifyBilling failed to compile; notifyWarehouse was never
+    attempted within the step budget), so that run cannot itself demonstrate the bug --
+    hence this synthetic fixture."""
     graph = graph_from_manifest(load_manifest("pilot_checkout_v1"))
     s5_detector_id = _stable_id("MessageChains", ["orders.OrderService.notifyWarehouse"])
     s6_detector_id = _stable_id("MessageChains", ["orders.OrderService.notifyBilling"])
