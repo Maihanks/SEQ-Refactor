@@ -127,12 +127,19 @@ seqrefactor/                 the Python package (installed into .venv by `uv syn
   graph/
     builder.py                catalogue + signed-catalogue rules + structural containment
                                 -> DepEdge[] (edge_for_pair is reused by graph/incremental.py)
-    rules.py                   PREREQUISITE precedence table (paper Table I) + a disjoint
-                                POSITIVE/NEGATIVE signed-dependency table (see its own
-                                HONESTY NOTE on where those probabilities come from)
-    incremental.py              scoped vertex/edge maintenance after one accepted step
-                                (Working Brief §3/C6) — proven bit-for-bit equivalent to a
-                                from-scratch rebuild, see its own design-note docstring
+    rules.py                   PREREQUISITE precedence table (paper Table III, the
+                                "illustrative subset" -- not Table I, which the paper defines
+                                as the notation/symbol glossary; the paper's own worked-example
+                                sentence still cites "the first rule of Table I" for this same
+                                rule, which looks like a stale cross-reference in the paper text
+                                itself, not a repo-side error -- see REPRODUCE.md's numbering
+                                note) + a disjoint POSITIVE/NEGATIVE signed-dependency table
+                                (see its own HONESTY NOTE on where those probabilities come from)
+    incremental.py              scoped vertex/edge maintenance after one accepted step (Working
+                                Brief §3/C6): an O(k|V|^2) -> O(kd) session-level construction-cost
+                                improvement, not a sorting improvement (Algorithm 1 is already
+                                cheap) -- proven bit-for-bit equivalent to a from-scratch rebuild,
+                                see its own docstring
   order/
     impact.py                  impact scoring (Eq. 1)
     orderer.py                  <== the ordering algorithm (THE CONTRIBUTION); PREREQUISITE-
@@ -152,10 +159,16 @@ seqrefactor/                 the Python package (installed into .venv by `uv syn
   eval/                         Working Brief §4/§5/§6/§8: statistics and result emission
     stats.py                     shared Wilcoxon + rank-biserial effect size + bootstrap CI,
                                   used by both report.py's H1-H3 and depmass.py's H4
-    complexity.py                 incremental-vs-from-scratch scaling study (synthetic, offline)
+    complexity.py                 incremental-vs-from-scratch scaling study (synthetic sweep +
+                                  real-corpus cross-validation); states the O(k|V|^2) -> O(kd)
+                                  session bound the paper's Section VI-A argument corresponds to
     depmass.py                    the dependency-mass study (RQ5, H4)
     weight_sweep.py               RQ4's alpha/beta/gamma sensitivity sweep execution loop
-    tables.py                     Table II/III/IV emission (CSV+LaTeX+Markdown) + SUMMARY.md
+    tables.py                     Table II/III/IV emission (CSV+LaTeX+Markdown) + SUMMARY.md --
+                                  repo-internal numbering; see REPRODUCE.md for the repo-to-paper
+                                  table cross-reference (repo III/IV = paper Table VI/VII)
+    plot_scaling.py                regenerates Fig. 5 (evaluation/fig_scaling.png/.pdf) and its
+                                  labelled step-0/session-mean summary from table4_efficiency.csv
   _sidecar.py, _treesitter.py, _worktree.py   internal shared helpers
 
 jvm-sidecar/                 Java 17 / Gradle sidecar: JUnit execution + CK metrics
@@ -233,11 +246,17 @@ confirms they match what's stored, which is the reproducibility story NFR-2/NFR-
 
 ```bash
 # One command, regenerates Tables II-IV + results/SUMMARY.md from a fixed seed (Working
-# Brief §8). Table III (dependency mass) and Table IV (complexity scaling) run fully offline;
-# Table II (the main ablation) needs the built jvm-sidecar and is skipped with a clear message
-# if it isn't present, rather than failing the whole command.
+# Brief §8). Table III (dependency mass, = paper Table VI) and Table IV (complexity scaling,
+# = paper Table VII) run fully offline; Table II (the main ablation) needs the built jvm-sidecar
+# and is skipped with a clear message if it isn't present, rather than failing the whole command.
+# Repo table numbers are an internal sequence, not the paper's -- see REPRODUCE.md's mapping note.
 make results
 # equivalent to: uv run seqrefactor results --config configs/ablation.yaml --out results
+
+# Regenerate Fig. 5 (evaluation/fig_scaling.png/.pdf) and its labelled step-0/session-mean
+# summary from the Table IV/VII CSV above:
+make scaling
+# equivalent to: uv run python -m seqrefactor.eval.plot_scaling
 ```
 
 ## Testing
