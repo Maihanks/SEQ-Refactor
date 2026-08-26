@@ -9,30 +9,38 @@ versions").
 
 The `tableN_*` filenames under `evaluation/` are this repo's own internal sequence -- assigned in
 the order each table was added during development -- and do **not** track the paper's table
-numbers one-to-one. Cross-reference, established directly from the paper text
-(`draft docs/SEQ_REFACTOR_paper.docx`):
+numbers one-to-one. Cross-reference, re-confirmed against the paper text as of the
+2026-08-26 revision of `draft docs/SEQ_REFACTOR_paper.docx` (the earlier Phase 3c pass was checked
+against a draft that predated this revision -- see the update note below):
 
 | Repo artefact | Repo label | Paper reference | Confidence |
 | --- | --- | --- | --- |
 | `evaluation/table2_ablation.*` | "Table II" | **Table IV** ("the four-arm ablation on the open-source subject json_java_v1") | explicit in paper text |
-| `evaluation/table3_depmass.*` | "Table III" | **Table VI** ("dependency-mass comparison of RQ5/H4") | explicit in paper text |
-| `evaluation/table4_efficiency.*` | "Table IV" | **Table VII** ("the efficiency study of RQ6/H5") | explicit in paper text |
-| `evaluation/table6_random_baseline.*` | "Table VI" | **Table V** (aggregates the mean of each measure across the 28 subjects; describes sampling uniformly among valid linear extensions) | inferred from context, not an explicit "(Table V)" citation next to this data -- verify before citing |
-| `seqrefactor/graph/rules.py` `PRECEDENCE_RULES` | (no repo table number; a Python literal, not an emitted table) | **Table III** ("illustrative subset" of precedence rules) | explicit in paper text |
+| `evaluation/table3_depmass.*` | "Table III" | **Table VI** ("Dependency-mass comparison for RQ5/H4 (n = 28 subjects)") | explicit table caption |
+| `evaluation/table4_efficiency.*` | "Table IV" | **Table VII** ("Efficiency for RQ6/H5 (n = 167 paired step-level observations across the 28 subjects, module sizes 4-200 vertices)") | explicit table caption; n=167 and the 4-200 size range are exactly what this repo's own re-derivation found (REPRODUCE.md §7) |
+| `evaluation/table6_random_baseline.*` | "Table VI" | **Table V** ("aggregates the mean of each measure across the twenty-eight subjects", introduced right after describing "a random-topological strategy that samples uniformly among valid linear extensions") | confirmed on the 2026-08-26 revision (previously only inferred from context) |
+| `seqrefactor/graph/rules.py` `PRECEDENCE_RULES` | (no repo table number; a Python literal, not an emitted table) | **Table III** ("illustrative subset" of precedence rules) | explicit table caption -- **but see the open paper-side issue below**: the paper's own worked-example sentence in Section III still cites "the first rule of Table I" for this same rule, and Table I is the notation/symbol glossary, not this rule table. Confirmed still present on the 2026-08-26 revision; not a repo-side error, flagged for the paper author. |
 | paper's symbol glossary | no repo equivalent | **Table I** | explicit in paper text; paper-only content |
 | paper's comparison against prior approaches | no repo equivalent | **Table II** | explicit in paper text; qualitative, paper-only content |
-| `evaluation/table5_detector_quality.*` | "Table V" | not currently cited by paper table number found in this pass | internal detector QA, not yet matched to a paper table |
-| `evaluation/fig_scaling.png`/`.pdf` (`seqrefactor/eval/plot_scaling.py`) | -- | referred to as **Fig. 5** by the Phase 3c working brief | **not found in the committed paper**: the paper currently has only Fig. 1-4, and no figure captioned as a scaling plot. Either a newer paper draft than what's committed here already has it, or it is still to be added -- verify against the author's current working copy before citing "Fig. 5" in a submission. |
-| the O(k\|V\|^2) -> O(kd) session bound (see `seqrefactor/eval/complexity.py`, `seqrefactor/graph/incremental.py`) | -- | referred to as **Proposition 1** by the Phase 3c working brief | **not found as a formally labelled proposition in the committed paper**: Section VI-A states the same argument in prose ("under the bounded-locality assumptions of Section VI-A the per-step re-analysis is proportional to the disturbed subgraph..."), not as a numbered "Proposition 1". Same caveat as Fig. 5 above. |
+| `evaluation/table5_detector_quality.*` | "Table V" | not matched to a paper table number in this pass | internal detector QA, not yet matched to a paper table |
+| `evaluation/fig_scaling.png`/`.pdf` (`seqrefactor/eval/plot_scaling.py`) | -- | **Fig. 5** ("Per-step edge-derivation cost versus module size, on log-log axes. Each plotted value is the mean over the ten steps of a session... From-scratch reconstruction tracks the O(V^2) reference") | **confirmed present on the 2026-08-26 revision** (absent from the draft the original Phase 3c pass checked against). The caption explicitly cites this repo's replication package: "evaluation/table4_efficiency.csv". This repo's figure/summary were built independently, before this revision was available, and match: the paper's own cited numbers (38,416 on the first step, 196^2; 31,816 mean per step) are exactly `evaluation/scaling_summary.md`'s `edge_derivations_step0_V200`/`edge_derivations_session_mean_V200`, re-verified again on this revision. |
+| the O(k\|V\|^2) -> O(kd) session bound (see `seqrefactor/eval/complexity.py`, `seqrefactor/graph/incremental.py`) | -- | **Proposition 1** ("Per-session edge-derivation cost"), stated under three explicit locality assumptions A1-A3 (only touched code elements can change smell status / only overlapping smells can be added-removed-reweighted / only edges incident to affected smells can change) | **confirmed present on the 2026-08-26 revision**, formally labelled and proved, not just prose. The paper's own statement of the bound matches this repo's docstrings independently: Theta(k\|V\|^2) naive vs. O(kd) incremental, worst case d = Theta(\|V\|^2) recovering the rebuild cost, and the explicit point that the ordering pass itself records zero heap and zero reordering operations so it is excluded from the bound. |
 
-The last two rows are a **documentation-currency finding**, not a data mismatch: every measured
-number this task touches (the CSV data, the 38,416/31,816 step-0/session-mean pair, the 3.05x
-median / 4.10x mean wall-clock ratio, the ~2402-to-~1.65 mean edge-touches drop) was independently
-recomputed from the committed `evaluation/table4_efficiency.csv` during this synchronisation pass
-and matches the working brief's cited values exactly. What doesn't yet exist in the committed
-`.docx` is the "Fig. 5" and "Proposition 1" *labels* themselves -- the repository-side artefacts
-those labels would point to (the figure, the explicit bound statement) are now built and
-verified; wiring the paper's own text to them is a paper edit, not a repo one.
+**Update note (2026-08-26):** the two rows above were flagged in the original Phase 3c pass as
+"not found in the committed paper" -- that was accurate against the draft committed at the time
+(no Fig. 5, no formally labelled Proposition 1, only the Section VI-A prose argument). The author
+has since committed a revision that adds both, worded almost identically to what this repo had
+already built independently from the code and the prior prose. Nothing in this repo needed to
+change as a result -- every number was already correct and is re-verified above -- only this
+mapping note's confidence markers needed updating.
+
+**Open paper-side issue, not a repo issue:** Section III's worked example ("Why Order Matters")
+still reads "...with g a prerequisite of each envy instance by the first rule of Table I,"
+but Table I is the notation/symbol glossary (defined in Section IV) and the God-Class-precedes-
+Feature-Envy rule actually lives in Table III. This looks like a stale cross-reference left over
+from an earlier table-numbering pass, confirmed present as of the 2026-08-26 revision. Only the
+paper author can fix this (it is prose in the `.docx`, not repo content); flagged here rather than
+silently worked around.
 
 ## Tool versions this was built and verified against
 
@@ -106,8 +114,8 @@ matrix and additionally regenerates Tables II-IV and `SUMMARY.md` in one command
 
 ## 5. Tables III/IV (dependency-mass, complexity-scaling) against the corpus
 
-**The session-level bound Table IV / Fig. 5 measure (Phase 3c G2, "Proposition 1" in the working
-brief's terms -- see the numbering note above):** naive rebuilding of the smell-dependency graph
+**The session-level bound Table IV / Fig. 5 measure (Phase 3c G2; paper Proposition 1, "Per-session
+edge-derivation cost" -- see the numbering note above):** naive rebuilding of the smell-dependency graph
 costs O(k\|V\|^2) edge derivations over a k-step session (every step re-derives all pairs of the
 surviving smells); incremental maintenance (`graph/incremental.apply_step`) costs O(kd), where d
 is the size of the disturbed region one accepted transformation actually touches, independent of

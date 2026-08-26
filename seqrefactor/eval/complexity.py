@@ -15,8 +15,9 @@ paths are proven bit-for-bit equivalent by
 ``tests/property/test_incremental_equivalence.py`` -- this module measures
 *how much cheaper* the equivalent result is, not whether it is equivalent.
 
-SESSION-LEVEL BOUND (Proposition 1 in the Phase 3c working brief's framing;
-paper Section VI-A's "bounded-locality assumptions" argument). Per-step, a
+SESSION-LEVEL BOUND (paper Proposition 1, "Per-session edge-derivation cost",
+proved under the three bounded-locality assumptions A1-A3 of Section VI-A).
+Per-step, a
 from-scratch rebuild over the surviving |V| smells costs O(|V|^2) edge
 derivations (the all-pairs check above); an incremental step costs O(d),
 where d is the size of the disturbed region -- the vertices whose

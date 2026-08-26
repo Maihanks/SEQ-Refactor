@@ -9,9 +9,10 @@ O(k|V|^2) edge derivations (all-pairs, every step); ``apply_step`` below
 instead costs O(kd), where d is the size of the disturbed region a single
 accepted transformation actually touches -- independent of |V| for a local
 refactoring, and recovering the O(k|V|^2) worst case only when a
-transformation disturbs the whole module. This is the paper's Section VI-A
-"bounded-locality" argument stated in the notation ``eval/complexity.py``
-measures it in; see that module's docstring for the full statement and
+transformation disturbs the whole module. This is the paper's Proposition 1
+("Per-session edge-derivation cost", Section VI-A's bounded-locality
+assumptions A1-A3) stated in the notation ``eval/complexity.py`` measures it
+in; see that module's docstring for the full statement and
 ``evaluation/scaling_summary.md`` for the real numbers it produces.
 
 DESIGN NOTE ON WHERE THE SAVING IS, AND ISN'T. Algorithm 1
