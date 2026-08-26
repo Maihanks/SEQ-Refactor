@@ -17,19 +17,22 @@ built around it, scoped honestly rather than over-claimed — see [What's real v
 thin](#whats-real-vs-whats-thin) below.
 
 Companion documents (`draft docs/`):
-[`SEQ_REFACTOR_paper.tex`](draft%20docs/SEQ_REFACTOR_paper.tex) — the research paper this
-implements —,
+[`SEQ_REFACTOR_paper.docx`](draft%20docs/SEQ_REFACTOR_paper.docx) -- the research paper this
+implements (a `SEQ_REFACTOR_paper.tex` existed earlier in this project's history but is not
+currently present on disk; recoverable from git history if needed) -- and
 [`SEQ_REFACTOR_Software_Specification.docx`](draft%20docs/SEQ_REFACTOR_Software_Specification.docx)
-— the engineering specification this codebase follows section-by-section —, and
-[`SEQ_REFACTOR_ClaudeCode_Instructions.docx`](draft%20docs/SEQ_REFACTOR_ClaudeCode_Instructions.docx)
-— a later working brief that requested the signed-dependency graph, incremental graph
-maintenance, complexity instrumentation, and dependency-mass study described below.
-**Its description of the paper (a signed positive/negative dependency section, an
-incremental-maintenance subsection, RQ5/RQ6/H4/H5, Tables II-IV) does not match
-`SEQ_REFACTOR_paper.docx` as currently saved in this repository — see
-[`REPO_MAP.md`](REPO_MAP.md) §3 for the full discrepancy.** Everything below was built
-against the brief, ahead of the paper text, on the repository owner's explicit instruction;
-the paper itself will need matching updates before submission.
+-- the engineering specification this codebase follows section-by-section.
+
+Earlier in this project's history, a separate working brief (`SEQ_REFACTOR_ClaudeCode_Instructions.docx`,
+since removed) requested features -- the signed-dependency graph, incremental graph maintenance,
+complexity instrumentation, the dependency-mass study -- that the paper on disk at the time did
+not yet describe; that conflict was reported rather than guessed through (see
+[`REPO_MAP.md`](REPO_MAP.md) §3). **It is resolved as of the paper revision committed
+2026-08-26**: the current `SEQ_REFACTOR_paper.docx` now states all of it -- Proposition 1, Fig. 5,
+Tables I-VII, RQ5/RQ6, H4/H5, and the signed positive/negative dependency section -- confirmed
+directly against the file, not assumed (`REPO_MAP.md` §10 has the full verification, and
+`REPRODUCE.md`'s numbering note has the exact repo-table-to-paper-table cross-reference this
+project's own `tableN_*` files need, since the two numbering sequences don't match one-to-one).
 
 ## Table of contents
 

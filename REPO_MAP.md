@@ -285,3 +285,43 @@ and the GSR/rejection-reason breakdown: `evaluation/README.md`'s Phase 2c sectio
 and random-topological sampler are honestly documented as not verified reproductions of their
 cited literature (see their own HONESTY NOTEs); no em-dashes were used anywhere in this phase's
 new code, comments, or docs, per the brief's standing constraint.
+
+## 10. Section 3's conflict is resolved by the 2026-08-26 paper revision
+
+Section 3 above, and README.md's intro paragraph that cites it, describe a real conflict as of
+the sessions that wrote them: the brief (then `SEQ_REFACTOR_ClaudeCode_Instructions.docx`,
+requesting signed positive/negative dependencies, an incremental-maintenance subsection, RQ5/RQ6,
+H4/H5, Tables II-IV, citations [32]-[34], and contributions C6/C7) described a paper that the
+`SEQ_REFACTOR_paper.docx` on disk at the time did not contain.
+
+The repository owner has since committed a paper revision (`draft docs/SEQ_REFACTOR_paper.docx`,
+2026-08-26, replacing the earlier one; the `SEQ_REFACTOR_ClaudeCode_Instructions.docx` the brief
+lived in was removed in the same commit) that adds all of it. Verified directly against the new
+file, not assumed:
+
+| Section 3's claim (then true) | Current state (2026-08-26 revision) |
+|---|---|
+| No signed positive/negative dependencies in Section IV | Present ("signed" x18, "positive" x26, "negative dependenc[y]" x6) |
+| No Section VI-A, no incremental-maintenance discussion | Section VI-A exists, states Proposition 1 ("Per-session edge-derivation cost") under locality assumptions A1-A3 |
+| No RQ5/RQ6, no H4/H5 | Both RQ5 and RQ6 present (7 and 5 occurrences); H4 and H5 stated and evaluated in Section VIII-B |
+| No tables anywhere in the paper | Tables I-VII all present with captions; Table VI = dependency-mass (RQ5/H4), Table VII = efficiency (RQ6/H5) |
+| Citations [32]-[34] don't exist | All three present (9, 2, 2 occurrences respectively) |
+| No C6/C7 in the contributions list | Both present, and C6 is explicitly named the paper's "one asymptotic improvement" |
+
+This was checked as part of a separate synchronisation task (see the "Phase 3c" commits on
+`main`: `e745bde`, `9aa8049`, `d24caf4`, `95d9fcb`), which additionally re-derived the paper's own
+cited numbers (Fig. 5's 38,416/31,816 pair, Table VII's n=167 and module-size-4-200 range) from
+`evaluation/table4_efficiency.csv` and found them to match exactly -- the repository's own
+implementation and data already supported the numbers the revised paper now cites, independently
+of this revision landing. `REPRODUCE.md`'s numbering note has the full repo-table-to-paper-table
+cross-reference and is the source of truth for that mapping going forward, not this section.
+
+**One open item, paper-side, not repo-side**: Section III's worked example still cites "the first
+rule of Table I" for the God-Class-precedes-Feature-Envy rule, which is actually Table III (Table
+I is the notation glossary, defined later in Section IV). Confirmed present on the 2026-08-26
+revision. Only the paper author can fix this.
+
+**Still open, unrelated to Section 3**: the `.tex` version of the paper that README.md links to
+(`SEQ_REFACTOR_paper.tex`) does not exist in this checkout -- Section 3's note above already
+recorded that it disappeared from disk during an earlier session's `git pull`, recoverable from
+git history but not currently present as a file. The paper is `.docx`-only on disk right now.
