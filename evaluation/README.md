@@ -273,6 +273,55 @@ generator limitation. Resolving it needs the LLM generator (Working Brief Phase 
 still blocked on an API key, see REPRODUCE.md) -- stated as the honest next step, not glossed
 over.
 
+## Phase 4 update: E1 impact-score ablation, E2 quality-score sensitivity
+
+Real runs (`seqrefactor/eval/run_phase4_e1_e2.py`, deterministic baseline generator,
+seed 20260101, `max_steps=10`, full 28-subject corpus), 157.4 minutes wall clock for E1;
+E2 adds zero additional orchestrator runs, reusing E1's A5 (default-weight) data directly
+(a quality-weight vector only changes how an already-recorded metric delta is scored, not
+what transformation happened -- see `seqrefactor/eval/quality_sensitivity.py`'s module
+docstring). Both answer a reviewer's must-fix question about whether the H3 early-quality
+result (SEQ-REFACTOR early-quality AUC > topology-only's) is real or an artefact of one
+specific weighting choice.
+
+### Table (new) -- impact-score ablation (`evaluation/table_impact_ablation.csv`)
+
+| Configuration | alpha, beta, gamma | n | p-value | effect size (r) | Supported? |
+|---|---|---|---|---|---|
+| A1 coupling only | 1, 0, 0 | 28 | -- | -- | **Degenerate** (every paired difference exactly zero) |
+| A2 complexity only | 0, 1, 0 | 28 | 0.0324 | 0.603 | Yes |
+| A3 co-occurrence only | 0, 0, 1 | 28 | 0.2641 | 0.286 | **No** |
+| A4 coupling+complexity, equal | 0.5, 0.5, 0 | 28 | 0.0324 | 0.603 | Yes |
+| A5 all three, paper default | 0.4, 0.4, 0.2 | 28 | 0.0009 | 0.978 | Yes |
+
+**Reported honestly, per the brief's own rule: the H3 advantage is not universally robust to
+the impact weighting.** It holds under complexity-only, coupling+complexity, and the paper's
+own default (A5's p=0.0009 exactly matches the previously-established H3 result -- the same
+statistic, independently reproduced by this new driver under identical weights, a clean
+internal consistency check). It does **not** hold under co-occurrence-only weighting (p=0.264),
+and coupling-only weighting is **degenerate** on this corpus: SEQ-REFACTOR and topology-only
+produced identical early-quality AUC on every single subject, meaning coupling alone does not
+discriminate priority among this corpus's smells enough to change which vertex gets scheduled
+first at any point in any of the 28 subjects. Read together: the advantage is a property of
+weighting complexity (alone or combined) into the impact score, not of impact-forward
+scheduling in the abstract regardless of what impact means -- a materially more precise claim
+than "SEQ-REFACTOR beats topology-only" without qualification, and the honest one this ablation
+was run to establish.
+
+### Table (new) -- quality-score sensitivity (`evaluation/table_quality_sensitivity.csv`)
+
+Every one of 4 quality-weight vectors (the pre-existing accepted-count measure, equal metric
+weights, and two vectors each emphasising a different family pair) x 2 trajectory-scoring
+modes (summed, step-count-normalised `AUC_norm`) reports **supported=True**, p-values ranging
+0.0009-0.0012, effect sizes 0.81-0.98. **The H3 conclusion does not flip under any tested
+quality weighting, and normalising by step count does not change which side of p=0.05 any row
+falls on either.** This is the reassuring result E2 was checking for -- unlike E1's impact-
+weighting ablation, nothing here disappears.
+
+Full disclosure of both drivers, the reused-A5-data design decision for E2, and the raw
+per-configuration RunReports: `seqrefactor/eval/run_phase4_e1_e2.py`,
+`evaluation/phase4_e1_raw_runs.json`.
+
 ## Phase 1 results (superseded scope, kept for reference)
 
 The original single/few-subject numbers this section used to report (n=3 synthetic subjects for

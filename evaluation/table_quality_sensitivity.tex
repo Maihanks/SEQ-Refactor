@@ -1,0 +1,19 @@
+\begin{table}[t]
+\centering
+\caption{Quality-score sensitivity: H3 per quality-weight vector, summed vs. step-count-normalised AUC}
+\label{tab:quality-sensitivity}
+\begin{tabular}{lllllllllll}
+\toprule
+weight\_vector & score\_mode & n & statistic & p\_value & effect\_size\_r & ci\_low & ci\_high & mean\_difference & supported & note \\
+\midrule
+current\_accepted\_count & summed & 28 & 90.0 & 0.0009 & 0.978 & 5.4987 & 16.5366 & 10.75 & True & supported at p<0.05 (H\_alt: greater) \\
+current\_accepted\_count & normalised & 28 & 90.0 & 0.0009 & 0.978 & 0.6036 & 1.8394 & 1.1929 & True & supported at p<0.05 (H\_alt: greater) \\
+equal & summed & 28 & 156.0 & 0.0011 & 0.8246 & 1.7362 & 5.1478 & 3.3341 & True & supported at p<0.05 (H\_alt: greater) \\
+equal & normalised & 28 & 155.0 & 0.0012 & 0.8129 & 0.1913 & 0.5701 & 0.3701 & True & supported at p<0.05 (H\_alt: greater) \\
+coupling\_complexity\_heavy & summed & 28 & 155.0 & 0.0012 & 0.8129 & 1.9517 & 5.8656 & 3.8093 & True & supported at p<0.05 (H\_alt: greater) \\
+coupling\_complexity\_heavy & normalised & 28 & 155.0 & 0.0012 & 0.8129 & 0.2159 & 0.6513 & 0.4227 & True & supported at p<0.05 (H\_alt: greater) \\
+readability\_architecture\_heavy & summed & 28 & 156.0 & 0.0011 & 0.8246 & 2.2112 & 6.5642 & 4.2397 & True & supported at p<0.05 (H\_alt: greater) \\
+readability\_architecture\_heavy & normalised & 28 & 156.0 & 0.0011 & 0.8246 & 0.2428 & 0.726 & 0.4707 & True & supported at p<0.05 (H\_alt: greater) \\
+\bottomrule
+\end{tabular}
+\end{table}
