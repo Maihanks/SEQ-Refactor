@@ -3,6 +3,7 @@
 | subject | strategy | generator | net_smell_resolution | cascading_violations | ordering_validity | escalation_rate | steps |
 | --- | --- | --- | --- | --- | --- | --- | --- |
 | billing_cycle_v1 | impact_only | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
+| billing_cycle_v1 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | billing_cycle_v1 | random | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | billing_cycle_v1 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | billing_cycle_v1 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
@@ -10,6 +11,7 @@
 | billing_cycle_v1 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | billing_cycle_v1 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | conflict_chain_depth2 | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_chain_depth2 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth2 | random | baseline | 0 | 2 | 0.8 | 0.0 | 10 |
 | conflict_chain_depth2 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth2 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -17,6 +19,7 @@
 | conflict_chain_depth2 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth2 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth3 | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_chain_depth3 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth3 | random | baseline | 0 | 2 | 0.7 | 0.0 | 10 |
 | conflict_chain_depth3 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth3 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -24,6 +27,7 @@
 | conflict_chain_depth3 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth3 | unordered | baseline | 0 | 9 | 0.0 | 0.0 | 10 |
 | conflict_chain_depth4 | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_chain_depth4 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth4 | random | baseline | 0 | 1 | 0.7 | 0.0 | 10 |
 | conflict_chain_depth4 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth4 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -31,6 +35,7 @@
 | conflict_chain_depth4 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth4 | unordered | baseline | 0 | 9 | 0.0 | 0.0 | 10 |
 | conflict_chain_depth5 | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_chain_depth5 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth5 | random | baseline | 0 | 0 | 0.7 | 0.0 | 10 |
 | conflict_chain_depth5 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth5 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -38,6 +43,7 @@
 | conflict_chain_depth5 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_chain_depth5 | unordered | baseline | 0 | 9 | 0.0 | 0.0 | 10 |
 | conflict_pair_a | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_pair_a | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_a | random | baseline | 0 | 2 | 0.8 | 0.0 | 10 |
 | conflict_pair_a | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_a | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -45,6 +51,7 @@
 | conflict_pair_a | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_a | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_b | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_pair_b | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_b | random | baseline | 0 | 2 | 0.8 | 0.0 | 10 |
 | conflict_pair_b | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_b | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -52,6 +59,7 @@
 | conflict_pair_b | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_b | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_pair_c | impact_only | baseline | 0 | 0 | 0.5 | 0.0 | 2 |
+| conflict_pair_c | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 2 |
 | conflict_pair_c | random | baseline | 0 | 0 | 0.5 | 0.0 | 2 |
 | conflict_pair_c | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 2 |
 | conflict_pair_c | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 2 |
@@ -59,6 +67,7 @@
 | conflict_pair_c | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 2 |
 | conflict_pair_c | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 2 |
 | conflict_width_2 | impact_only | baseline | 0 | 0 | 0.3333333333333333 | 0.0 | 3 |
+| conflict_width_2 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 3 |
 | conflict_width_2 | random | baseline | 0 | 0 | 0.3333333333333333 | 0.0 | 3 |
 | conflict_width_2 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 3 |
 | conflict_width_2 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 3 |
@@ -66,6 +75,7 @@
 | conflict_width_2 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 3 |
 | conflict_width_2 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 3 |
 | conflict_width_4 | impact_only | baseline | 0 | 0 | 0.2 | 0.0 | 5 |
+| conflict_width_4 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 5 |
 | conflict_width_4 | random | baseline | 0 | 0 | 0.6 | 0.0 | 5 |
 | conflict_width_4 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 5 |
 | conflict_width_4 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 5 |
@@ -73,6 +83,7 @@
 | conflict_width_4 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 5 |
 | conflict_width_4 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 5 |
 | conflict_width_6 | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| conflict_width_6 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_width_6 | random | baseline | 0 | 2 | 0.8 | 0.0 | 10 |
 | conflict_width_6 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_width_6 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -80,6 +91,7 @@
 | conflict_width_6 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | conflict_width_6 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | notification_mixed_v1 | impact_only | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
+| notification_mixed_v1 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | notification_mixed_v1 | random | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | notification_mixed_v1 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | notification_mixed_v1 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
@@ -87,6 +99,7 @@
 | notification_mixed_v1 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | notification_mixed_v1 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 0 |
 | pilot_checkout_v1 | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| pilot_checkout_v1 | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | pilot_checkout_v1 | random | baseline | 0 | 2 | 0.8 | 0.0 | 10 |
 | pilot_checkout_v1 | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | pilot_checkout_v1 | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -94,6 +107,7 @@
 | pilot_checkout_v1 | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | pilot_checkout_v1 | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_cycle | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_large_cycle | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_cycle | random | baseline | 0 | 4 | 0.3 | 0.0 | 10 |
 | synth_large_cycle | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_cycle | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -101,6 +115,7 @@
 | synth_large_cycle | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_cycle | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_high | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_large_high | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_high | random | baseline | 0 | 2 | 0.4 | 0.0 | 10 |
 | synth_large_high | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_high | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -108,6 +123,7 @@
 | synth_large_high | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_high | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_low | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_large_low | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_low | random | baseline | 0 | 3 | 0.5 | 0.0 | 10 |
 | synth_large_low | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_low | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -115,6 +131,7 @@
 | synth_large_low | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_low | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_medium | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_large_medium | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_medium | random | baseline | 0 | 5 | 0.3 | 0.0 | 10 |
 | synth_large_medium | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_medium | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -122,6 +139,7 @@
 | synth_large_medium | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_large_medium | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_cycle | impact_only | baseline | 0 | 9 | 0.0 | 0.0 | 10 |
+| synth_medium_cycle | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_cycle | random | baseline | 0 | 1 | 0.7 | 0.0 | 10 |
 | synth_medium_cycle | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_cycle | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -129,6 +147,7 @@
 | synth_medium_cycle | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_cycle | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high | impact_only | baseline | 0 | 8 | 0.0 | 0.0 | 10 |
+| synth_medium_high | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high | random | baseline | 0 | 2 | 0.4 | 0.0 | 10 |
 | synth_medium_high | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -136,6 +155,7 @@
 | synth_medium_high | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high_signed | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_medium_high_signed | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high_signed | random | baseline | 0 | 1 | 0.8 | 0.0 | 10 |
 | synth_medium_high_signed | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high_signed | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -143,6 +163,7 @@
 | synth_medium_high_signed | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_high_signed | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low | impact_only | baseline | 0 | 8 | 0.0 | 0.0 | 10 |
+| synth_medium_low | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low | random | baseline | 0 | 1 | 0.8 | 0.0 | 10 |
 | synth_medium_low | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -150,6 +171,7 @@
 | synth_medium_low | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low_signed | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_medium_low_signed | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low_signed | random | baseline | 0 | 1 | 0.8 | 0.0 | 10 |
 | synth_medium_low_signed | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low_signed | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -157,6 +179,7 @@
 | synth_medium_low_signed | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_low_signed | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_medium | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_medium_medium | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_medium | random | baseline | 0 | 1 | 0.8 | 0.0 | 10 |
 | synth_medium_medium | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_medium | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -164,6 +187,7 @@
 | synth_medium_medium | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_medium_medium | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_cycle | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_small_cycle | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_cycle | random | baseline | 0 | 3 | 0.7 | 0.0 | 10 |
 | synth_small_cycle | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_cycle | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -171,6 +195,7 @@
 | synth_small_cycle | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_cycle | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_high | impact_only | baseline | 0 | 6 | 0.0 | 0.0 | 10 |
+| synth_small_high | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_high | random | baseline | 0 | 2 | 0.6 | 0.0 | 10 |
 | synth_small_high | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_high | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -178,6 +203,7 @@
 | synth_small_high | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_high | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_low | impact_only | baseline | 0 | 0 | 0.625 | 0.0 | 8 |
+| synth_small_low | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 8 |
 | synth_small_low | random | baseline | 0 | 0 | 0.875 | 0.0 | 8 |
 | synth_small_low | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 8 |
 | synth_small_low | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 8 |
@@ -185,6 +211,7 @@
 | synth_small_low | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 8 |
 | synth_small_low | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 8 |
 | synth_small_medium | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_small_medium | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_medium | random | baseline | 0 | 0 | 0.9 | 0.0 | 10 |
 | synth_small_medium | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_medium | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
@@ -192,6 +219,7 @@
 | synth_small_medium | topo_only | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_small_medium | unordered | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_xlarge_medium | impact_only | baseline | 0 | 10 | 0.0 | 0.0 | 10 |
+| synth_xlarge_medium | ouni_nsga2 | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_xlarge_medium | random | baseline | 0 | 1 | 0.9 | 0.0 | 10 |
 | synth_xlarge_medium | random_topological | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
 | synth_xlarge_medium | search_based | baseline | 0 | 0 | 1.0 | 0.0 | 10 |
