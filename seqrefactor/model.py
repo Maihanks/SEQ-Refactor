@@ -160,6 +160,21 @@ class MetricDelta(BaseModel):
     architecture: float = 0.0
 
 
+class QualityWeights(BaseModel):
+    """Weights for scoring a single step's MetricDelta into one scalar quality
+    value (Working Brief Phase 4 / E2: "the trajectory quality score is a
+    weighted sum over five families"). Distinct from the Gate's own fixed
+    equal-weighted aggregate (``gate.py``, the accept/reject threshold, out of
+    scope to change per the brief) -- this is the H3 measurement weighting,
+    applied after the fact to already-verified, already-gated steps."""
+
+    cohesion: float = 0.2
+    coupling: float = 0.2
+    complexity: float = 0.2
+    readability: float = 0.2
+    architecture: float = 0.2
+
+
 class TestFailure(BaseModel):
     test: str
     message: str
@@ -216,6 +231,12 @@ class StepRecord(BaseModel):
     introduced: list[SmellId] = Field(default_factory=list)  # new smells after this step
     cascading_violation: bool = False  # per the paper's Definition (cascading violation)
     prerequisites_satisfied: bool = True  # feeds ordering-validity (OR-1 audit)
+    # Working Brief Phase 4 / E2: the five-family metric delta the gate actually saw for
+    # this step, persisted so a trajectory quality score can be recomputed under different
+    # quality-weight vectors from already-committed data, without re-running the pipeline.
+    # Zero-valued (MetricDelta()'s default) for a step that never reached verification (no
+    # patch, generation failure) -- distinguish those via ``verdict.reason``, not this field.
+    metric: MetricDelta = Field(default_factory=MetricDelta)
 
 
 class RunReport(BaseModel):
@@ -364,7 +385,7 @@ class DependencyMass(BaseModel):
 
 Strategy = Literal[
     "seqrefactor", "impact_only", "topo_only", "unordered", "search_based",
-    "random", "random_topological",
+    "random", "random_topological", "ouni_nsga2",
 ]
 GeneratorName = Literal["llm", "baseline"]
 

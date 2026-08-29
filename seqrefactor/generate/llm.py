@@ -97,21 +97,30 @@ def refactor(
                 "cache to reproduce (NFR-2: raw outputs are recorded, never re-queried)."
             )
         try:
-            from openai import OpenAI
+            from openai import BadRequestError, OpenAI
         except ImportError as exc:
             raise LLMUnavailable("the `openai` package is not installed") from exc
 
         client = OpenAI(api_key=api_key)
         prompt = _build_prompt(target, ctx, module)
-        response = client.chat.completions.create(
-            model=model,
-            seed=seed,
-            temperature=0.0,
-            messages=[
-                {"role": "system", "content": _SYSTEM_PROMPT},
-                {"role": "user", "content": prompt},
-            ],
-        )
+        messages = [
+            {"role": "system", "content": _SYSTEM_PROMPT},
+            {"role": "user", "content": prompt},
+        ]
+        try:
+            response = client.chat.completions.create(
+                model=model, seed=seed, temperature=0.0, messages=messages
+            )
+        except BadRequestError as exc:
+            # Some models (observed: gpt-5) reject any temperature other than their
+            # default (1.0) with a 400, rather than silently clamping it -- retry
+            # without the parameter instead of failing the whole generation. The seed
+            # is kept either way (NFR-2: seeded, cached, never re-queried on replay);
+            # only the temperature=0.0 request for maximum sampling determinism is
+            # what such a model cannot honour, not reproducibility as a whole.
+            if "temperature" not in str(exc):
+                raise
+            response = client.chat.completions.create(model=model, seed=seed, messages=messages)
         raw_output = response.choices[0].message.content or ""
 
         cache_dir.mkdir(parents=True, exist_ok=True)

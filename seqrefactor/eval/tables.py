@@ -196,6 +196,37 @@ def table6_random_baseline(
     )
 
 
+def _round_floats(row: dict, ndigits: int = 4) -> dict:
+    return {k: (round(v, ndigits) if isinstance(v, float) else v) for k, v in row.items()}
+
+
+def table_impact_ablation(rows: list[dict], out_dir: Path = RESULTS_DIR) -> list[dict]:
+    """H3 per impact-weighting configuration (Working Brief Phase 4, E1). ``rows``
+    comes from ``seqrefactor.eval.ablation_impact.table_impact_ablation`` -- this
+    function only rounds and emits, per the module's own "nothing here computes a
+    reported number" rule."""
+    return emit_table(
+        [_round_floats(r) for r in rows],
+        "table_impact_ablation",
+        "Impact-score ablation: H3 (SEQ-REFACTOR vs. topology-only AUC) per impact weighting",
+        "tab:impact-ablation",
+        out_dir,
+    )
+
+
+def table_quality_sensitivity(rows: list[dict], out_dir: Path = RESULTS_DIR) -> list[dict]:
+    """H3 per quality-weight vector and trajectory-scoring mode (Working Brief
+    Phase 4, E2). ``rows`` comes from
+    ``seqrefactor.eval.quality_sensitivity.table_quality_sensitivity``."""
+    return emit_table(
+        [_round_floats(r) for r in rows],
+        "table_quality_sensitivity",
+        "Quality-score sensitivity: H3 per quality-weight vector, summed vs. step-count-normalised AUC",
+        "tab:quality-sensitivity",
+        out_dir,
+    )
+
+
 def _fmt(value: float | None) -> str:
     return f"{value:.4g}" if value is not None else "n/a"
 

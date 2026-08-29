@@ -33,6 +33,7 @@ from seqrefactor.model import (
     Config,
     Evidence,
     GeneratorName,
+    MetricDelta,
     Module,
     Ordering,
     RunReport,
@@ -44,7 +45,7 @@ from seqrefactor.model import (
     Verdict,
 )
 from seqrefactor.order import impact as impact_scorer
-from seqrefactor.order import orderer, random_baseline, search_based
+from seqrefactor.order import nsga2_scheduler, orderer, random_baseline, search_based
 from seqrefactor.retrieve.retriever import Retriever
 from seqrefactor.verify.arch import ArchCheck
 from seqrefactor.verify.metrics import MetricFacade
@@ -58,10 +59,11 @@ def _select_ordering(
     discount: float = 0.9,
     seed: int = 20260101,
 ) -> Ordering:
-    """The seven ablation arms (§8.3 Variables; search_based added Phase 2 §4;
-    random/random_topological added Phase 2c §3): only the ordering strategy
-    varies; everything else in the loop is identical across arms so the
-    comparison isolates ordering effects from generation effects."""
+    """The eight ablation arms (§8.3 Variables; search_based added Phase 2 §4;
+    random/random_topological added Phase 2c §3; ouni_nsga2 added Working
+    Brief Phase 4 / E3): only the ordering strategy varies; everything else
+    in the loop is identical across arms so the comparison isolates ordering
+    effects from generation effects."""
     if strategy == "unordered":
         return Ordering(agenda=[n.id for n in g.nodes], escalations=[])
     if strategy == "impact_only":
@@ -86,6 +88,12 @@ def _select_ordering(
         # Safe, impact-neutral (order/random_baseline.py): isolates the value
         # of impact-forward priority from the value of safety alone.
         return random_baseline.random_topological_order(g, seed=seed)
+    if strategy == "ouni_nsga2":
+        # E3 (Working Brief Phase 4): a real NSGA-II multi-objective search, informed by
+        # (not a faithful reproduction of) Ouni et al. [29]'s described maximise-
+        # correction/minimise-effort structure -- see order/nsga2_scheduler.py's module
+        # docstring for the full faithfulness disclosure.
+        return nsga2_scheduler.nsga2_order(g, impact_scores, discount=discount, seed=seed)
     return orderer.order(g, impact_scores)  # "seqrefactor"
 
 
@@ -169,7 +177,7 @@ class Orchestrator:
         candidate = self._generate(state["generator_name"], target, ctx, module, cfg.seed + step_index)
 
         # S6 Verify + S7 Gate (+ re-detect on accept, folded into _evaluate)
-        verdict, module = self._evaluate(module, target, candidate)
+        verdict, module, metric_delta = self._evaluate(module, target, candidate)
 
         introduced: list[SmellId] = []
         if verdict.accepted:
@@ -186,6 +194,7 @@ class Orchestrator:
             # resolved first.
             cascading_violation=bool(introduced) and not prerequisites_satisfied,
             prerequisites_satisfied=prerequisites_satisfied,
+            metric=metric_delta,
         )
 
         new_resolved = set(resolved)
@@ -209,7 +218,7 @@ class Orchestrator:
     # -- S6 Verify + S7 Gate, inside an isolated worktree (NFR-1) ------------
     def _evaluate(
         self, module: Module, target: SmellInstance, candidate
-    ) -> tuple[Verdict, Module]:
+    ) -> tuple[Verdict, Module, MetricDelta]:
         from seqrefactor import _treesitter as ts
 
         if not candidate.patch:
@@ -217,7 +226,7 @@ class Orchestrator:
                 smell=target.id, accepted=False, rationale="generator produced no patch",
                 reason="no_patch",
             )
-            return verdict, module
+            return verdict, module, MetricDelta()
 
         element = target.loc[0] if target.loc else target.category
         real_file = ts.locate_file(element, module.source_files)
@@ -226,7 +235,7 @@ class Orchestrator:
                 smell=target.id, accepted=False, rationale=f"could not locate source file for {element}",
                 reason="generation_failure",
             )
-            return verdict, module
+            return verdict, module, MetricDelta()
 
         relative_file = real_file.relative_to(module.path)
 
@@ -251,8 +260,8 @@ class Orchestrator:
                 real_file.write_text(candidate.patch, encoding="utf-8")
 
         if verdict.accepted:
-            return verdict, ingest.load(module.path, classpath=module.classpath)
-        return verdict, module
+            return verdict, ingest.load(module.path, classpath=module.classpath), metric_delta
+        return verdict, module, metric_delta
 
     # -- The full re-planning loop (S1..S7, FR-11, OR-4) ---------------------
     def run_one(

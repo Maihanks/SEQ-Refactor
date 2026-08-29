@@ -17,7 +17,7 @@ from statistics import mean
 import numpy as np
 
 from seqrefactor.eval.stats import PairedTestResult, paired_test
-from seqrefactor.model import RunReport
+from seqrefactor.model import MetricDelta, QualityWeights, RunReport
 
 
 class AblationCell(dict):
@@ -81,6 +81,62 @@ def auc_quality_trajectory(run: RunReport) -> float:
     rule over ``quality_trajectory``'s cumulative accepted-step series."""
     trajectory = quality_trajectory(run)
     return float(np.trapezoid(trajectory)) if trajectory else 0.0
+
+
+def quality_score(metric: MetricDelta, weights: QualityWeights | None = None) -> float:
+    """One step's MetricDelta reduced to a single scalar under ``weights``
+    (Working Brief Phase 4 / E2.1). Distinct from ``gate.py``'s fixed
+    equal-weighted aggregate (the accept/reject threshold) -- this is the H3
+    measurement weighting, applied to already-gated steps, never fed back
+    into acceptance."""
+    weights = weights or QualityWeights()
+    return (
+        weights.cohesion * metric.cohesion
+        + weights.coupling * metric.coupling
+        + weights.complexity * metric.complexity
+        + weights.readability * metric.readability
+        + weights.architecture * metric.architecture
+    )
+
+
+def weighted_quality_trajectory(
+    run: RunReport, weights: QualityWeights | None = None
+) -> list[float]:
+    """Cumulative weighted quality-score series (Working Brief Phase 4 / E2.1):
+    the real per-step MetricDelta persisted on ``StepRecord.metric``, scored
+    under ``weights`` and accumulated only on accepted steps -- a rejected
+    candidate's metric delta was never applied to the real module, so it
+    contributes 0 to the cumulative curve, mirroring ``quality_trajectory``'s
+    own accepted-only accumulation."""
+    weights = weights or QualityWeights()
+    cumulative = 0.0
+    trajectory: list[float] = []
+    for step in run.steps:
+        if step.verdict.accepted:
+            cumulative += quality_score(step.metric, weights)
+        trajectory.append(cumulative)
+    return trajectory
+
+
+def weighted_auc_quality_trajectory(
+    run: RunReport, weights: QualityWeights | None = None
+) -> float:
+    """Area under ``weighted_quality_trajectory`` (trapezoid rule), the
+    weighted-quality counterpart of ``auc_quality_trajectory``."""
+    trajectory = weighted_quality_trajectory(run, weights)
+    return float(np.trapezoid(trajectory)) if trajectory else 0.0
+
+
+def normalised_auc(trajectory: list[float]) -> float:
+    """Step-count-normalised trajectory score (Working Brief Phase 4 / E2.2):
+    ``AUC_norm(subject) = (1/T) * sum_{t=1..T} Q_t``, T = that subject's step
+    count. Guards against summing over steps favouring subjects that simply
+    ran longer -- the risk E2.2 exists to check, not a claim that it changes
+    the conclusion. ``T = 0`` (a subject with no steps at all) returns 0.0
+    rather than dividing by zero."""
+    if not trajectory:
+        return 0.0
+    return sum(trajectory) / len(trajectory)
 
 
 def _paired_values(

@@ -7,8 +7,11 @@
 # mutates its target module in place. NEVER point subjects_glob at datasets/synthetic/
 # directly for a real run -- copy the corpus to a scratch location first.
 subjects_glob: "datasets/synthetic/*/"
-# 7 arms (Working Brief Phase 2c §3 adds random/random_topological to Phase 2's five):
-strategies: ["seqrefactor", "impact_only", "topo_only", "unordered", "search_based", "random", "random_topological"]
+# 8 arms (Working Brief Phase 2c §3 adds random/random_topological to Phase 2's five;
+# Working Brief Phase 4 / E3 adds ouni_nsga2, a real NSGA-II multi-objective search
+# informed by -- not a faithful reproduction of -- Ouni et al. [29]'s described
+# maximise-correction/minimise-effort structure, see order/nsga2_scheduler.py):
+strategies: ["seqrefactor", "impact_only", "topo_only", "unordered", "search_based", "random", "random_topological", "ouni_nsga2"]
 generators: ["baseline"]
 impact_weights:
   alpha: 0.4

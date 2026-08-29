@@ -4,11 +4,26 @@ from __future__ import annotations
 
 import json
 
-from seqrefactor.model import RunReport, StepRecord, Verdict
-from seqrefactor.report import Reporter, auc_quality_trajectory, hypothesis_tests
+from seqrefactor.model import MetricDelta, QualityWeights, RunReport, StepRecord, Verdict
+from seqrefactor.report import (
+    Reporter,
+    auc_quality_trajectory,
+    hypothesis_tests,
+    normalised_auc,
+    quality_score,
+    weighted_auc_quality_trajectory,
+    weighted_quality_trajectory,
+)
 
 
-def _run(subject: str, strategy: str, generator: str, n_accepted: int, n_cascades: int) -> RunReport:
+def _run(
+    subject: str,
+    strategy: str,
+    generator: str,
+    n_accepted: int,
+    n_cascades: int,
+    metric: MetricDelta | None = None,
+) -> RunReport:
     steps = []
     for i in range(max(n_accepted, n_cascades)):
         steps.append(
@@ -17,6 +32,7 @@ def _run(subject: str, strategy: str, generator: str, n_accepted: int, n_cascade
                 smell=f"s{i}",
                 verdict=Verdict(smell=f"s{i}", accepted=i < n_accepted, rationale="test"),
                 cascading_violation=i < n_cascades,
+                metric=metric or MetricDelta(),
             )
         )
     return RunReport(subject=subject, strategy=strategy, generator=generator, steps=steps)
@@ -83,3 +99,76 @@ def test_auc_quality_trajectory_is_nonnegative_and_monotone_with_more_accepts() 
 
     assert auc_quality_trajectory(fewer) >= 0
     assert auc_quality_trajectory(more) > auc_quality_trajectory(fewer)
+
+
+def test_quality_score_is_weighted_sum_over_five_families() -> None:
+    metric = MetricDelta(cohesion=1.0, coupling=2.0, complexity=3.0, readability=4.0, architecture=5.0)
+
+    equal = quality_score(metric, QualityWeights())
+    assert equal == (1.0 + 2.0 + 3.0 + 4.0 + 5.0) * 0.2
+
+    coupling_only = quality_score(
+        metric, QualityWeights(cohesion=0, coupling=1, complexity=0, readability=0, architecture=0)
+    )
+    assert coupling_only == 2.0
+
+
+def test_weighted_quality_trajectory_only_accumulates_on_accepted_steps() -> None:
+    metric = MetricDelta(cohesion=1.0, coupling=1.0, complexity=1.0, readability=1.0, architecture=1.0)
+    run = _run("s", "seqrefactor", "baseline", n_accepted=2, n_cascades=0, metric=metric)
+    # 4 steps total (max(n_accepted, n_cascades) with n_cascades=0 -> range(2)), so build
+    # explicitly to get a rejected step in the middle and confirm it contributes zero.
+    steps = [
+        StepRecord(
+            index=0, smell="a", verdict=Verdict(smell="a", accepted=True, rationale="ok"), metric=metric
+        ),
+        StepRecord(
+            index=1, smell="b", verdict=Verdict(smell="b", accepted=False, rationale="no"), metric=metric
+        ),
+        StepRecord(
+            index=2, smell="c", verdict=Verdict(smell="c", accepted=True, rationale="ok"), metric=metric
+        ),
+    ]
+    run = RunReport(subject="s", strategy="seqrefactor", generator="baseline", steps=steps)
+
+    trajectory = weighted_quality_trajectory(run, QualityWeights())
+
+    assert trajectory == [1.0, 1.0, 2.0]  # step 1 (rejected) contributes nothing
+
+
+def test_normalised_auc_divides_by_step_count() -> None:
+    trajectory = [1.0, 2.0, 3.0, 4.0]
+    assert normalised_auc(trajectory) == 2.5  # (1+2+3+4)/4
+    assert normalised_auc([]) == 0.0
+
+
+def test_normalised_auc_narrows_but_does_not_erase_the_step_count_gap() -> None:
+    """E2.2's actual concern, checked precisely rather than assumed: the brief's own
+    formula (``AUC_norm = (1/T) * sum of the CUMULATIVE trajectory``) divides the raw
+    trapezoid area by T, which narrows the gap between a short and a long run at
+    identical per-step quality, but does not fully erase it -- a cumulative ramp's mean
+    still grows with T even after dividing by T once (mean of 1..T is (T+1)/2, not
+    constant). Hand-computed for T=2 vs T=8 at a constant per-step delta of 1.0:
+    raw ratio 31.5/1.5 = 21x, normalised ratio 4.5/1.5 = 3x -- narrower, not equal. A
+    unit test asserting full equality here would be asserting something false about
+    this formula, not a property it actually has; if a fully step-count-invariant
+    score is wanted later, that is a different formula (e.g. dividing each step's OWN
+    contribution by T before accumulating, not normalising the cumulative curve after
+    the fact), not a bug in this implementation of the brief's literal formula."""
+    metric = MetricDelta(cohesion=1.0, coupling=0, complexity=0, readability=0, architecture=0)
+    weights = QualityWeights(cohesion=1, coupling=0, complexity=0, readability=0, architecture=0)
+    short_run = _run("s", "seqrefactor", "baseline", n_accepted=2, n_cascades=0, metric=metric)
+    long_run = _run("s", "seqrefactor", "baseline", n_accepted=8, n_cascades=0, metric=metric)
+
+    short_raw = weighted_auc_quality_trajectory(short_run, weights)
+    long_raw = weighted_auc_quality_trajectory(long_run, weights)
+    assert (short_raw, long_raw) == (1.5, 31.5)
+
+    short_norm = normalised_auc(weighted_quality_trajectory(short_run, weights))
+    long_norm = normalised_auc(weighted_quality_trajectory(long_run, weights))
+    assert (short_norm, long_norm) == (1.5, 4.5)
+
+    raw_ratio = long_raw / short_raw
+    norm_ratio = long_norm / short_norm
+    assert norm_ratio < raw_ratio  # narrower...
+    assert norm_ratio > 1.0  # ...but a real gap remains for this formula
