@@ -1,0 +1,62 @@
+{
+  "subject": "conflict_pair_a",
+  "strategy": "seqrefactor",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:synth.GodClass0",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass0",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass0.StringProcessor.preprocessInput"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "smell": "MessageChains:synth.GodClass0.StringProcessor.preprocessInput",
+      "verdict": {
+        "smell": "MessageChains:synth.GodClass0.StringProcessor.preprocessInput",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.100 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": -0.5,
+        "architecture": 0.0
+      }
+    }
+  ],
+  "escalations": [],
+  "repetition": 1,
+  "net_smell_resolution": 0,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 2,
+  "successful_generations": 2,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {
+    "metric_regression": 1
+  }
+}

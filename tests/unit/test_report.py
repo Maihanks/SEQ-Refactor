@@ -23,6 +23,7 @@ def _run(
     n_accepted: int,
     n_cascades: int,
     metric: MetricDelta | None = None,
+    repetition: int = 0,
 ) -> RunReport:
     steps = []
     for i in range(max(n_accepted, n_cascades)):
@@ -35,7 +36,9 @@ def _run(
                 metric=metric or MetricDelta(),
             )
         )
-    return RunReport(subject=subject, strategy=strategy, generator=generator, steps=steps)
+    return RunReport(
+        subject=subject, strategy=strategy, generator=generator, steps=steps, repetition=repetition
+    )
 
 
 def _five_subject_runs(strategy_a: str, strategy_b: str, a_casc: int, b_casc: int) -> list[RunReport]:
@@ -172,3 +175,25 @@ def test_normalised_auc_narrows_but_does_not_erase_the_step_count_gap() -> None:
     norm_ratio = long_norm / short_norm
     assert norm_ratio < raw_ratio  # narrower...
     assert norm_ratio > 1.0  # ...but a real gap remains for this formula
+
+
+def test_repeated_runs_of_the_same_cell_are_independent_paired_observations() -> None:
+    """Working Brief Phase 4 / E4: a generator with real repetitions (e.g. the LLM
+    adapter run N times at distinct seeds) must contribute N independent paired
+    observations, not have later repetitions silently overwrite earlier ones in the
+    same (subject, generator) cell -- caught for real while analysing the E4 pilot,
+    where every RunReport predates this fix and needed patching after the fact."""
+    runs = []
+    for rep in range(3):
+        # Only subject "s0"; 3 repetitions each of seqrefactor/unordered, with
+        # seqrefactor cascading less than unordered in every repetition.
+        runs.append(_run("s0", "seqrefactor", "llm", n_accepted=3, n_cascades=0, repetition=rep))
+        runs.append(_run("s0", "unordered", "llm", n_accepted=3, n_cascades=2, repetition=rep))
+
+    results = hypothesis_tests(runs)
+
+    h1 = results["H1_fewer_cascading_violations_vs_unordered"]
+    # 1 subject x 3 repetitions = 3 paired observations, not 1 (which is what a
+    # (subject, generator)-only key -- ignoring repetition -- would silently collapse
+    # this to, keeping only the last repetition's pair).
+    assert h1.n == 3

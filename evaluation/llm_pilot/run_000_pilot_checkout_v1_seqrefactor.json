@@ -1,0 +1,122 @@
+{
+  "subject": "pilot_checkout_v1",
+  "strategy": "seqrefactor",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:orders.OrderService",
+      "verdict": {
+        "smell": "GodClass:orders.OrderService",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:orders.OrderService.checkout",
+        "MessageChains:orders.OrderService.getShippingZoneCode",
+        "MessageChains:orders.OrderService.regionalSurcharge"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "smell": "BigSwitch:orders.OrderService.dispatchStatus",
+      "verdict": {
+        "smell": "BigSwitch:orders.OrderService.dispatchStatus",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.251",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.7,
+        "readability": 0.6363636363636364,
+        "architecture": -0.07894736842105263
+      }
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:orders.OrderService.applyDiscount",
+      "verdict": {
+        "smell": "LongMethod:orders.OrderService.applyDiscount",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.201",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.47904191616766467,
+        "coupling": 0.0,
+        "complexity": 0.875,
+        "readability": 0.7241379310344828,
+        "architecture": -0.11627906976744186
+      }
+    },
+    {
+      "index": 3,
+      "smell": "LongMethod:orders.OrderService.checkout",
+      "verdict": {
+        "smell": "LongMethod:orders.OrderService.checkout",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.092",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.3293172690763052,
+        "coupling": 0.0,
+        "complexity": 0.5,
+        "readability": 0.375,
+        "architecture": -0.0851063829787234
+      }
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:orders.OrderService.regionalSurcharge",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.regionalSurcharge",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.021",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.08455882352941177,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": -0.020833333333333332
+      }
+    }
+  ],
+  "escalations": [],
+  "repetition": 0,
+  "net_smell_resolution": 2,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 5,
+  "successful_generations": 5,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.4,
+  "rejection_reason_counts": {}
+}

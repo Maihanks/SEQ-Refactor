@@ -1,0 +1,122 @@
+{
+  "subject": "synth_small_medium",
+  "strategy": "seqrefactor",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass0.leafSwitch",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.233",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.6666666666666666,
+        "readability": 0.5,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "smell": "GodClass:synth.GodClass1",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass1",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "LongMethod:synth.GodClass1.m0_messagechains"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 2,
+      "smell": "LongMethod:synth.GodClass1.m0_messagechains",
+      "verdict": {
+        "smell": "LongMethod:synth.GodClass1.m0_messagechains",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.169",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.2222222222222222,
+        "coupling": 0.0,
+        "complexity": 0.7777777777777778,
+        "readability": 0.4166666666666667,
+        "architecture": -0.125
+      }
+    },
+    {
+      "index": 3,
+      "smell": "BigSwitch:synth.LeafClass1.leafSwitch",
+      "verdict": {
+        "smell": "BigSwitch:synth.LeafClass1.leafSwitch",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.167",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.5,
+        "readability": 0.3333333333333333,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 4,
+      "smell": "GodClass:synth.GodClass0",
+      "verdict": {
+        "smell": "GodClass:synth.GodClass0",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:synth.GodClass0.normalizedPrefix"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    }
+  ],
+  "escalations": [],
+  "repetition": 0,
+  "net_smell_resolution": 3,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 5,
+  "successful_generations": 5,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.6,
+  "rejection_reason_counts": {}
+}

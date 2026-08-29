@@ -146,12 +146,17 @@ def _paired_values(
     metric: Callable[[RunReport], float],
 ) -> tuple[list[float], list[float]]:
     """Pair runs of ``strategy_a`` and ``strategy_b`` sharing the same
-    (subject, generator) cell -- the paired design H1-H3's statistics require
-    (Software Specification §8.3's ordering-strategy independent variable,
-    generator held fixed as a control)."""
-    by_cell: dict[tuple[str, str], dict[str, RunReport]] = defaultdict(dict)
+    (subject, generator, repetition) cell -- the paired design H1-H3's statistics
+    require (Software Specification §8.3's ordering-strategy independent variable,
+    generator held fixed as a control). Keying on ``repetition`` too (Working Brief
+    Phase 4 / E4) means a generator with real non-determinism (repeated seeded draws)
+    contributes one independent paired observation per repetition rather than having
+    later repetitions silently overwrite earlier ones in the same cell; every
+    pre-existing single-run-per-cell RunReport has ``repetition=0`` by default, so
+    this reproduces the original pairing exactly when there is only one draw."""
+    by_cell: dict[tuple[str, str, int], dict[str, RunReport]] = defaultdict(dict)
     for r in runs:
-        by_cell[(r.subject, r.generator)][r.strategy] = r
+        by_cell[(r.subject, r.generator, r.repetition)][r.strategy] = r
 
     a_vals: list[float] = []
     b_vals: list[float] = []

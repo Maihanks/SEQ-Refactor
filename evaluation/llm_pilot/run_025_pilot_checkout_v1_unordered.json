@@ -1,0 +1,128 @@
+{
+  "subject": "pilot_checkout_v1",
+  "strategy": "unordered",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postUsingGatewayInfrastructure",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postUsingGatewayInfrastructure",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.invokePostingQueue"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.invokePostingQueue",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.invokePostingQueue",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.performQueuePost"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 2,
+      "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.performQueuePost",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.performQueuePost",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postOnGatewayQueue"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 3,
+      "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postOnGatewayQueue",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postOnGatewayQueue",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postOnQueueThroughGateway"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postOnQueueThroughGateway",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.postOnQueueThroughGateway",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.GatewayPostingQueueAccessor.performQueuePostThroughGateway"
+      ],
+      "cascading_violation": true,
+      "prerequisites_satisfied": false,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    }
+  ],
+  "escalations": [],
+  "repetition": 2,
+  "net_smell_resolution": 0,
+  "cascading_violations": 5,
+  "ordering_validity": 0.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 5,
+  "successful_generations": 5,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.0,
+  "rejection_reason_counts": {}
+}

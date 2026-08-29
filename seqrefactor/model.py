@@ -245,6 +245,15 @@ class RunReport(BaseModel):
     generator: str
     steps: list[StepRecord] = Field(default_factory=list)
     escalations: list[list[SmellId]] = Field(default_factory=list)
+    # Working Brief Phase 4 / E4: which repeated draw this run is, for a generator with
+    # real non-determinism (e.g. the LLM adapter across distinct seeds). Defaults to 0,
+    # so every pre-existing single-run RunReport (deterministic baseline generator, one
+    # run per subject/strategy/generator cell) is unaffected -- report.py's pairing keys
+    # on (subject, generator, repetition), so repetition=0 everywhere reproduces the
+    # original one-run-per-cell pairing exactly, and repetition>0 makes each repeated
+    # draw its own independent paired observation instead of silently overwriting the
+    # previous one when multiple runs share a (subject, generator) cell.
+    repetition: int = 0
 
     @computed_field  # type: ignore[prop-decorator]
     @property

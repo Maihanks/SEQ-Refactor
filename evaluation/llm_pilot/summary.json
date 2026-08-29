@@ -1,0 +1,433 @@
+{
+  "cells": [
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 2,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 3,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 2,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 3,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 5,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 4,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 3,
+      "ordering_validity": 0.2,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 2,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 2,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 3,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 3,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 4,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.5,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 5,
+      "ordering_validity": 0.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "pilot_checkout_v1",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 5
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 2,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_small_medium",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "synth_medium_medium",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 1,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 4
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "seqrefactor",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "unordered",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 0.5,
+      "escalation_rate": 0.0,
+      "steps": 2
+    },
+    {
+      "subject": "conflict_pair_a",
+      "strategy": "topo_only",
+      "generator": "llm",
+      "net_smell_resolution": 0,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "steps": 2
+    }
+  ],
+  "by_strategy": {
+    "seqrefactor": {
+      "net_smell_resolution": 1.3333333333333333,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 12
+    },
+    "unordered": {
+      "net_smell_resolution": 1.3333333333333333,
+      "cascading_violations": 0.6666666666666666,
+      "ordering_validity": 0.7666666666666667,
+      "escalation_rate": 0.0,
+      "n_subjects": 12
+    },
+    "topo_only": {
+      "net_smell_resolution": 1.3333333333333333,
+      "cascading_violations": 0,
+      "ordering_validity": 1.0,
+      "escalation_rate": 0.0,
+      "n_subjects": 12
+    }
+  },
+  "hypothesis_tests": {
+    "H1_fewer_cascading_violations_vs_unordered": {
+      "n": 12,
+      "statistic": 3.0,
+      "p_value": 0.25,
+      "effect_size_r": 1.0,
+      "ci_low": 0.0,
+      "ci_high": 1.5833333333333333,
+      "mean_difference": 0.6666666666666666,
+      "supported": false,
+      "note": "not supported at p<0.05 (H_alt: greater)"
+    },
+    "H2_higher_nsr_vs_unordered": {
+      "n": 12,
+      "statistic": 18.0,
+      "p_value": 0.578125,
+      "effect_size_r": 0.0,
+      "ci_low": -0.5833333333333334,
+      "ci_high": 0.5833333333333334,
+      "mean_difference": 0.0,
+      "supported": false,
+      "note": "not supported at p<0.05 (H_alt: greater)"
+    },
+    "H2_higher_nsr_vs_topo_only": {
+      "n": 12,
+      "statistic": 18.5,
+      "p_value": 0.421875,
+      "effect_size_r": 0.027777777777777776,
+      "ci_low": -0.5833333333333334,
+      "ci_high": 0.6666666666666666,
+      "mean_difference": 0.0,
+      "supported": false,
+      "note": "not supported at p<0.05 (H_alt: greater)"
+    },
+    "H3_higher_auc_vs_topo_only": {
+      "n": 12,
+      "statistic": 35.0,
+      "p_value": 0.2412109375,
+      "effect_size_r": 0.2727272727272727,
+      "ci_low": -0.625,
+      "ci_high": 3.4583333333333335,
+      "mean_difference": 1.1666666666666667,
+      "supported": false,
+      "note": "not supported at p<0.05 (H_alt: greater)"
+    }
+  }
+}

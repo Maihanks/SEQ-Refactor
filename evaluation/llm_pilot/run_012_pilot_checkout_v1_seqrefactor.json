@@ -1,0 +1,126 @@
+{
+  "subject": "pilot_checkout_v1",
+  "strategy": "seqrefactor",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:orders.OrderService",
+      "verdict": {
+        "smell": "GodClass:orders.OrderService",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "smell": "MessageChains:orders.OrderService.getShippingZoneFrom",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.getShippingZoneFrom",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.125 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.1735985533453888,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": -0.4,
+        "architecture": -0.05172413793103448
+      }
+    },
+    {
+      "index": 2,
+      "smell": "MessageChains:orders.OrderService.postToBilling",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.postToBilling",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.016",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.postToBillingViaGateway"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.06352459016393443,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": -0.017857142857142856
+      }
+    },
+    {
+      "index": 3,
+      "smell": "MessageChains:orders.OrderService.postToBillingViaGateway",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.postToBillingViaGateway",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.016",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.postToBillingThroughGatewayQueue"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.06153846153846154,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": -0.017543859649122806
+      }
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:orders.OrderService.postToBillingThroughGatewayQueue",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.postToBillingThroughGatewayQueue",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.022",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.BillingPoster.post"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.07692307692307693,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.03508771929824561
+      }
+    }
+  ],
+  "escalations": [],
+  "repetition": 1,
+  "net_smell_resolution": 1,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 5,
+  "successful_generations": 5,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.2,
+  "rejection_reason_counts": {
+    "metric_regression": 1
+  }
+}

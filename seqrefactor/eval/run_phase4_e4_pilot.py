@@ -86,6 +86,7 @@ def main() -> None:
             for strategy in PILOT_STRATEGIES:
                 run_start = time.perf_counter()
                 report = orchestrator.run_one(path, cfg, strategy=strategy, generator="llm")
+                report = report.model_copy(update={"repetition": repetition})
                 run_elapsed = time.perf_counter() - run_start
                 all_runs.append(report)
                 print(

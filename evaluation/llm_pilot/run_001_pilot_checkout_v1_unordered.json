@@ -1,0 +1,126 @@
+{
+  "subject": "pilot_checkout_v1",
+  "strategy": "unordered",
+  "generator": "llm",
+  "steps": [
+    {
+      "index": 0,
+      "smell": "GodClass:orders.OrderService",
+      "verdict": {
+        "smell": "GodClass:orders.OrderService",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta 0.000",
+        "reason": "accepted"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 1,
+      "smell": "MessageChains:orders.OrderService.getShippingZoneCode",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.getShippingZoneCode",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.020",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.getShippingZoneFrom"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.0778816199376947,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": -0.02
+      }
+    },
+    {
+      "index": 2,
+      "smell": "MessageChains:orders.OrderService.getShippingZoneFrom",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.getShippingZoneFrom",
+        "accepted": false,
+        "rationale": "aggregate metric delta -0.100 below threshold -0.05",
+        "reason": "metric_regression"
+      },
+      "introduced": [],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": 0.0,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": -0.5,
+        "architecture": 0.0
+      }
+    },
+    {
+      "index": 3,
+      "smell": "MessageChains:orders.OrderService.notifyWarehouse",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.notifyWarehouse",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.019",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.reserveInWarehouse"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.07492795389048991,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": -0.0196078431372549
+      }
+    },
+    {
+      "index": 4,
+      "smell": "MessageChains:orders.OrderService.reserveInWarehouse",
+      "verdict": {
+        "smell": "MessageChains:orders.OrderService.reserveInWarehouse",
+        "accepted": true,
+        "rationale": "tests pass, architecture ok, aggregate metric delta -0.018",
+        "reason": "accepted"
+      },
+      "introduced": [
+        "MessageChains:orders.OrderService.performWarehouseReservation"
+      ],
+      "cascading_violation": false,
+      "prerequisites_satisfied": true,
+      "metric": {
+        "cohesion": -0.07219251336898395,
+        "coupling": 0.0,
+        "complexity": 0.0,
+        "readability": 0.0,
+        "architecture": -0.019230769230769232
+      }
+    }
+  ],
+  "escalations": [],
+  "repetition": 0,
+  "net_smell_resolution": 1,
+  "cascading_violations": 0,
+  "ordering_validity": 1.0,
+  "escalation_rate": 0.0,
+  "generation_attempts": 5,
+  "successful_generations": 5,
+  "generation_success_rate": 1.0,
+  "net_smell_resolution_rate_given_generation_success": 0.2,
+  "rejection_reason_counts": {
+    "metric_regression": 1
+  }
+}
