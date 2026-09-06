@@ -1,5 +1,16 @@
 # REPO_MAP.md
 
+## Submission snapshot
+
+The compact IEEE conference version of the paper corresponds to tag
+`paper-submission-ieee-v1` (commit `1dde93f`). That version reports RQ1-RQ3
+with four tables and three figures. The longer development history in this
+repository (documented throughout this file) contains additional material
+(further research questions, tables, and analyses) that is NOT part of the
+submitted paper. Reviewers should reproduce from the tagged commit.
+
+Replication: see [REPRODUCE.md](REPRODUCE.md) at the tagged commit.
+
 Produced per the Claude Code Working Brief, Section 0 ("orient yourself before writing
 code"). Summarises what exists in this repository today, what the brief asks for, and where
 the brief's description of the paper diverges from the paper actually on disk.

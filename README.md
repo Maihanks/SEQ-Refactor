@@ -1,5 +1,16 @@
 # SEQ-REFACTOR
 
+## Submission snapshot
+
+The compact IEEE conference version of the paper corresponds to tag
+`paper-submission-ieee-v1` (commit `1dde93f`). That version reports RQ1-RQ3
+with four tables and three figures. The longer development history in this
+repository contains additional material (further research questions, tables,
+and analyses) that is NOT part of the submitted paper. Reviewers should
+reproduce from the tagged commit.
+
+Replication: see [REPRODUCE.md](REPRODUCE.md) at the tagged commit.
+
 **A stateful agentic pipeline for impact-forward, dependency-safe ordering of multi-smell refactorings.**
 
 SEQ-REFACTOR resolves the code smells of a decaying Java module in an order that is both
