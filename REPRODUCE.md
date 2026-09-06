@@ -279,6 +279,26 @@ Phase-2-snapshot corpus rows -- if that corpus half is ever regenerated against 
 synthetic-sweep-only and already re-verified exactly) would need re-checking against whatever the
 paper cites at that time.
 
+## 8. H1 safety statistics: reproducible sanity check (Working Brief Phase 5, Task A)
+
+A self-contained, fully offline recomputation of the H1 safety comparison (SEQ-REFACTOR vs.
+unordered, and the mechanism-exposing SEQ-REFACTOR vs. impact-only comparator) plus the
+Holm-adjusted p-values across the three prespecified hypothesis tests (H1 safety, H2 early
+quality, H3 efficiency -- see `seqrefactor/eval/h1_safety_check.py`'s module docstring for
+exactly which repo-internal hypothesis each label maps to). Reads only already-committed raw
+per-subject data (`evaluation/table2_ablation.csv`, `evaluation/phase4_e1_raw_runs.json`,
+`evaluation/table3_depmass.csv`); runs no new experiments.
+
+```bash
+make h1-safety   # = uv run python -m seqrefactor.eval.h1_safety_check
+```
+
+Writes `evaluation/H1_SAFETY.md` (the full nine-item audit trail per comparator) and
+`evaluation/table_h1_safety.csv`. Verified zero drift against the paper's currently stated
+SEQ-vs-unordered values (n=28, p=0.042, rank-biserial r=1.0, mean difference 0.96) when this
+was last run; re-run to re-verify, since this is the single source of truth for that
+recomputation, not this paragraph.
+
 ## What needs an API key (not available in this environment)
 
 The LLM generator (`generate/llm.py`) needs `OPENAI_API_KEY`. No `.env` file exists in this

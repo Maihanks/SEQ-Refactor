@@ -1,0 +1,6 @@
+comparator,n,positive,negative,zero,statistic,p_value,effect_size_r,mean_difference,ci_low,ci_high,supported
+unordered,28,3,0,25,6.0,0.0416322583317752,1.0,0.9642857142857143,0.0,2.25,True
+impact_only,28,22,0,6,253.0,5.475071585388227e-06,1.0,7.535714285714286,5.964285714285714,8.928571428571429,True
+"H1_safety (SEQ vs unordered, cascading violations)",,,,,,0.0416322583317752,,,,,holm_adjusted_p=0.0832645166635504
+"H2_early_quality (SEQ vs topo_only, AUC, A5 default weights)",,,,,,0.0009207568902879692,,,,,holm_adjusted_p=0.0027622706708639077
+H3_efficiency (avoided-negative-mass vs forgone-positive-mass),,,,,,0.4860626648658325,,,,,holm_adjusted_p=0.4860626648658325
